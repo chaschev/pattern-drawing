@@ -1,6 +1,6 @@
 ﻿using cAlgo.API;
+using cAlgo.Controls;
 using cAlgo.Helpers;
-using System;
 
 namespace cAlgo
 {
@@ -36,13 +36,16 @@ namespace cAlgo
         [Parameter("Background Disable Color", DefaultValue = "Red", Group = "Buttons")]
         public string ButtonsBackgroundEnableColor { get; set; }
 
+        [Parameter("Foreground Color", DefaultValue = "Blue", Group = "Buttons")]
+        public string ButtonsForegroundColor { get; set; }
+
         [Parameter("Margin", DefaultValue = 1, Group = "Buttons")]
         public double ButtonsMargin { get; set; }
 
-        [Parameter("Width", DefaultValue = 24, Group = "Buttons")]
+        [Parameter("Width", DefaultValue = 100, Group = "Buttons")]
         public double ButtonsWidth { get; set; }
 
-        [Parameter("Height", DefaultValue = 24, Group = "Buttons")]
+        [Parameter("Height", DefaultValue = 20, Group = "Buttons")]
         public double ButtonsHeight { get; set; }
 
         protected override void Initialize()
@@ -57,42 +60,29 @@ namespace cAlgo
                 Margin = PanelMargin,
             };
 
-            _panel.AddChild(GetButton(Properties.Resources.TriangleIcon, OnClick));
-            _panel.AddChild(GetButton(Properties.Resources.TriangleIcon, OnClick));
-            _panel.AddChild(GetButton(Properties.Resources.TriangleIcon, OnClick));
-            _panel.AddChild(GetButton(Properties.Resources.TriangleIcon, OnClick));
-            _panel.AddChild(GetButton(Properties.Resources.TriangleIcon, OnClick));
-            _panel.AddChild(GetButton(Properties.Resources.TriangleIcon, OnClick));
+            var buttonsBackgroundDisableColor = ColorParser.Parse(ButtonsBackgroundDisableColor);
+            var buttonsBackgroundEnableColor = ColorParser.Parse(ButtonsBackgroundEnableColor);
+
+            var buttonsStyle = new Style();
+
+            buttonsStyle.Set(ControlProperty.Margin, ButtonsMargin);
+            buttonsStyle.Set(ControlProperty.BackgroundColor, buttonsBackgroundDisableColor);
+            buttonsStyle.Set(ControlProperty.ForegroundColor, ColorParser.Parse(ButtonsForegroundColor));
+            buttonsStyle.Set(ControlProperty.Width, ButtonsWidth);
+            buttonsStyle.Set(ControlProperty.Height, ButtonsHeight);
+
+            _panel.AddChild(new TriangleButton(Chart)
+            {
+                Style = buttonsStyle,
+                OnColor = buttonsBackgroundEnableColor,
+                OffColor = buttonsBackgroundDisableColor
+            });
 
             Chart.AddControl(_panel);
         }
 
         public override void Calculate(int index)
         {
-        }
-
-        private void OnClick(Button button, ButtonClickEventArgs args)
-        {
-            button.BackgroundColor = ColorParser.Parse(ButtonsBackgroundEnableColor);
-        }
-
-        private Button GetButton(object icon, Action<Button, ButtonClickEventArgs> onClick)
-        {
-            var button = new Button
-            {
-                Content = new Image
-                {
-                    Source = icon,
-                    Width = ButtonsWidth,
-                    Height = ButtonsHeight
-                },
-                Margin = ButtonsMargin,
-                BackgroundColor = ColorParser.Parse(ButtonsBackgroundDisableColor),
-            };
-
-            button.Click += args => onClick(button, args);
-
-            return button;
         }
     }
 }
