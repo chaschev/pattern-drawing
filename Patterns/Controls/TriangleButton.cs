@@ -3,92 +3,58 @@ using System;
 
 namespace cAlgo.Controls
 {
-    public class TriangleButton : ToggleButton
+    public class TriangleButton : PatternDrawingButton
     {
-        private readonly Chart _chart;
-
         private ChartTriangle _triangle;
 
-        private int _mouseUpNumber;
-
-        public TriangleButton(Chart chart)
+        public TriangleButton(Chart chart) : base(chart)
         {
             Text = "Triangle";
-
-            Click += args =>
-            {
-                if (IsOn)
-                {
-                    TurnOff();
-                }
-                else
-                {
-                    TurnOn();
-                }
-            };
-
-            _chart = chart;
-        }
-
-        protected override void OnTurnedOn()
-        {
-            _chart.MouseDown += Chart_MouseDown;
-            _chart.MouseMove += Chart_MouseMove;
-            _chart.MouseUp += Chart_MouseUp;
-
-            _chart.IsScrollingEnabled = false;
         }
 
         protected override void OnTurnedOff()
         {
-            _chart.MouseDown -= Chart_MouseDown;
-            _chart.MouseMove -= Chart_MouseMove;
-            _chart.MouseUp -= Chart_MouseUp;
-
-            _chart.IsScrollingEnabled = true;
+            base.OnTurnedOff();
 
             _triangle = null;
-
-            _mouseUpNumber = 0;
         }
 
-        private void Chart_MouseUp(ChartMouseEventArgs obj)
+        protected override void Chart_MouseUp(ChartMouseEventArgs obj)
         {
             if (_triangle == null) return;
 
-            _mouseUpNumber++;
-
-            if (_mouseUpNumber == 3)
-            {
-                TurnOff();
-            }
+            base.Chart_MouseUp(obj);
         }
 
-        private void Chart_MouseMove(ChartMouseEventArgs obj)
+        protected override void Chart_MouseMove(ChartMouseEventArgs obj)
         {
             if (_triangle == null) return;
+
+            base.Chart_MouseMove(obj);
 
             var index = (int)obj.BarIndex;
 
-            if (_mouseUpNumber == 1)
+            if (MouseUpNumber == 1)
             {
-                _triangle.Time2 = _chart.Bars.OpenTimes[index];
+                _triangle.Time2 = Chart.Bars.OpenTimes[index];
                 _triangle.Y2 = obj.YValue;
             }
-            else if (_mouseUpNumber == 2)
+            else if (MouseUpNumber == 2)
             {
-                _triangle.Time3 = _chart.Bars.OpenTimes[index];
+                _triangle.Time3 = Chart.Bars.OpenTimes[index];
                 _triangle.Y3 = obj.YValue;
             }
         }
 
-        private void Chart_MouseDown(ChartMouseEventArgs obj)
+        protected override void Chart_MouseDown(ChartMouseEventArgs obj)
         {
+            base.Chart_MouseDown(obj);
+
             var name = string.Format("Patterns_Triangle_{0}", DateTime.Now.Ticks);
 
             var index = (int)obj.BarIndex;
 
-            _triangle = _chart.DrawTriangle(name, index, obj.YValue, index, obj.YValue, index, obj.YValue, Color.Red);
+            _triangle = Chart.DrawTriangle(name, index, obj.YValue, index, obj.YValue, index, obj.YValue, Color.Red);
 
             _triangle.IsInteractive = true;
         }

@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\PatternDrawingButton.cs" />
     <Compile Include="Controls\ToggleButton.cs" />
     <Compile Include="Controls\TriangleButton.cs" />
     <Compile Include="Helpers\ColorParser.cs" />
