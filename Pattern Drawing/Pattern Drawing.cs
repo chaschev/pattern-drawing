@@ -1,6 +1,7 @@
 ﻿using cAlgo.API;
 using cAlgo.Controls;
 using cAlgo.Helpers;
+using cAlgo.Patterns;
 
 namespace cAlgo
 {
@@ -8,9 +9,18 @@ namespace cAlgo
     /// This indicator allows you to draw chart patterns
     /// </summary>
     [Indicator(IsOverlay = true, TimeZone = TimeZones.UTC, AccessRights = AccessRights.None)]
-    public class Patterns : Indicator
+    public class PatternDrawing : Indicator
     {
         private StackPanel _panel;
+
+        private Color _buttonsBackgroundDisableColor;
+
+        private Color _buttonsBackgroundEnableColor;
+
+        private Style _buttonsStyle;
+
+        [Parameter("Color", DefaultValue = "Red", Group = "Patterns")]
+        public string PatternsColor { get; set; }
 
         [Parameter("Orientation", DefaultValue = Orientation.Vertical, Group = "Container Panel")]
         public Orientation PanelOrientation { get; set; }
@@ -60,29 +70,36 @@ namespace cAlgo
                 Margin = PanelMargin,
             };
 
-            var buttonsBackgroundDisableColor = ColorParser.Parse(ButtonsBackgroundDisableColor);
-            var buttonsBackgroundEnableColor = ColorParser.Parse(ButtonsBackgroundEnableColor);
+            _buttonsBackgroundDisableColor = ColorParser.Parse(ButtonsBackgroundDisableColor);
+            _buttonsBackgroundEnableColor = ColorParser.Parse(ButtonsBackgroundEnableColor);
 
-            var buttonsStyle = new Style();
+            _buttonsStyle = new Style();
 
-            buttonsStyle.Set(ControlProperty.Margin, ButtonsMargin);
-            buttonsStyle.Set(ControlProperty.BackgroundColor, buttonsBackgroundDisableColor);
-            buttonsStyle.Set(ControlProperty.ForegroundColor, ColorParser.Parse(ButtonsForegroundColor));
-            buttonsStyle.Set(ControlProperty.Width, ButtonsWidth);
-            buttonsStyle.Set(ControlProperty.Height, ButtonsHeight);
+            _buttonsStyle.Set(ControlProperty.Margin, ButtonsMargin);
+            _buttonsStyle.Set(ControlProperty.BackgroundColor, _buttonsBackgroundDisableColor);
+            _buttonsStyle.Set(ControlProperty.ForegroundColor, ColorParser.Parse(ButtonsForegroundColor));
+            _buttonsStyle.Set(ControlProperty.Width, ButtonsWidth);
+            _buttonsStyle.Set(ControlProperty.Height, ButtonsHeight);
 
-            _panel.AddChild(new TriangleButton(Chart)
-            {
-                Style = buttonsStyle,
-                OnColor = buttonsBackgroundEnableColor,
-                OffColor = buttonsBackgroundDisableColor
-            });
+            var patternsColor = ColorParser.Parse(PatternsColor);
+
+            AddPatternButton(new TrianglePattern(Chart, patternsColor));
 
             Chart.AddControl(_panel);
         }
 
         public override void Calculate(int index)
         {
+        }
+
+        private void AddPatternButton(IPattern pattern)
+        {
+            _panel.AddChild(new PatternButton(pattern)
+            {
+                Style = _buttonsStyle,
+                OnColor = _buttonsBackgroundEnableColor,
+                OffColor = _buttonsBackgroundDisableColor
+            });
         }
     }
 }

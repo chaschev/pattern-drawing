@@ -2,10 +2,10 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Patterns")]
+[assembly: AssemblyTitle("Pattern Drawing")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Patterns")]
+[assembly: AssemblyProduct("Pattern Drawing")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
