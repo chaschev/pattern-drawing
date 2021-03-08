@@ -9,12 +9,11 @@ namespace cAlgo.Patterns
 
         public TrianglePattern(Chart chart, Color color) : base(chart, "Triangle", color)
         {
+            DrawingStopped += args => _triangle = null;
         }
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
         {
-            if (_triangle == null) return;
-
             if (MouseUpNumber == 3)
             {
                 StopDrawing();

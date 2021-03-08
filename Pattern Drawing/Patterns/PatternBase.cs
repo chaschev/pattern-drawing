@@ -1,5 +1,7 @@
 ﻿using cAlgo.API;
 using System;
+using System.Globalization;
+using System.Linq;
 
 namespace cAlgo.Patterns
 {
@@ -11,12 +13,17 @@ namespace cAlgo.Patterns
         private string _name;
         private readonly Color _color;
         private bool _isMouseDown;
+        private bool _isDrawing;
 
         public PatternBase(Chart chart, string name, Color color)
         {
             _chart = chart;
             _name = name;
             _color = color;
+
+            ObjectName = string.Format("Pattern_{0}", _name.Replace(" ", "").Replace("_", ""));
+
+            _chart.ObjectsRemoved += Chart_ObjectsRemoved;
         }
 
         public event Action<IPattern> DrawingStarted;
@@ -48,8 +55,19 @@ namespace cAlgo.Patterns
             get { return _name; }
         }
 
+        public bool IsDrawing
+        {
+            get { return _isDrawing; }
+        }
+
+        public string ObjectName { get; private set; }
+
         public void StartDrawing()
         {
+            if (IsDrawing) return;
+
+            _isDrawing = true;
+
             _chart.MouseDown += Chart_MouseDown;
             _chart.MouseMove += Chart_MouseMove;
             _chart.MouseUp += Chart_MouseUp;
@@ -61,6 +79,10 @@ namespace cAlgo.Patterns
 
         public void StopDrawing()
         {
+            if (!IsDrawing) return;
+
+            _isDrawing = false;
+
             _chart.MouseDown -= Chart_MouseDown;
             _chart.MouseMove -= Chart_MouseMove;
             _chart.MouseUp -= Chart_MouseUp;
@@ -111,6 +133,53 @@ namespace cAlgo.Patterns
             _mouseUpNumber++;
 
             OnMouseUp(obj);
+        }
+
+        private void Chart_ObjectsRemoved(ChartObjectsRemovedEventArgs obj)
+        {
+            var removedPatternObjects = obj.ChartObjects.Where(iRemovedObject => iRemovedObject.Name.StartsWith(ObjectName,
+                StringComparison.OrdinalIgnoreCase)).ToArray();
+
+            if (removedPatternObjects.Length == 0) return;
+
+            Chart.ObjectsRemoved -= Chart_ObjectsRemoved;
+
+            try
+            {
+                foreach (var chartObject in removedPatternObjects)
+                {
+                    var objectNameSplit = chartObject.Name.Split('_');
+
+                    long id;
+
+                    if (objectNameSplit.Length < 3
+                        || !long.TryParse(objectNameSplit[2], NumberStyles.Any, CultureInfo.InvariantCulture, out id))
+                    {
+                        continue;
+                    }
+
+                    RemoveObjects(id);
+                }
+            }
+            finally
+            {
+                Chart.ObjectsRemoved += Chart_ObjectsRemoved;
+            }
+        }
+
+        private void RemoveObjects(long id)
+        {
+            var patternObjectNames = string.Format("{0}_{1}", ObjectName, id);
+
+            var chartObjects = Chart.Objects.ToArray();
+
+            foreach (var chartObject in chartObjects)
+            {
+                if (chartObject.Name.StartsWith(patternObjectNames, StringComparison.OrdinalIgnoreCase))
+                {
+                    Chart.RemoveObject(chartObject.Name);
+                }
+            }
         }
 
         protected virtual void OnMouseMove(ChartMouseEventArgs obj)
