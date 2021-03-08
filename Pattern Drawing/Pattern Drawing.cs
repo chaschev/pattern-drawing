@@ -84,6 +84,7 @@ namespace cAlgo
             var patternsColor = ColorParser.Parse(PatternsColor);
 
             AddPatternButton(new TrianglePattern(Chart, patternsColor));
+            AddPatternButton(new CyclicLinesPattern(Chart, patternsColor));
 
             Chart.AddControl(_panel);
         }
@@ -98,7 +99,7 @@ namespace cAlgo
             {
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
-                OffColor = _buttonsBackgroundDisableColor
+                OffColor = _buttonsBackgroundDisableColor,
             });
         }
     }

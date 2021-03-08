@@ -10,6 +10,7 @@ namespace cAlgo.Patterns
         private int _mouseUpNumber;
         private string _name;
         private readonly Color _color;
+        private bool _isMouseDown;
 
         public PatternBase(Chart chart, string name, Color color)
         {
@@ -30,6 +31,11 @@ namespace cAlgo.Patterns
         protected int MouseUpNumber
         {
             get { return _mouseUpNumber; }
+        }
+
+        protected bool IsMouseDown
+        {
+            get { return _isMouseDown; }
         }
 
         protected Color Color
@@ -93,11 +99,15 @@ namespace cAlgo.Patterns
 
         private void Chart_MouseDown(ChartMouseEventArgs obj)
         {
+            _isMouseDown = true;
+
             OnMouseDown(obj);
         }
 
         private void Chart_MouseUp(ChartMouseEventArgs obj)
         {
+            _isMouseDown = false;
+
             _mouseUpNumber++;
 
             OnMouseUp(obj);
