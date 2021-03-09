@@ -86,6 +86,7 @@ namespace cAlgo
             AddPatternButton(new TrianglePattern(Chart, patternsColor));
             AddPatternButton(new CyclicLinesPattern(Chart, patternsColor));
             AddPatternButton(new HeadAndShouldersPattern(Chart, patternsColor));
+            AddPatternButton(new CypherPattern(Chart, patternsColor));
 
             Chart.AddControl(_panel);
         }

@@ -24,6 +24,38 @@ namespace cAlgo.Patterns
             ObjectName = string.Format("Pattern_{0}", _name.Replace(" ", "").Replace("_", ""));
 
             _chart.ObjectsRemoved += Chart_ObjectsRemoved;
+            _chart.ObjectsUpdated += Chart_ObjectsUpdated;
+        }
+
+        private void Chart_ObjectsUpdated(ChartObjectsUpdatedEventArgs obj)
+        {
+            if (IsDrawing) return;
+
+            var updatedPatternObjects = obj.ChartObjects.Where(iRemovedObject => iRemovedObject.Name.StartsWith(ObjectName,
+                StringComparison.OrdinalIgnoreCase)).ToArray();
+
+            if (updatedPatternObjects.Length == 0) return;
+
+            Chart.ObjectsUpdated -= Chart_ObjectsUpdated;
+
+            try
+            {
+                foreach (var chartObject in updatedPatternObjects)
+                {
+                    long id;
+
+                    if (!TryGetChartObjectPatternId(chartObject.Name, out id))
+                    {
+                        continue;
+                    }
+
+                    OnPatternChartObjectsUpdated(id, chartObject);
+                }
+            }
+            finally
+            {
+                Chart.ObjectsUpdated += Chart_ObjectsUpdated;
+            }
         }
 
         public event Action<IPattern> DrawingStarted;
@@ -75,6 +107,13 @@ namespace cAlgo.Patterns
             _chart.IsScrollingEnabled = false;
 
             OnDrawingStarted();
+
+            var drawingStarted = DrawingStarted;
+
+            if (drawingStarted != null)
+            {
+                drawingStarted.Invoke(this);
+            }
         }
 
         public void StopDrawing()
@@ -92,10 +131,7 @@ namespace cAlgo.Patterns
             _mouseUpNumber = 0;
 
             OnDrawingStopped();
-        }
 
-        private void OnDrawingStopped()
-        {
             var drawingStopped = DrawingStopped;
 
             if (drawingStopped != null)
@@ -104,14 +140,12 @@ namespace cAlgo.Patterns
             }
         }
 
-        private void OnDrawingStarted()
+        protected virtual void OnDrawingStopped()
         {
-            var drawingStarted = DrawingStarted;
+        }
 
-            if (drawingStarted != null)
-            {
-                drawingStarted.Invoke(this);
-            }
+        protected virtual void OnDrawingStarted()
+        {
         }
 
         private void Chart_MouseMove(ChartMouseEventArgs obj)
@@ -148,12 +182,9 @@ namespace cAlgo.Patterns
             {
                 foreach (var chartObject in removedPatternObjects)
                 {
-                    var objectNameSplit = chartObject.Name.Split('_');
-
                     long id;
 
-                    if (objectNameSplit.Length < 3
-                        || !long.TryParse(objectNameSplit[2], NumberStyles.Any, CultureInfo.InvariantCulture, out id))
+                    if (!TryGetChartObjectPatternId(chartObject.Name, out id))
                     {
                         continue;
                     }
@@ -191,6 +222,25 @@ namespace cAlgo.Patterns
         }
 
         protected virtual void OnMouseUp(ChartMouseEventArgs obj)
+        {
+        }
+
+        protected bool TryGetChartObjectPatternId(string chartObjectName, out long id)
+        {
+            var objectNameSplit = chartObjectName.Split('_');
+
+            if (objectNameSplit.Length < 3
+                || !long.TryParse(objectNameSplit[2], NumberStyles.Any, CultureInfo.InvariantCulture, out id))
+            {
+                id = 0;
+
+                return false;
+            }
+
+            return true;
+        }
+
+        protected virtual void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject)
         {
         }
     }

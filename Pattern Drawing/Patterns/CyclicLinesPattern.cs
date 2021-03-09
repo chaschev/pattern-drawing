@@ -11,7 +11,11 @@ namespace cAlgo.Patterns
 
         public CyclicLinesPattern(Chart chart, Color color) : base(chart, "Cyclic Lines", color)
         {
-            DrawingStopped += args => _mouseDownBarIndex = null;
+        }
+
+        protected override void OnDrawingStopped()
+        {
+            _mouseDownBarIndex = null;
         }
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)

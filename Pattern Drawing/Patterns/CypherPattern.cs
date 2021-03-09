@@ -1,30 +1,63 @@
 ﻿using cAlgo.API;
 using System;
+using System.Linq;
 
 namespace cAlgo.Patterns
 {
-    public class HeadAndShouldersPattern : PatternBase
+    public class CypherPattern : PatternBase
     {
         private ChartTriangle _leftTriangle;
         private ChartTriangle _rightTriangle;
-        private ChartTriangle _headTriangle;
 
         private long _id;
 
-        public HeadAndShouldersPattern(Chart chart, Color color) : base(chart, "Head and Shoulders", Color.FromArgb(100, color))
+        public CypherPattern(Chart chart, Color color) : base(chart, "Cypher", Color.FromArgb(100, color))
         {
+        }
+
+        protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject)
+        {
+            var otherTriangle = updatedChartObject as ChartTriangle;
+
+            if (otherTriangle == null) return;
+
+            var chartObjects = Chart.Objects.ToArray();
+
+            var objectNameId = string.Format("{0}_{1}", ObjectName, id);
+
+            foreach (var chartObject in chartObjects)
+            {
+                if (chartObject == updatedChartObject
+                    || chartObject.ObjectType != ChartObjectType.Triangle
+                    || !chartObject.Name.StartsWith(objectNameId, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                var triangle = chartObject as ChartTriangle;
+
+                if (triangle.Name.EndsWith("Left", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    triangle.Time3 = otherTriangle.Time1;
+                    triangle.Y3 = otherTriangle.Y1;
+                }
+                else
+                {
+                    triangle.Time1 = otherTriangle.Time3;
+                    triangle.Y1 = otherTriangle.Y3;
+                }
+            }
         }
 
         protected override void OnDrawingStopped()
         {
             _leftTriangle = null;
             _rightTriangle = null;
-            _headTriangle = null;
         }
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
         {
-            if (MouseUpNumber == 7)
+            if (MouseUpNumber == 5)
             {
                 StopDrawing();
 
@@ -39,13 +72,7 @@ namespace cAlgo.Patterns
 
                 DrawTriangle(obj, name, ref _leftTriangle);
             }
-            else if (_headTriangle == null && MouseUpNumber == 3)
-            {
-                var name = string.Format("{0}_{1}_Head", ObjectName, _id);
-
-                DrawTriangle(obj, name, ref _headTriangle);
-            }
-            else if (_rightTriangle == null && MouseUpNumber == 5)
+            else if (_rightTriangle == null && MouseUpNumber == 3)
             {
                 var name = string.Format("{0}_{1}_Right", ObjectName, _id);
 
@@ -77,20 +104,10 @@ namespace cAlgo.Patterns
             }
             else if (MouseUpNumber == 3)
             {
-                _headTriangle.Time2 = obj.TimeValue;
-                _headTriangle.Y2 = obj.YValue;
-            }
-            else if (MouseUpNumber == 4)
-            {
-                _headTriangle.Time3 = obj.TimeValue;
-                _headTriangle.Y3 = obj.YValue;
-            }
-            else if (MouseUpNumber == 5)
-            {
                 _rightTriangle.Time2 = obj.TimeValue;
                 _rightTriangle.Y2 = obj.YValue;
             }
-            else if (MouseUpNumber == 6)
+            else if (MouseUpNumber == 4)
             {
                 _rightTriangle.Time3 = obj.TimeValue;
                 _rightTriangle.Y3 = obj.YValue;

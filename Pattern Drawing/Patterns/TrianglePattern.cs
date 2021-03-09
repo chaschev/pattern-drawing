@@ -9,7 +9,6 @@ namespace cAlgo.Patterns
 
         public TrianglePattern(Chart chart, Color color) : base(chart, "Triangle", color)
         {
-            DrawingStopped += args => _triangle = null;
         }
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
@@ -43,6 +42,11 @@ namespace cAlgo.Patterns
             _triangle = Chart.DrawTriangle(name, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, Color);
 
             _triangle.IsInteractive = true;
+        }
+
+        protected override void OnDrawingStopped()
+        {
+            _triangle = null;
         }
     }
 }
