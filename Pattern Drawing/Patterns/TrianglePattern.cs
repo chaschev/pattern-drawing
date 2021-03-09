@@ -7,7 +7,7 @@ namespace cAlgo.Patterns
     {
         private ChartTriangle _triangle;
 
-        public TrianglePattern(Chart chart, Color color) : base(chart, "Triangle", color)
+        public TrianglePattern(Chart chart, Color color) : base(chart, "Triangle", Color.FromArgb(100, color))
         {
         }
 
@@ -42,6 +42,7 @@ namespace cAlgo.Patterns
             _triangle = Chart.DrawTriangle(name, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, Color);
 
             _triangle.IsInteractive = true;
+            _triangle.IsFilled = true;
         }
 
         protected override void OnDrawingStopped()

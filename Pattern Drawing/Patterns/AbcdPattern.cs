@@ -4,15 +4,14 @@ using System.Linq;
 
 namespace cAlgo.Patterns
 {
-    public class HeadAndShouldersPattern : PatternBase
+    public class AbcdPattern : PatternBase
     {
         private ChartTriangle _leftTriangle;
         private ChartTriangle _rightTriangle;
-        private ChartTriangle _headTriangle;
 
         private long _id;
 
-        public HeadAndShouldersPattern(Chart chart, Color color) : base(chart, "Head and Shoulders", Color.FromArgb(100, color))
+        public AbcdPattern(Chart chart, Color color) : base(chart, "ABCD", Color.FromArgb(100, color))
         {
         }
 
@@ -37,22 +36,19 @@ namespace cAlgo.Patterns
 
                 var triangle = chartObject as ChartTriangle;
 
-                if ((triangle.Name.EndsWith("Left", StringComparison.InvariantCultureIgnoreCase)
-                    && otherTriangle.Name.EndsWith("Head", StringComparison.InvariantCultureIgnoreCase))
-                    || (triangle.Name.EndsWith("Head", StringComparison.InvariantCultureIgnoreCase)
-                    && otherTriangle.Name.EndsWith("Right", StringComparison.InvariantCultureIgnoreCase)))
+                if (triangle.Name.EndsWith("Left", StringComparison.InvariantCultureIgnoreCase))
                 {
                     triangle.Time3 = otherTriangle.Time1;
                     triangle.Y3 = otherTriangle.Y1;
                 }
-                else if ((triangle.Name.EndsWith("Head", StringComparison.InvariantCultureIgnoreCase)
-                    && otherTriangle.Name.EndsWith("Left", StringComparison.InvariantCultureIgnoreCase))
-                    || (triangle.Name.EndsWith("Right", StringComparison.InvariantCultureIgnoreCase)
-                    && otherTriangle.Name.EndsWith("Head", StringComparison.InvariantCultureIgnoreCase)))
+                else
                 {
                     triangle.Time1 = otherTriangle.Time3;
                     triangle.Y1 = otherTriangle.Y3;
                 }
+
+                triangle.Time2 = otherTriangle.Time2;
+                triangle.Y2 = otherTriangle.Y2;
             }
         }
 
@@ -60,12 +56,11 @@ namespace cAlgo.Patterns
         {
             _leftTriangle = null;
             _rightTriangle = null;
-            _headTriangle = null;
         }
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
         {
-            if (MouseUpNumber == 7)
+            if (MouseUpNumber == 4)
             {
                 StopDrawing();
 
@@ -80,17 +75,15 @@ namespace cAlgo.Patterns
 
                 DrawTriangle(obj, name, ref _leftTriangle);
             }
-            else if (_headTriangle == null && MouseUpNumber == 3)
-            {
-                var name = string.Format("{0}_{1}_Head", ObjectName, _id);
-
-                DrawTriangle(obj, name, ref _headTriangle);
-            }
-            else if (_rightTriangle == null && MouseUpNumber == 5)
+            else if (_rightTriangle == null && MouseUpNumber == 3)
             {
                 var name = string.Format("{0}_{1}_Right", ObjectName, _id);
 
                 DrawTriangle(obj, name, ref _rightTriangle);
+
+                _rightTriangle.Time2 = _leftTriangle.Time2;
+                _rightTriangle.Y2 = _leftTriangle.Y2;
+                _rightTriangle.Color = Color.FromArgb(70, Color);
             }
         }
 
@@ -117,21 +110,6 @@ namespace cAlgo.Patterns
                 _leftTriangle.Y3 = obj.YValue;
             }
             else if (MouseUpNumber == 3)
-            {
-                _headTriangle.Time2 = obj.TimeValue;
-                _headTriangle.Y2 = obj.YValue;
-            }
-            else if (MouseUpNumber == 4)
-            {
-                _headTriangle.Time3 = obj.TimeValue;
-                _headTriangle.Y3 = obj.YValue;
-            }
-            else if (MouseUpNumber == 5)
-            {
-                _rightTriangle.Time2 = obj.TimeValue;
-                _rightTriangle.Y2 = obj.YValue;
-            }
-            else if (MouseUpNumber == 6)
             {
                 _rightTriangle.Time3 = obj.TimeValue;
                 _rightTriangle.Y3 = obj.YValue;

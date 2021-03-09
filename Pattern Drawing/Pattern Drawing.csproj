@@ -51,6 +51,7 @@
     <Compile Include="Controls\ToggleButton.cs" />
     <Compile Include="Helpers\ColorParser.cs" />
     <Compile Include="Pattern Drawing.cs" />
+    <Compile Include="Patterns\AbcdPattern.cs" />
     <Compile Include="Patterns\CypherPattern.cs" />
     <Compile Include="Patterns\HeadAndShouldersPattern.cs" />
     <Compile Include="Patterns\IPattern.cs" />
