@@ -11,11 +11,12 @@ namespace cAlgo.Patterns
 
         private long _id;
 
-        public AbcdPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "ABCD", color, showLabels, labelsColor)
+        public AbcdPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "ABCD", color, showLabels,
+            labelsColor)
         {
         }
 
-        protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject)
+        protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
         {
             var otherTriangle = updatedChartObject as ChartTriangle;
 
@@ -93,8 +94,6 @@ namespace cAlgo.Patterns
                 mouseEventArgs.YValue, mouseEventArgs.TimeValue, mouseEventArgs.YValue, Color);
 
             triangle.IsInteractive = true;
-
-            triangle.IsFilled = true;
         }
 
         protected override void OnMouseMove(ChartMouseEventArgs obj)

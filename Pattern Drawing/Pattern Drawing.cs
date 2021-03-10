@@ -101,6 +101,7 @@ namespace cAlgo
             AddPatternButton(new HeadAndShouldersPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
             AddPatternButton(new CypherPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
             AddPatternButton(new AbcdPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            AddPatternButton(new ThreeDrivesPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
 
             Chart.AddControl(_panel);
         }

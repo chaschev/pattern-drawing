@@ -35,7 +35,7 @@ namespace cAlgo.Patterns
         {
             if (IsDrawing) return;
 
-            var updatedPatternObjects = obj.ChartObjects.Where(iRemovedObject => iRemovedObject.Name.StartsWith(ObjectName,
+            var updatedPatternObjects = obj.ChartObjects.Where(iObject => iObject.Name.StartsWith(ObjectName,
                 StringComparison.OrdinalIgnoreCase)).ToArray();
 
             if (updatedPatternObjects.Length == 0) return;
@@ -53,19 +53,19 @@ namespace cAlgo.Patterns
                         continue;
                     }
 
-                    OnPatternChartObjectsUpdated(id, chartObject);
+                    var updatedPatternName = string.Format("{0}_{1}", ObjectName, id);
+
+                    var patternObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
+                        StringComparison.OrdinalIgnoreCase) && iObject.ObjectType != ChartObjectType.Text)
+                        .ToArray();
+
+                    OnPatternChartObjectsUpdated(id, chartObject, patternObjects);
 
                     if (ShowLabels)
                     {
-                        var updatedPatternName = string.Format("{0}_{1}", ObjectName, id);
-
                         var labelObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
                             StringComparison.OrdinalIgnoreCase) && iObject is ChartText)
                             .Select(iObject => iObject as ChartText)
-                            .ToArray();
-
-                        var patternObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
-                            StringComparison.OrdinalIgnoreCase) && iObject.ObjectType != ChartObjectType.Text)
                             .ToArray();
 
                         UpdateLabels(id, chartObject, labelObjects, patternObjects);
@@ -272,7 +272,7 @@ namespace cAlgo.Patterns
             return true;
         }
 
-        protected virtual void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject)
+        protected virtual void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
         {
         }
 

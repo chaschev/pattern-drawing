@@ -17,7 +17,7 @@ namespace cAlgo.Patterns
         {
         }
 
-        protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject)
+        protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
         {
             var otherTriangle = updatedChartObject as ChartTriangle;
 
