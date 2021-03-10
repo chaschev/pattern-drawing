@@ -11,7 +11,7 @@ namespace cAlgo.Patterns
 
         private long _id;
 
-        public CypherPattern(Chart chart, Color color) : base(chart, "Cypher", Color.FromArgb(100, color))
+        public CypherPattern(Chart chart, Color color) : base(chart, "Cypher", color)
         {
         }
 

@@ -12,7 +12,7 @@ namespace cAlgo.Patterns
 
         private long _id;
 
-        public HeadAndShouldersPattern(Chart chart, Color color) : base(chart, "Head and Shoulders", Color.FromArgb(100, color))
+        public HeadAndShouldersPattern(Chart chart, Color color) : base(chart, "Head and Shoulders", color)
         {
         }
 

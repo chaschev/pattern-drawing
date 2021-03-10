@@ -11,7 +11,7 @@ namespace cAlgo.Patterns
 
         private long _id;
 
-        public AbcdPattern(Chart chart, Color color) : base(chart, "ABCD", Color.FromArgb(100, color))
+        public AbcdPattern(Chart chart, Color color) : base(chart, "ABCD", color)
         {
         }
 

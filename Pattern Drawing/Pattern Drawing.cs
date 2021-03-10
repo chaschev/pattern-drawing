@@ -22,6 +22,9 @@ namespace cAlgo
         [Parameter("Color", DefaultValue = "Red", Group = "Patterns")]
         public string PatternsColor { get; set; }
 
+        [Parameter("Color Alpha", DefaultValue = 100, MinValue = 0, MaxValue = 255, Group = "Patterns")]
+        public int PatternsColorAlpha { get; set; }
+
         [Parameter("Orientation", DefaultValue = Orientation.Vertical, Group = "Container Panel")]
         public Orientation PanelOrientation { get; set; }
 
@@ -81,7 +84,7 @@ namespace cAlgo
             _buttonsStyle.Set(ControlProperty.Width, ButtonsWidth);
             _buttonsStyle.Set(ControlProperty.Height, ButtonsHeight);
 
-            var patternsColor = ColorParser.Parse(PatternsColor);
+            var patternsColor = ColorParser.Parse(PatternsColor, PatternsColorAlpha);
 
             AddPatternButton(new TrianglePattern(Chart, patternsColor));
             AddPatternButton(new CyclicLinesPattern(Chart, patternsColor));
