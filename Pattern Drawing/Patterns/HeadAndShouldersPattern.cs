@@ -12,7 +12,8 @@ namespace cAlgo.Patterns
 
         private long _id;
 
-        public HeadAndShouldersPattern(Chart chart, Color color) : base(chart, "Head and Shoulders", color)
+        public HeadAndShouldersPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Head and Shoulders",
+            color, showLabels, labelsColor)
         {
         }
 
@@ -135,6 +136,43 @@ namespace cAlgo.Patterns
             {
                 _rightTriangle.Time3 = obj.TimeValue;
                 _rightTriangle.Y3 = obj.YValue;
+            }
+        }
+
+        protected override void DrawLabels()
+        {
+            if (_leftTriangle == null || _headTriangle == null || _rightTriangle == null) return;
+
+            var leftLabelName = string.Format("{0}_Label_Left", _leftTriangle.Name);
+            var HeadLabelName = string.Format("{0}_Label_Head", _headTriangle.Name);
+            var rightLabelName = string.Format("{0}_Label_Right", _rightTriangle.Name);
+
+            var labelLeft = Chart.DrawText(leftLabelName, "Left", _leftTriangle.Time2, _leftTriangle.Y2, LabelsColor);
+
+            labelLeft.IsInteractive = true;
+
+            var labelHead = Chart.DrawText(HeadLabelName, "Head", _headTriangle.Time2, _headTriangle.Y2, LabelsColor);
+
+            labelHead.IsInteractive = true;
+
+            var labelRight = Chart.DrawText(rightLabelName, "Right", _rightTriangle.Time2, _rightTriangle.Y2, LabelsColor);
+
+            labelRight.IsInteractive = true;
+        }
+
+        protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
+        {
+            var triangles = patternObjects.Select(iObject => iObject as ChartTriangle).ToArray();
+
+            foreach (var label in labels)
+            {
+                var labelTriangle = triangles.FirstOrDefault(iTriangle => iTriangle.Name.EndsWith(label.Text,
+                    StringComparison.OrdinalIgnoreCase));
+
+                if (labelTriangle == null) continue;
+
+                label.Time = labelTriangle.Time2;
+                label.Y = labelTriangle.Y2;
             }
         }
     }

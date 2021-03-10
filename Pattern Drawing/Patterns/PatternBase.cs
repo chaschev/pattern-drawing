@@ -8,18 +8,22 @@ namespace cAlgo.Patterns
     public abstract class PatternBase : IPattern
     {
         private readonly Chart _chart;
+        private readonly string _name;
+        private readonly Color _color;
+        private readonly bool _showLabels;
+        private readonly Color _labelsColor;
 
         private int _mouseUpNumber;
-        private string _name;
-        private readonly Color _color;
         private bool _isMouseDown;
         private bool _isDrawing;
 
-        public PatternBase(Chart chart, string name, Color color)
+        public PatternBase(Chart chart, string name, Color color, bool showLabels, Color labelsColor)
         {
             _chart = chart;
             _name = name;
             _color = color;
+            _showLabels = showLabels;
+            _labelsColor = labelsColor;
 
             ObjectName = string.Format("Pattern_{0}", _name.Replace(" ", "").Replace("_", ""));
 
@@ -50,6 +54,22 @@ namespace cAlgo.Patterns
                     }
 
                     OnPatternChartObjectsUpdated(id, chartObject);
+
+                    if (ShowLabels)
+                    {
+                        var updatedPatternName = string.Format("{0}_{1}", ObjectName, id);
+
+                        var labelObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
+                            StringComparison.OrdinalIgnoreCase) && iObject is ChartText)
+                            .Select(iObject => iObject as ChartText)
+                            .ToArray();
+
+                        var patternObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
+                            StringComparison.OrdinalIgnoreCase) && iObject.ObjectType != ChartObjectType.Text)
+                            .ToArray();
+
+                        UpdateLabels(id, chartObject, labelObjects, patternObjects);
+                    }
                 }
             }
             finally
@@ -80,6 +100,16 @@ namespace cAlgo.Patterns
         protected Color Color
         {
             get { return _color; }
+        }
+
+        protected Color LabelsColor
+        {
+            get { return _labelsColor; }
+        }
+
+        protected bool ShowLabels
+        {
+            get { return _showLabels; }
         }
 
         public string Name
@@ -121,6 +151,8 @@ namespace cAlgo.Patterns
             if (!IsDrawing) return;
 
             _isDrawing = false;
+
+            if (ShowLabels) DrawLabels();
 
             _chart.MouseDown -= Chart_MouseDown;
             _chart.MouseMove -= Chart_MouseMove;
@@ -241,6 +273,14 @@ namespace cAlgo.Patterns
         }
 
         protected virtual void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject)
+        {
+        }
+
+        protected virtual void DrawLabels()
+        {
+        }
+
+        protected virtual void UpdateLabels(long id, ChartObject updatedObject, ChartText[] labels, ChartObject[] patternObjects)
         {
         }
     }

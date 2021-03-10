@@ -9,7 +9,7 @@ namespace cAlgo.Patterns
 
         private long _id;
 
-        public CyclicLinesPattern(Chart chart, Color color) : base(chart, "Cyclic Lines", color)
+        public CyclicLinesPattern(Chart chart, Color color) : base(chart, "Cyclic Lines", color, false, null)
         {
         }
 

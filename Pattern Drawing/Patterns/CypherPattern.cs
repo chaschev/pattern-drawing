@@ -11,7 +11,8 @@ namespace cAlgo.Patterns
 
         private long _id;
 
-        public CypherPattern(Chart chart, Color color) : base(chart, "Cypher", color)
+        public CypherPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Cypher", color, showLabels,
+            labelsColor)
         {
         }
 
@@ -111,6 +112,79 @@ namespace cAlgo.Patterns
             {
                 _rightTriangle.Time3 = obj.TimeValue;
                 _rightTriangle.Y3 = obj.YValue;
+            }
+        }
+
+        protected override void DrawLabels()
+        {
+            if (_leftTriangle == null || _rightTriangle == null) return;
+
+            var xLabelName = string.Format("{0}_Label_X", _leftTriangle.Name);
+            var aLabelName = string.Format("{0}_Label_A", _leftTriangle.Name);
+            var bLabelName = string.Format("{0}_Label_B", _leftTriangle.Name);
+            var cLabelName = string.Format("{0}_Label_C", _rightTriangle.Name);
+            var dLabelName = string.Format("{0}_Label_D", _rightTriangle.Name);
+
+            var labelX = Chart.DrawText(xLabelName, "X", _leftTriangle.Time1, _leftTriangle.Y1, LabelsColor);
+
+            labelX.IsInteractive = true;
+
+            var labelA = Chart.DrawText(aLabelName, "A", _leftTriangle.Time2, _leftTriangle.Y2, LabelsColor);
+
+            labelA.IsInteractive = true;
+
+            var labelB = Chart.DrawText(bLabelName, "B", _leftTriangle.Time3, _leftTriangle.Y3, LabelsColor);
+
+            labelB.IsInteractive = true;
+
+            var labelC = Chart.DrawText(cLabelName, "C", _rightTriangle.Time2, _rightTriangle.Y2, LabelsColor);
+
+            labelC.IsInteractive = true;
+
+            var labelD = Chart.DrawText(dLabelName, "D", _rightTriangle.Time3, _rightTriangle.Y3, LabelsColor);
+
+            labelD.IsInteractive = true;
+        }
+
+        protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
+        {
+            var leftTriangle = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("Left",
+                StringComparison.OrdinalIgnoreCase)) as ChartTriangle;
+
+            var rightTriangle = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("Right",
+                StringComparison.OrdinalIgnoreCase)) as ChartTriangle;
+
+            if (leftTriangle == null || rightTriangle == null) return;
+
+            foreach (var label in labels)
+            {
+                switch (label.Text)
+                {
+                    case "X":
+                        label.Time = leftTriangle.Time1;
+                        label.Y = leftTriangle.Y1;
+                        break;
+
+                    case "A":
+                        label.Time = leftTriangle.Time2;
+                        label.Y = leftTriangle.Y2;
+                        break;
+
+                    case "B":
+                        label.Time = leftTriangle.Time3;
+                        label.Y = leftTriangle.Y3;
+                        break;
+
+                    case "C":
+                        label.Time = rightTriangle.Time2;
+                        label.Y = rightTriangle.Y2;
+                        break;
+
+                    case "D":
+                        label.Time = rightTriangle.Time3;
+                        label.Y = rightTriangle.Y3;
+                        break;
+                }
             }
         }
     }

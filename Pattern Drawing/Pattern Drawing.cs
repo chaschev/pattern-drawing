@@ -19,11 +19,20 @@ namespace cAlgo
 
         private Style _buttonsStyle;
 
-        [Parameter("Color", DefaultValue = "Red", Group = "Patterns")]
+        [Parameter("Color", DefaultValue = "Red", Group = "Patterns Color")]
         public string PatternsColor { get; set; }
 
-        [Parameter("Color Alpha", DefaultValue = 100, MinValue = 0, MaxValue = 255, Group = "Patterns")]
+        [Parameter("Alpha", DefaultValue = 100, MinValue = 0, MaxValue = 255, Group = "Patterns Color")]
         public int PatternsColorAlpha { get; set; }
+
+        [Parameter("Show", DefaultValue = true, Group = "Patterns Label")]
+        public bool PatternsLabelShow { get; set; }
+
+        [Parameter("Color", DefaultValue = "Red", Group = "Patterns Label")]
+        public string PatternsLabelColor { get; set; }
+
+        [Parameter("Alpha", DefaultValue = 100, MinValue = 0, MaxValue = 255, Group = "Patterns Label")]
+        public int PatternsLabelColorAlpha { get; set; }
 
         [Parameter("Orientation", DefaultValue = Orientation.Vertical, Group = "Container Panel")]
         public Orientation PanelOrientation { get; set; }
@@ -85,12 +94,13 @@ namespace cAlgo
             _buttonsStyle.Set(ControlProperty.Height, ButtonsHeight);
 
             var patternsColor = ColorParser.Parse(PatternsColor, PatternsColorAlpha);
+            var patternsLabelColor = ColorParser.Parse(PatternsLabelColor, PatternsLabelColorAlpha);
 
-            AddPatternButton(new TrianglePattern(Chart, patternsColor));
+            AddPatternButton(new TrianglePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
             AddPatternButton(new CyclicLinesPattern(Chart, patternsColor));
-            AddPatternButton(new HeadAndShouldersPattern(Chart, patternsColor));
-            AddPatternButton(new CypherPattern(Chart, patternsColor));
-            AddPatternButton(new AbcdPattern(Chart, patternsColor));
+            AddPatternButton(new HeadAndShouldersPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            AddPatternButton(new CypherPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            AddPatternButton(new AbcdPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
 
             Chart.AddControl(_panel);
         }
