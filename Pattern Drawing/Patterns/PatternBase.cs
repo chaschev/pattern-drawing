@@ -296,7 +296,7 @@ namespace cAlgo.Patterns
 
             var chartText = Chart.DrawText(name, text, time, y, LabelsColor);
 
-            chartText.IsInteractive = isInteractive;
+            //chartText.IsInteractive = isInteractive;
 
             return chartText;
         }

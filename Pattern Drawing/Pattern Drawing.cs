@@ -103,6 +103,10 @@ namespace cAlgo
             AddPatternButton(new AbcdPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
             AddPatternButton(new ThreeDrivesPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
             AddPatternButton(new ElliottImpulseWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            AddPatternButton(new ElliottTriangleWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            AddPatternButton(new ElliottTripleComboWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            AddPatternButton(new ElliottCorrectionWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            AddPatternButton(new ElliottDoubleComboWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
 
             Chart.AddControl(_panel);
         }

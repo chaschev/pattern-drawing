@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace cAlgo.Patterns
 {
-    public class ElliottImpulseWavePattern : ElliottWavePatternBase
+    public class ElliottTriangleWavePattern : ElliottWavePatternBase
     {
-        public ElliottImpulseWavePattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Elliott Impulse Wave (12345)", color,
+        public ElliottTriangleWavePattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Elliott Triangle Wave (ABCDE)", color,
             showLabels, labelsColor, 5)
         {
         }
@@ -16,11 +16,11 @@ namespace cAlgo.Patterns
             if (FirstLine == null || SecondLine == null || ThirdLine == null || FourthLine == null || FifthLine == null) return;
 
             DrawLabelText("(0)", FirstLine.Time1, FirstLine.Y1);
-            DrawLabelText("(1)", SecondLine.Time1, SecondLine.Y1);
-            DrawLabelText("(2)", ThirdLine.Time1, ThirdLine.Y1);
-            DrawLabelText("(3)", FourthLine.Time1, FourthLine.Y1);
-            DrawLabelText("(4)", FifthLine.Time1, FifthLine.Y1);
-            DrawLabelText("(5)", FifthLine.Time2, FifthLine.Y2);
+            DrawLabelText("(A)", SecondLine.Time1, SecondLine.Y1);
+            DrawLabelText("(B)", ThirdLine.Time1, ThirdLine.Y1);
+            DrawLabelText("(C)", FourthLine.Time1, FourthLine.Y1);
+            DrawLabelText("(D)", FifthLine.Time1, FifthLine.Y1);
+            DrawLabelText("(E)", FifthLine.Time2, FifthLine.Y2);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
@@ -51,27 +51,27 @@ namespace cAlgo.Patterns
                         label.Y = firstLine.Y1;
                         break;
 
-                    case "(1)":
+                    case "(A)":
                         label.Time = secondLine.Time1;
                         label.Y = secondLine.Y1;
                         break;
 
-                    case "(2)":
+                    case "(B)":
                         label.Time = thirdLine.Time1;
                         label.Y = thirdLine.Y1;
                         break;
 
-                    case "(3)":
+                    case "(C)":
                         label.Time = fourthLine.Time1;
                         label.Y = fourthLine.Y1;
                         break;
 
-                    case "(4)":
+                    case "(D)":
                         label.Time = fifthLine.Time1;
                         label.Y = fifthLine.Y1;
                         break;
 
-                    case "(5)":
+                    case "(E)":
                         label.Time = fifthLine.Time2;
                         label.Y = fifthLine.Y2;
                         break;

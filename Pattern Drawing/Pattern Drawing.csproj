@@ -51,6 +51,11 @@
     <Compile Include="Controls\ToggleButton.cs" />
     <Compile Include="Helpers\ColorParser.cs" />
     <Compile Include="Pattern Drawing.cs" />
+    <Compile Include="Patterns\ElliottDoubleComboWavePattern.cs" />
+    <Compile Include="Patterns\ElliottCorrectionWavePattern.cs" />
+    <Compile Include="Patterns\ElliottTripleComboWavePattern.cs" />
+    <Compile Include="Patterns\ElliottWavePatternBase.cs" />
+    <Compile Include="Patterns\ElliottTriangleWavePattern.cs" />
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
     <Compile Include="Patterns\ThreeDrivesPattern.cs" />
     <Compile Include="Patterns\AbcdPattern.cs" />
