@@ -10,8 +10,6 @@ namespace cAlgo.Patterns
         private ChartTriangle _rightTriangle;
         private ChartTriangle _headTriangle;
 
-        private long _id;
-
         public HeadAndShouldersPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Head and Shoulders",
             color, showLabels, labelsColor)
         {
@@ -75,21 +73,19 @@ namespace cAlgo.Patterns
 
             if (_leftTriangle == null)
             {
-                _id = DateTime.Now.Ticks;
-
-                var name = string.Format("{0}_{1}_Left", ObjectName, _id);
+                var name = GetObjectName("Left");
 
                 DrawTriangle(obj, name, ref _leftTriangle);
             }
             else if (_headTriangle == null && MouseUpNumber == 3)
             {
-                var name = string.Format("{0}_{1}_Head", ObjectName, _id);
+                var name = GetObjectName("Head");
 
                 DrawTriangle(obj, name, ref _headTriangle);
             }
             else if (_rightTriangle == null && MouseUpNumber == 5)
             {
-                var name = string.Format("{0}_{1}_Right", ObjectName, _id);
+                var name = GetObjectName("Right");
 
                 DrawTriangle(obj, name, ref _rightTriangle);
             }
@@ -143,21 +139,9 @@ namespace cAlgo.Patterns
         {
             if (_leftTriangle == null || _headTriangle == null || _rightTriangle == null) return;
 
-            var leftLabelName = string.Format("{0}_Label_Left", _leftTriangle.Name);
-            var HeadLabelName = string.Format("{0}_Label_Head", _headTriangle.Name);
-            var rightLabelName = string.Format("{0}_Label_Right", _rightTriangle.Name);
-
-            var labelLeft = Chart.DrawText(leftLabelName, "Left", _leftTriangle.Time2, _leftTriangle.Y2, LabelsColor);
-
-            labelLeft.IsInteractive = true;
-
-            var labelHead = Chart.DrawText(HeadLabelName, "Head", _headTriangle.Time2, _headTriangle.Y2, LabelsColor);
-
-            labelHead.IsInteractive = true;
-
-            var labelRight = Chart.DrawText(rightLabelName, "Right", _rightTriangle.Time2, _rightTriangle.Y2, LabelsColor);
-
-            labelRight.IsInteractive = true;
+            DrawLabelText("Left", _leftTriangle.Time2, _leftTriangle.Y2);
+            DrawLabelText("Head", _headTriangle.Time2, _headTriangle.Y2);
+            DrawLabelText("Right", _rightTriangle.Time2, _rightTriangle.Y2);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)

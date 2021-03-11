@@ -1,5 +1,4 @@
 ﻿using cAlgo.API;
-using System;
 
 namespace cAlgo.Patterns
 {
@@ -35,7 +34,7 @@ namespace cAlgo.Patterns
 
         protected override void OnMouseDown(ChartMouseEventArgs obj)
         {
-            var name = string.Format("{0}_{1}", ObjectName, DateTime.Now.Ticks);
+            var name = GetObjectName();
 
             _triangle = Chart.DrawTriangle(name, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, Color);
 
@@ -52,21 +51,9 @@ namespace cAlgo.Patterns
         {
             if (_triangle == null) return;
 
-            var aLabelName = string.Format("{0}_Label_A", _triangle.Name);
-            var bLabelName = string.Format("{0}_Label_B", _triangle.Name);
-            var cLabelName = string.Format("{0}_Label_C", _triangle.Name);
-
-            var labelA = Chart.DrawText(aLabelName, "A", _triangle.Time1, _triangle.Y1, LabelsColor);
-
-            labelA.IsInteractive = true;
-
-            var labelB = Chart.DrawText(bLabelName, "B", _triangle.Time2, _triangle.Y2, LabelsColor);
-
-            labelB.IsInteractive = true;
-
-            var labelC = Chart.DrawText(cLabelName, "C", _triangle.Time3, _triangle.Y3, LabelsColor);
-
-            labelC.IsInteractive = true;
+            DrawLabelText("A", _triangle.Time1, _triangle.Y1);
+            DrawLabelText("B", _triangle.Time2, _triangle.Y2);
+            DrawLabelText("C", _triangle.Time3, _triangle.Y3);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)

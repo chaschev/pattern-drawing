@@ -124,11 +124,15 @@ namespace cAlgo.Patterns
 
         public string ObjectName { get; private set; }
 
+        protected long Id { get; private set; }
+
         public void StartDrawing()
         {
             if (IsDrawing) return;
 
             _isDrawing = true;
+
+            Id = DateTime.Now.Ticks;
 
             _chart.MouseDown += Chart_MouseDown;
             _chart.MouseMove += Chart_MouseMove;
@@ -161,6 +165,8 @@ namespace cAlgo.Patterns
             _chart.IsScrollingEnabled = true;
 
             _mouseUpNumber = 0;
+
+            Id = 0;
 
             OnDrawingStopped();
 
@@ -282,6 +288,24 @@ namespace cAlgo.Patterns
 
         protected virtual void UpdateLabels(long id, ChartObject updatedObject, ChartText[] labels, ChartObject[] patternObjects)
         {
+        }
+
+        protected ChartText DrawLabelText(string text, DateTime time, double y, bool isInteractive = true)
+        {
+            var name = string.Format("{0}_{1}_Label_{2}", ObjectName, Id, text);
+
+            var chartText = Chart.DrawText(name, text, time, y, LabelsColor);
+
+            chartText.IsInteractive = isInteractive;
+
+            return chartText;
+        }
+
+        protected string GetObjectName(string data = null)
+        {
+            data = data ?? string.Empty;
+
+            return string.Format("{0}_{1}_{2}", ObjectName, Id, data);
         }
     }
 }

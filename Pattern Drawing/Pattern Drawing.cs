@@ -102,6 +102,7 @@ namespace cAlgo
             AddPatternButton(new CypherPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
             AddPatternButton(new AbcdPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
             AddPatternButton(new ThreeDrivesPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            AddPatternButton(new ElliottImpulseWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
 
             Chart.AddControl(_panel);
         }
@@ -117,7 +118,7 @@ namespace cAlgo
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
                 OffColor = _buttonsBackgroundDisableColor,
-                Width = 150
+                Width = 200
             });
         }
     }

@@ -9,8 +9,6 @@ namespace cAlgo.Patterns
         private ChartTriangle _leftTriangle;
         private ChartTriangle _rightTriangle;
 
-        private long _id;
-
         public CypherPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Cypher", color, showLabels,
             labelsColor)
         {
@@ -67,15 +65,13 @@ namespace cAlgo.Patterns
 
             if (_leftTriangle == null)
             {
-                _id = DateTime.Now.Ticks;
-
-                var name = string.Format("{0}_{1}_Left", ObjectName, _id);
+                var name = GetObjectName("Left");
 
                 DrawTriangle(obj, name, ref _leftTriangle);
             }
             else if (_rightTriangle == null && MouseUpNumber == 3)
             {
-                var name = string.Format("{0}_{1}_Right", ObjectName, _id);
+                var name = GetObjectName("Right");
 
                 DrawTriangle(obj, name, ref _rightTriangle);
             }
@@ -119,31 +115,15 @@ namespace cAlgo.Patterns
         {
             if (_leftTriangle == null || _rightTriangle == null) return;
 
-            var xLabelName = string.Format("{0}_Label_X", _leftTriangle.Name);
-            var aLabelName = string.Format("{0}_Label_A", _leftTriangle.Name);
-            var bLabelName = string.Format("{0}_Label_B", _leftTriangle.Name);
-            var cLabelName = string.Format("{0}_Label_C", _rightTriangle.Name);
-            var dLabelName = string.Format("{0}_Label_D", _rightTriangle.Name);
+            DrawLabelText("X", _leftTriangle.Time1, _leftTriangle.Y1);
 
-            var labelX = Chart.DrawText(xLabelName, "X", _leftTriangle.Time1, _leftTriangle.Y1, LabelsColor);
+            DrawLabelText("A", _leftTriangle.Time2, _leftTriangle.Y2);
 
-            labelX.IsInteractive = true;
+            DrawLabelText("B", _leftTriangle.Time3, _leftTriangle.Y3);
 
-            var labelA = Chart.DrawText(aLabelName, "A", _leftTriangle.Time2, _leftTriangle.Y2, LabelsColor);
+            DrawLabelText("C", _rightTriangle.Time2, _rightTriangle.Y2);
 
-            labelA.IsInteractive = true;
-
-            var labelB = Chart.DrawText(bLabelName, "B", _leftTriangle.Time3, _leftTriangle.Y3, LabelsColor);
-
-            labelB.IsInteractive = true;
-
-            var labelC = Chart.DrawText(cLabelName, "C", _rightTriangle.Time2, _rightTriangle.Y2, LabelsColor);
-
-            labelC.IsInteractive = true;
-
-            var labelD = Chart.DrawText(dLabelName, "D", _rightTriangle.Time3, _rightTriangle.Y3, LabelsColor);
-
-            labelD.IsInteractive = true;
+            DrawLabelText("D", _rightTriangle.Time3, _rightTriangle.Y3);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)

@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace cAlgo.Patterns
 {
-    public class ThreeDrivesPattern : PatternBase
+    public class ElliottImpulseWavePattern : PatternBase
     {
-        private ChartTrendLine _firstLine, _secondLine, _thirdLine, _fourthLine, _fifthLine, _sixthLine;
+        private ChartTrendLine _firstLine, _secondLine, _thirdLine, _fourthLine, _fifthLine;
 
-        public ThreeDrivesPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Three Drives", color,
+        public ElliottImpulseWavePattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Elliott Impulse Wave (12345)", color,
             showLabels, labelsColor)
         {
         }
@@ -37,11 +37,7 @@ namespace cAlgo.Patterns
             }
             else if (updatedLine.Name.EndsWith("FifthLine", StringComparison.OrdinalIgnoreCase))
             {
-                UpdateSideLines(updatedLine, patternObjects, "FourthLine", "SixthLine");
-            }
-            else if (updatedLine.Name.EndsWith("SixthLine", StringComparison.OrdinalIgnoreCase))
-            {
-                UpdateSideLines(updatedLine, patternObjects, "FifthLine", null);
+                UpdateSideLines(updatedLine, patternObjects, "FourthLine", null);
             }
         }
 
@@ -79,12 +75,11 @@ namespace cAlgo.Patterns
             _thirdLine = null;
             _fourthLine = null;
             _fifthLine = null;
-            _sixthLine = null;
         }
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
         {
-            if (MouseUpNumber == 7)
+            if (MouseUpNumber == 6)
             {
                 StopDrawing();
 
@@ -120,12 +115,6 @@ namespace cAlgo.Patterns
                 var name = GetObjectName("FifthLine");
 
                 DrawLine(obj, name, ref _fifthLine);
-            }
-            else if (_sixthLine == null && MouseUpNumber == 6)
-            {
-                var name = GetObjectName("SixthLine");
-
-                DrawLine(obj, name, ref _sixthLine);
             }
         }
 
@@ -173,22 +162,75 @@ namespace cAlgo.Patterns
                     _fifthLine.Time2 = obj.TimeValue;
                     _fifthLine.Y2 = obj.YValue;
                     return;
-
-                case 6:
-                    if (_sixthLine == null) return;
-
-                    _sixthLine.Time2 = obj.TimeValue;
-                    _sixthLine.Y2 = obj.YValue;
-                    return;
             }
         }
 
         protected override void DrawLabels()
         {
+            if (_firstLine == null || _secondLine == null || _thirdLine == null || _fourthLine == null || _fifthLine == null) return;
+
+            DrawLabelText("(0)", _firstLine.Time1, _firstLine.Y1);
+            DrawLabelText("(1)", _secondLine.Time1, _secondLine.Y1);
+            DrawLabelText("(2)", _thirdLine.Time1, _thirdLine.Y1);
+            DrawLabelText("(3)", _fourthLine.Time1, _fourthLine.Y1);
+            DrawLabelText("(4)", _fifthLine.Time1, _fifthLine.Y1);
+            DrawLabelText("(5)", _fifthLine.Time2, _fifthLine.Y2);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
         {
+            var firstLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("FirstLine",
+                StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
+
+            var secondLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("SecondLine",
+                StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
+
+            var thirdLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("ThirdLine",
+                StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
+
+            var fourthLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("FourthLine",
+                StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
+
+            var fifthLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("FifthLine",
+                StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
+
+            if (firstLine == null || secondLine == null || thirdLine == null || fourthLine == null || fifthLine == null) return;
+
+            foreach (var label in labels)
+            {
+                switch (label.Text)
+                {
+                    case "(0)":
+                        label.Time = firstLine.Time1;
+                        label.Y = firstLine.Y1;
+                        break;
+
+                    case "(1)":
+                        label.Time = secondLine.Time1;
+                        label.Y = secondLine.Y1;
+                        break;
+
+                    case "(2)":
+                        label.Time = thirdLine.Time1;
+                        label.Y = thirdLine.Y1;
+                        break;
+
+                    case "(3)":
+                        label.Time = fourthLine.Time1;
+                        label.Y = fourthLine.Y1;
+                        break;
+
+                    case "(4)":
+                        label.Time = fifthLine.Time1;
+                        label.Y = fifthLine.Y1;
+                        break;
+
+                    case "(5)":
+                        label.Time = fifthLine.Time2;
+                        label.Y = fifthLine.Y2;
+                        break;
+                }
+            }
         }
     }
 }

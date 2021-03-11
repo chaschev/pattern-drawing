@@ -1,13 +1,10 @@
 ﻿using cAlgo.API;
-using System;
 
 namespace cAlgo.Patterns
 {
     public class CyclicLinesPattern : PatternBase
     {
         private int? _mouseDownBarIndex;
-
-        private long _id;
 
         public CyclicLinesPattern(Chart chart, Color color) : base(chart, "Cyclic Lines", color, false, null)
         {
@@ -36,7 +33,7 @@ namespace cAlgo.Patterns
 
             for (int i = 0; i < 100; i++)
             {
-                var name = string.Format("{0}_{1}_{2}", ObjectName, _id, i);
+                var name = GetObjectName(i.ToString());
 
                 var lineIndex = _mouseDownBarIndex.Value + (diff * i);
 
@@ -51,8 +48,6 @@ namespace cAlgo.Patterns
             if (_mouseDownBarIndex.HasValue) return;
 
             _mouseDownBarIndex = (int)obj.BarIndex;
-
-            _id = DateTime.Now.Ticks;
         }
     }
 }
