@@ -8,8 +8,7 @@ namespace cAlgo.Patterns
     {
         private ChartTrendLine _firstLine, _secondLine, _thirdLine, _fourthLine, _fifthLine, _sixthLine;
 
-        public ThreeDrivesPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Three Drives", color,
-            showLabels, labelsColor)
+        public ThreeDrivesPattern(PatternConfig config) : base("Three Drives", config)
         {
         }
 

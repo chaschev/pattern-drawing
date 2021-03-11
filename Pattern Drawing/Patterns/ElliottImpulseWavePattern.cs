@@ -6,8 +6,7 @@ namespace cAlgo.Patterns
 {
     public class ElliottImpulseWavePattern : ElliottWavePatternBase
     {
-        public ElliottImpulseWavePattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Elliott Impulse Wave (12345)", color,
-            showLabels, labelsColor, 5)
+        public ElliottImpulseWavePattern(PatternConfig config) : base("Elliott Impulse Wave (12345)", config, 5)
         {
         }
 

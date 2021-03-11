@@ -6,8 +6,7 @@ namespace cAlgo.Patterns
 {
     public class ElliottDoubleComboWavePattern : ElliottWavePatternBase
     {
-        public ElliottDoubleComboWavePattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Elliott Double Combo Wave (WXY)", color,
-            showLabels, labelsColor, 3)
+        public ElliottDoubleComboWavePattern(PatternConfig config) : base("Elliott Double Combo Wave (WXY)", config, 3)
         {
         }
 

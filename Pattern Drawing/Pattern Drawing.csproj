@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\PatternsShowHideButton.cs" />
     <Compile Include="Controls\PatternButton.cs" />
     <Compile Include="Controls\ToggleButton.cs" />
     <Compile Include="Helpers\ColorParser.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Patterns\ElliottWavePatternBase.cs" />
     <Compile Include="Patterns\ElliottTriangleWavePattern.cs" />
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
+    <Compile Include="Patterns\PatternConfig.cs" />
     <Compile Include="Patterns\ThreeDrivesPattern.cs" />
     <Compile Include="Patterns\AbcdPattern.cs" />
     <Compile Include="Patterns\CypherPattern.cs" />

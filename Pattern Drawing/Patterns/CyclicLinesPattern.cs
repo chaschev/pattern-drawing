@@ -6,7 +6,7 @@ namespace cAlgo.Patterns
     {
         private int? _mouseDownBarIndex;
 
-        public CyclicLinesPattern(Chart chart, Color color) : base(chart, "Cyclic Lines", color, false, null)
+        public CyclicLinesPattern(PatternConfig config) : base("Cyclic Lines", config)
         {
         }
 

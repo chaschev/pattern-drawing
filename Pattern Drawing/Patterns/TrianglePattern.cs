@@ -6,8 +6,7 @@ namespace cAlgo.Patterns
     {
         private ChartTriangle _triangle;
 
-        public TrianglePattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Triangle", color, showLabels,
-            labelsColor)
+        public TrianglePattern(PatternConfig config) : base("Triangle", config)
         {
         }
 

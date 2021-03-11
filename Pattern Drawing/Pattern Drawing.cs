@@ -34,6 +34,9 @@ namespace cAlgo
         [Parameter("Alpha", DefaultValue = 100, MinValue = 0, MaxValue = 255, Group = "Patterns Label")]
         public int PatternsLabelColorAlpha { get; set; }
 
+        [Parameter("Interactive", DefaultValue = "Red", Group = "Patterns Label")]
+        public bool PatternsLabelInteractive { get; set; }
+
         [Parameter("Orientation", DefaultValue = Orientation.Vertical, Group = "Container Panel")]
         public Orientation PanelOrientation { get; set; }
 
@@ -94,19 +97,29 @@ namespace cAlgo
             _buttonsStyle.Set(ControlProperty.Height, ButtonsHeight);
 
             var patternsColor = ColorParser.Parse(PatternsColor, PatternsColorAlpha);
-            var patternsLabelColor = ColorParser.Parse(PatternsLabelColor, PatternsLabelColorAlpha);
+            var patternsLabelsColor = ColorParser.Parse(PatternsLabelColor, PatternsLabelColorAlpha);
 
-            AddPatternButton(new TrianglePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new CyclicLinesPattern(Chart, patternsColor));
-            AddPatternButton(new HeadAndShouldersPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new CypherPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new AbcdPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new ThreeDrivesPattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new ElliottImpulseWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new ElliottTriangleWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new ElliottTripleComboWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new ElliottCorrectionWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
-            AddPatternButton(new ElliottDoubleComboWavePattern(Chart, patternsColor, PatternsLabelShow, patternsLabelColor));
+            var patternConfig = new PatternConfig(Chart, patternsColor, PatternsLabelShow, patternsLabelsColor, PatternsLabelInteractive);
+
+            AddPatternButton(new TrianglePattern(patternConfig));
+            AddPatternButton(new CyclicLinesPattern(patternConfig));
+            AddPatternButton(new HeadAndShouldersPattern(patternConfig));
+            AddPatternButton(new CypherPattern(patternConfig));
+            AddPatternButton(new AbcdPattern(patternConfig));
+            AddPatternButton(new ThreeDrivesPattern(patternConfig));
+            AddPatternButton(new ElliottImpulseWavePattern(patternConfig));
+            AddPatternButton(new ElliottTriangleWavePattern(patternConfig));
+            AddPatternButton(new ElliottTripleComboWavePattern(patternConfig));
+            AddPatternButton(new ElliottCorrectionWavePattern(patternConfig));
+            AddPatternButton(new ElliottDoubleComboWavePattern(patternConfig));
+
+            _panel.AddChild(new PatternsShowHideButton(Chart)
+            {
+                Style = _buttonsStyle,
+                OnColor = _buttonsBackgroundEnableColor,
+                OffColor = _buttonsBackgroundDisableColor,
+                Width = 200
+            });
 
             Chart.AddControl(_panel);
         }

@@ -6,8 +6,7 @@ namespace cAlgo.Patterns
 {
     public class ElliottTripleComboWavePattern : ElliottWavePatternBase
     {
-        public ElliottTripleComboWavePattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Elliott Triple Combo Wave (WXYXZ)", color,
-            showLabels, labelsColor, 5)
+        public ElliottTripleComboWavePattern(PatternConfig config) : base("Elliott Triple Combo Wave (WXYXZ)", config, 5)
         {
         }
 

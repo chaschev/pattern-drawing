@@ -9,8 +9,7 @@ namespace cAlgo.Patterns
         private ChartTriangle _leftTriangle;
         private ChartTriangle _rightTriangle;
 
-        public AbcdPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "ABCD", color, showLabels,
-            labelsColor)
+        public AbcdPattern(PatternConfig config) : base("ABCD", config)
         {
         }
 

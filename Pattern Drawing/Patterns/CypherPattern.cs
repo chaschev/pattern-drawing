@@ -9,8 +9,7 @@ namespace cAlgo.Patterns
         private ChartTriangle _leftTriangle;
         private ChartTriangle _rightTriangle;
 
-        public CypherPattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Cypher", color, showLabels,
-            labelsColor)
+        public CypherPattern(PatternConfig config) : base("Cypher", config)
         {
         }
 

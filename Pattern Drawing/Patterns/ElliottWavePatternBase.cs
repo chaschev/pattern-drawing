@@ -10,8 +10,7 @@ namespace cAlgo.Patterns
 
         private int _linesNumber;
 
-        public ElliottWavePatternBase(Chart chart, string name, Color color, bool showLabels, Color labelsColor, int linesNumber) : base(chart, name, color,
-            showLabels, labelsColor)
+        public ElliottWavePatternBase(string name, PatternConfig config, int linesNumber) : base(name, config)
         {
             if (linesNumber > 5) throw new ArgumentOutOfRangeException("linesNumber");
 

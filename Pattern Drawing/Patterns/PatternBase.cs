@@ -7,29 +7,22 @@ namespace cAlgo.Patterns
 {
     public abstract class PatternBase : IPattern
     {
-        private readonly Chart _chart;
-        private readonly string _name;
-        private readonly Color _color;
-        private readonly bool _showLabels;
-        private readonly Color _labelsColor;
-
         private int _mouseUpNumber;
         private bool _isMouseDown;
         private bool _isDrawing;
 
-        public PatternBase(Chart chart, string name, Color color, bool showLabels, Color labelsColor)
+        public PatternBase(string name, PatternConfig config)
         {
-            _chart = chart;
-            _name = name;
-            _color = color;
-            _showLabels = showLabels;
-            _labelsColor = labelsColor;
+            Name = name;
+            Config = config;
 
-            ObjectName = string.Format("Pattern_{0}", _name.Replace(" ", "").Replace("_", ""));
+            ObjectName = string.Format("Pattern_{0}", Name.Replace(" ", "").Replace("_", ""));
 
-            _chart.ObjectsRemoved += Chart_ObjectsRemoved;
-            _chart.ObjectsUpdated += Chart_ObjectsUpdated;
+            Config.Chart.ObjectsRemoved += Chart_ObjectsRemoved;
+            Config.Chart.ObjectsUpdated += Chart_ObjectsUpdated;
         }
+
+        protected PatternConfig Config { get; private set; }
 
         private void Chart_ObjectsUpdated(ChartObjectsUpdatedEventArgs obj)
         {
@@ -84,7 +77,7 @@ namespace cAlgo.Patterns
 
         protected Chart Chart
         {
-            get { return _chart; }
+            get { return Config.Chart; }
         }
 
         protected int MouseUpNumber
@@ -99,23 +92,20 @@ namespace cAlgo.Patterns
 
         protected Color Color
         {
-            get { return _color; }
+            get { return Config.Color; }
         }
 
         protected Color LabelsColor
         {
-            get { return _labelsColor; }
+            get { return Config.LabelsColor; }
         }
 
         protected bool ShowLabels
         {
-            get { return _showLabels; }
+            get { return Config.ShowLabels; }
         }
 
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string Name { get; private set; }
 
         public bool IsDrawing
         {
@@ -134,11 +124,11 @@ namespace cAlgo.Patterns
 
             Id = DateTime.Now.Ticks;
 
-            _chart.MouseDown += Chart_MouseDown;
-            _chart.MouseMove += Chart_MouseMove;
-            _chart.MouseUp += Chart_MouseUp;
+            Chart.MouseDown += Chart_MouseDown;
+            Chart.MouseMove += Chart_MouseMove;
+            Chart.MouseUp += Chart_MouseUp;
 
-            _chart.IsScrollingEnabled = false;
+            Chart.IsScrollingEnabled = false;
 
             OnDrawingStarted();
 
@@ -158,11 +148,11 @@ namespace cAlgo.Patterns
 
             if (ShowLabels) DrawLabels();
 
-            _chart.MouseDown -= Chart_MouseDown;
-            _chart.MouseMove -= Chart_MouseMove;
-            _chart.MouseUp -= Chart_MouseUp;
+            Chart.MouseDown -= Chart_MouseDown;
+            Chart.MouseMove -= Chart_MouseMove;
+            Chart.MouseUp -= Chart_MouseUp;
 
-            _chart.IsScrollingEnabled = true;
+            Chart.IsScrollingEnabled = true;
 
             _mouseUpNumber = 0;
 

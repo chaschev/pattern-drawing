@@ -6,8 +6,7 @@ namespace cAlgo.Patterns
 {
     public class ElliottCorrectionWavePattern : ElliottWavePatternBase
     {
-        public ElliottCorrectionWavePattern(Chart chart, Color color, bool showLabels, Color labelsColor) : base(chart, "Elliott Correction Wave (ABC)", color,
-            showLabels, labelsColor, 3)
+        public ElliottCorrectionWavePattern(PatternConfig config) : base("Elliott Correction Wave (ABC)", config, 3)
         {
         }
 
