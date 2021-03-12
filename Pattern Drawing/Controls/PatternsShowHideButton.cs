@@ -12,18 +12,6 @@ namespace cAlgo.Controls
         {
             _chart = chart;
 
-            Click += args =>
-            {
-                if (IsOn)
-                {
-                    TurnOff();
-                }
-                else
-                {
-                    TurnOn();
-                }
-            };
-
             Text = "Hide";
         }
 

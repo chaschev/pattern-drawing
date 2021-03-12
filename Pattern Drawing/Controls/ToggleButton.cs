@@ -7,6 +7,21 @@ namespace cAlgo.Controls
         private Color _onColor;
         private Color _offColor;
 
+        public ToggleButton()
+        {
+            Click += args =>
+            {
+                if (IsOn)
+                {
+                    TurnOff();
+                }
+                else
+                {
+                    TurnOn();
+                }
+            };
+        }
+
         public Color OnColor
         {
             get { return _onColor; }

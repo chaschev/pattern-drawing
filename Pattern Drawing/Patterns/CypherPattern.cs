@@ -9,6 +9,9 @@ namespace cAlgo.Patterns
         private ChartTriangle _leftTriangle;
         private ChartTriangle _rightTriangle;
 
+        private ChartTrendLine _xdLine;
+        private ChartTrendLine _acLine;
+
         public CypherPattern(PatternConfig config) : base("Cypher", config)
         {
         }
@@ -23,26 +26,52 @@ namespace cAlgo.Patterns
 
             var objectNameId = string.Format("{0}_{1}", ObjectName, id);
 
-            foreach (var chartObject in chartObjects)
+            var leftTriangle = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("Left",
+                StringComparison.OrdinalIgnoreCase)) as ChartTriangle;
+
+            var rightTriangle = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("Right",
+                StringComparison.OrdinalIgnoreCase)) as ChartTriangle;
+
+            if (leftTriangle == null || rightTriangle == null) return;
+
+            foreach (var chartObject in patternObjects)
             {
-                if (chartObject == updatedChartObject
-                    || chartObject.ObjectType != ChartObjectType.Triangle
-                    || !chartObject.Name.StartsWith(objectNameId, StringComparison.OrdinalIgnoreCase))
+                if (chartObject == updatedChartObject)
                 {
                     continue;
                 }
 
-                var triangle = chartObject as ChartTriangle;
+                var nameSplit = chartObject.Name.Split('_');
 
-                if (triangle.Name.EndsWith("Left", StringComparison.InvariantCultureIgnoreCase))
+                switch (nameSplit.Last())
                 {
-                    triangle.Time3 = otherTriangle.Time1;
-                    triangle.Y3 = otherTriangle.Y1;
-                }
-                else
-                {
-                    triangle.Time1 = otherTriangle.Time3;
-                    triangle.Y1 = otherTriangle.Y3;
+                    case "Left":
+                        leftTriangle.Time3 = otherTriangle.Time1;
+                        leftTriangle.Y3 = otherTriangle.Y1;
+                        break;
+
+                    case "Right":
+                        rightTriangle.Time1 = otherTriangle.Time3;
+                        rightTriangle.Y1 = otherTriangle.Y3;
+                        break;
+
+                    case "ACLine":
+                        var acLine = chartObject as ChartTrendLine;
+
+                        acLine.Time1 = leftTriangle.Time2;
+                        acLine.Y1 = leftTriangle.Y2;
+                        acLine.Time2 = rightTriangle.Time2;
+                        acLine.Y2 = rightTriangle.Y2;
+                        break;
+
+                    case "XDLine":
+                        var xdLine = chartObject as ChartTrendLine;
+
+                        xdLine.Time1 = leftTriangle.Time1;
+                        xdLine.Y1 = leftTriangle.Y1;
+                        xdLine.Time2 = rightTriangle.Time3;
+                        xdLine.Y2 = rightTriangle.Y3;
+                        break;
                 }
             }
         }
@@ -51,12 +80,22 @@ namespace cAlgo.Patterns
         {
             _leftTriangle = null;
             _rightTriangle = null;
+            _xdLine = null;
+            _acLine = null;
         }
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
         {
             if (MouseUpNumber == 5)
             {
+                var acLineName = GetObjectName("ACLine");
+
+                _acLine = Chart.DrawTrendLine(acLineName, _leftTriangle.Time2, _leftTriangle.Y2, _rightTriangle.Time2, _rightTriangle.Y2, Color, 1, LineStyle.Dots);
+
+                var xdLineName = GetObjectName("XDLine");
+
+                _xdLine = Chart.DrawTrendLine(xdLineName, _leftTriangle.Time1, _leftTriangle.Y1, _rightTriangle.Time3, _rightTriangle.Y3, Color, 1, LineStyle.Dots);
+
                 StopDrawing();
 
                 return;
@@ -123,6 +162,15 @@ namespace cAlgo.Patterns
             DrawLabelText("C", _rightTriangle.Time2, _rightTriangle.Y2);
 
             DrawLabelText("D", _rightTriangle.Time3, _rightTriangle.Y3);
+
+            var acLabelTime = _acLine.Time1.AddMilliseconds((_acLine.Time2 - _acLine.Time1).TotalMilliseconds / 2);
+            var acLabelY = _acLine.Y1 + ((_acLine.Y2 - _acLine.Y1) / 2);
+
+            var acDiff = _rightTriangle.Y2 - _leftTriangle.Y2;
+
+            var xaLength = _leftTriangle.Y2 - _leftTriangle.Y1;
+
+            DrawLabelText(Math.Round(1 + acDiff / xaLength, 3).ToString(), acLabelTime, acLabelY);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)

@@ -8,18 +8,6 @@ namespace cAlgo.Controls
 
         public PatternButton(IPattern pattern)
         {
-            Click += args =>
-            {
-                if (IsOn)
-                {
-                    TurnOff();
-                }
-                else
-                {
-                    TurnOn();
-                }
-            };
-
             _pattern = pattern;
 
             _pattern.DrawingStarted += Pattern_DrawingStarted;
