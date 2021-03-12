@@ -118,6 +118,57 @@ namespace cAlgo.Patterns
             DrawLabelText("B", _leftTriangle.Time2, _leftTriangle.Y2);
             DrawLabelText("C", _leftTriangle.Time3, _leftTriangle.Y3);
             DrawLabelText("D", _rightTriangle.Time3, _rightTriangle.Y3);
+
+            DrawLabelAc(_leftTriangle);
+            DrawLabelBd(_leftTriangle, _rightTriangle);
+        }
+
+        private void DrawLabelAc(ChartTriangle leftTriangle, ChartText label = null)
+        {
+            var abLength = leftTriangle.Y2 - leftTriangle.Y1;
+
+            var bcLength = leftTriangle.Y2 - leftTriangle.Y3;
+
+            var ratio = Math.Round(bcLength / abLength, 3);
+
+            var labelTime = leftTriangle.Time1.AddMilliseconds((leftTriangle.Time3 - leftTriangle.Time1).TotalMilliseconds * 0.7);
+
+            var labelY = leftTriangle.Y1 + ((leftTriangle.Y3 - leftTriangle.Y1) / 2);
+
+            if (label == null)
+            {
+                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "AC");
+            }
+            else
+            {
+                label.Text = ratio.ToString();
+                label.Time = labelTime;
+                label.Y = labelY;
+            }
+        }
+
+        private void DrawLabelBd(ChartTriangle leftTriangle, ChartTriangle rightTriangle, ChartText label = null)
+        {
+            var abLength = leftTriangle.Y2 - leftTriangle.Y1;
+
+            var bdLength = rightTriangle.Y3 - rightTriangle.Y2;
+
+            var ratio = Math.Round(1 + bdLength / abLength, 3);
+
+            var labelTime = rightTriangle.Time2.AddMilliseconds((rightTriangle.Time3 - rightTriangle.Time2).TotalMilliseconds * 0.7);
+
+            var labelY = rightTriangle.Y2 + ((rightTriangle.Y3 - rightTriangle.Y2) / 2);
+
+            if (label == null)
+            {
+                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "BD");
+            }
+            else
+            {
+                label.Text = ratio.ToString();
+                label.Time = labelTime;
+                label.Y = labelY;
+            }
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
@@ -154,6 +205,9 @@ namespace cAlgo.Patterns
                         label.Y = rightTriangle.Y3;
                         break;
                 }
+
+                if (label.Name.EndsWith("AC", StringComparison.OrdinalIgnoreCase)) DrawLabelAc(leftTriangle, label);
+                if (label.Name.EndsWith("BD", StringComparison.OrdinalIgnoreCase)) DrawLabelBd(leftTriangle, rightTriangle, label);
             }
         }
     }

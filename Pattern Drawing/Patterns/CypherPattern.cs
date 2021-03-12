@@ -1,4 +1,5 @@
 ﻿using cAlgo.API;
+using cAlgo.Helpers;
 using System;
 using System.Linq;
 
@@ -92,9 +93,15 @@ namespace cAlgo.Patterns
 
                 _acLine = Chart.DrawTrendLine(acLineName, _leftTriangle.Time2, _leftTriangle.Y2, _rightTriangle.Time2, _rightTriangle.Y2, Color, 1, LineStyle.Dots);
 
+                _acLine.IsLocked = true;
+                _acLine.IsInteractive = true;
+
                 var xdLineName = GetObjectName("XDLine");
 
                 _xdLine = Chart.DrawTrendLine(xdLineName, _leftTriangle.Time1, _leftTriangle.Y1, _rightTriangle.Time3, _rightTriangle.Y3, Color, 1, LineStyle.Dots);
+
+                _xdLine.IsLocked = true;
+                _xdLine.IsInteractive = true;
 
                 StopDrawing();
 
@@ -163,14 +170,109 @@ namespace cAlgo.Patterns
 
             DrawLabelText("D", _rightTriangle.Time3, _rightTriangle.Y3);
 
-            var acLabelTime = _acLine.Time1.AddMilliseconds((_acLine.Time2 - _acLine.Time1).TotalMilliseconds / 2);
-            var acLabelY = _acLine.Y1 + ((_acLine.Y2 - _acLine.Y1) / 2);
+            if (_acLine != null) DrawOrUpdateAcLabel(_leftTriangle, _rightTriangle, _acLine);
 
-            var acDiff = _rightTriangle.Y2 - _leftTriangle.Y2;
+            if (_xdLine != null) DrawOrUpdateXdLabel(_leftTriangle, _rightTriangle, _xdLine);
 
-            var xaLength = _leftTriangle.Y2 - _leftTriangle.Y1;
+            DrawOrUpdateXbLabel(_leftTriangle);
 
-            DrawLabelText(Math.Round(1 + acDiff / xaLength, 3).ToString(), acLabelTime, acLabelY);
+            DrawOrUpdateBdLabel(_rightTriangle);
+        }
+
+        private void DrawOrUpdateBdLabel(ChartTriangle rightTriangle, ChartText label = null)
+        {
+            var cdLength = rightTriangle.Y2 - rightTriangle.Y3;
+
+            var bcLength = rightTriangle.Y2 - rightTriangle.Y1;
+
+            var ratio = Math.Round(cdLength / bcLength, 3);
+
+            var labelTime = rightTriangle.Time1.AddMilliseconds((rightTriangle.Time3 - rightTriangle.Time1).TotalMilliseconds * 0.3);
+
+            var labelY = rightTriangle.Y1 + ((rightTriangle.Y3 - rightTriangle.Y1) / 2);
+
+            if (label == null)
+            {
+                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "BD");
+            }
+            else
+            {
+                label.Text = ratio.ToString();
+                label.Time = labelTime;
+                label.Y = labelY;
+            }
+        }
+
+        private void DrawOrUpdateXbLabel(ChartTriangle leftTriangle, ChartText label = null)
+        {
+            var abLength = leftTriangle.Y2 - leftTriangle.Y3;
+
+            var xaLength = leftTriangle.Y2 - leftTriangle.Y1;
+
+            var ratio = Math.Round(abLength / xaLength, 3);
+
+            var labelTime = leftTriangle.Time1.AddMilliseconds((leftTriangle.Time3 - leftTriangle.Time1).TotalMilliseconds * 0.7);
+
+            var labelY = leftTriangle.Y1 + ((leftTriangle.Y3 - leftTriangle.Y1) / 2);
+
+            if (label == null)
+            {
+                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "XB");
+            }
+            else
+            {
+                label.Text = ratio.ToString();
+                label.Time = labelTime;
+                label.Y = labelY;
+            }
+        }
+
+        private void DrawOrUpdateXdLabel(ChartTriangle leftTriangle, ChartTriangle rightTriangle, ChartTrendLine line, ChartText label = null)
+        {
+            var labelTime = line.GetLineCenterTime();
+
+            var labelY = line.GetLineCenterY();
+
+            var xdLength = rightTriangle.Y2 - rightTriangle.Y3;
+
+            var xcLength = rightTriangle.Y2 - leftTriangle.Y1;
+
+            var ratio = Math.Round(xdLength / xcLength, 3);
+
+            if (label == null)
+            {
+                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "XD");
+            }
+            else
+            {
+                label.Text = ratio.ToString();
+                label.Time = labelTime;
+                label.Y = labelY;
+            }
+        }
+
+        private void DrawOrUpdateAcLabel(ChartTriangle leftTriangle, ChartTriangle rightTriangle, ChartTrendLine line, ChartText label = null)
+        {
+            var labelTime = line.GetLineCenterTime();
+
+            var labelY = line.GetLineCenterY();
+
+            var acLength = rightTriangle.Y2 - leftTriangle.Y2;
+
+            var xaLength = leftTriangle.Y2 - leftTriangle.Y1;
+
+            var ratio = Math.Round(1 + acLength / xaLength, 3);
+
+            if (label == null)
+            {
+                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "AC");
+            }
+            else
+            {
+                label.Text = ratio.ToString();
+                label.Time = labelTime;
+                label.Y = labelY;
+            }
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
@@ -181,7 +283,13 @@ namespace cAlgo.Patterns
             var rightTriangle = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("Right",
                 StringComparison.OrdinalIgnoreCase)) as ChartTriangle;
 
-            if (leftTriangle == null || rightTriangle == null) return;
+            var acLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("ACLine",
+                StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
+
+            var xdLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("XDLine",
+                StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
+
+            if (leftTriangle == null || rightTriangle == null || acLine == null || xdLine == null) return;
 
             foreach (var label in labels)
             {
@@ -212,6 +320,11 @@ namespace cAlgo.Patterns
                         label.Y = rightTriangle.Y3;
                         break;
                 }
+
+                if (label.Name.EndsWith("AC", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateAcLabel(leftTriangle, rightTriangle, acLine, label);
+                if (label.Name.EndsWith("XD", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateXdLabel(leftTriangle, rightTriangle, xdLine, label);
+                if (label.Name.EndsWith("XB", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateXbLabel(leftTriangle, label);
+                if (label.Name.EndsWith("BD", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateBdLabel(rightTriangle, label);
             }
         }
     }

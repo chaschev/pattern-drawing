@@ -22,6 +22,8 @@ namespace cAlgo.Patterns
             Config.Chart.ObjectsUpdated += Chart_ObjectsUpdated;
         }
 
+        public Action<string> Print { get; set; }
+
         protected PatternConfig Config { get; private set; }
 
         private void Chart_ObjectsUpdated(ChartObjectsUpdatedEventArgs obj)
@@ -39,6 +41,8 @@ namespace cAlgo.Patterns
             {
                 foreach (var chartObject in updatedPatternObjects)
                 {
+                    if (chartObject is ChartText) continue;
+
                     long id;
 
                     if (!TryGetChartObjectPatternId(chartObject.Name, out id))
@@ -280,13 +284,15 @@ namespace cAlgo.Patterns
         {
         }
 
-        protected ChartText DrawLabelText(string text, DateTime time, double y, bool isInteractive = true)
+        protected ChartText DrawLabelText(string text, DateTime time, double y, string objectNameKey = null)
         {
-            var name = string.Format("{0}_{1}_Label_{2}", ObjectName, Id, text);
+            var name = string.IsNullOrWhiteSpace(objectNameKey)
+                ? string.Format("{0}_{1}_Label_{2}", ObjectName, Id, text)
+                : string.Format("{0}_{1}_Label_{2}", ObjectName, Id, objectNameKey);
 
             var chartText = Chart.DrawText(name, text, time, y, LabelsColor);
 
-            //chartText.IsInteractive = isInteractive;
+            chartText.IsInteractive = Config.IsLabelsInteractive;
 
             return chartText;
         }

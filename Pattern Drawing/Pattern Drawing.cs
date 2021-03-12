@@ -104,7 +104,7 @@ namespace cAlgo
             AddPatternButton(new TrianglePattern(patternConfig));
             AddPatternButton(new CyclicLinesPattern(patternConfig));
             AddPatternButton(new HeadAndShouldersPattern(patternConfig));
-            AddPatternButton(new CypherPattern(patternConfig));
+            AddPatternButton(new CypherPattern(patternConfig) { Print = Print });
             AddPatternButton(new AbcdPattern(patternConfig));
             AddPatternButton(new ThreeDrivesPattern(patternConfig));
             AddPatternButton(new ElliottImpulseWavePattern(patternConfig));
