@@ -1,6 +1,8 @@
 ﻿using cAlgo.API;
 using cAlgo.Helpers;
 using System.Linq;
+using System.Windows.Forms;
+using Button = cAlgo.API.Button;
 
 namespace cAlgo.Controls
 {
@@ -19,6 +21,10 @@ namespace cAlgo.Controls
 
         private void PatternsRemoveAllButton_Click(ButtonClickEventArgs obj)
         {
+            var dialogResult = MessageBox.Show("Are you sure you want to remove all patterns from this chart?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+            if (dialogResult != DialogResult.OK) return;
+
             var chartObjects = _chart.Objects.ToArray();
 
             foreach (var chartObject in chartObjects)

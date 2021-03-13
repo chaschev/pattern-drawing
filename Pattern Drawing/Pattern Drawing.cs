@@ -8,7 +8,7 @@ namespace cAlgo
     /// <summary>
     /// This indicator allows you to draw chart patterns
     /// </summary>
-    [Indicator(IsOverlay = true, TimeZone = TimeZones.UTC, AccessRights = AccessRights.None)]
+    [Indicator(IsOverlay = true, TimeZone = TimeZones.UTC, AccessRights = AccessRights.FullAccess)]
     public class PatternDrawing : Indicator
     {
         private StackPanel _panel;
@@ -28,7 +28,7 @@ namespace cAlgo
         [Parameter("Show", DefaultValue = true, Group = "Patterns Label")]
         public bool PatternsLabelShow { get; set; }
 
-        [Parameter("Color", DefaultValue = "Red", Group = "Patterns Label")]
+        [Parameter("Color", DefaultValue = "Yellow", Group = "Patterns Label")]
         public string PatternsLabelColor { get; set; }
 
         [Parameter("Alpha", DefaultValue = 100, MinValue = 0, MaxValue = 255, Group = "Patterns Label")]
