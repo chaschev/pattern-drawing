@@ -29,7 +29,7 @@ namespace cAlgo.Controls
 
             foreach (var chartObject in chartObjects)
             {
-                if (!chartObject.IsPattern()) continue;
+                if (!chartObject.IsPattern() || chartObject.IsHidden) continue;
 
                 _chart.RemoveObject(chartObject.Name);
             }

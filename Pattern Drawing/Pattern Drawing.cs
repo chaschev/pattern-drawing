@@ -46,19 +46,13 @@ namespace cAlgo
         [Parameter("Vertical Alignment", DefaultValue = VerticalAlignment.Top, Group = "Container Panel")]
         public VerticalAlignment PanelVerticalAlignment { get; set; }
 
-        [Parameter("Background Color", DefaultValue = "Gray", Group = "Container Panel")]
-        public string PanelBackgroundColor { get; set; }
-
-        [Parameter("Opacity", DefaultValue = 1, MinValue = 0, MaxValue = 1, Group = "Container Panel")]
-        public double PanelOpacity { get; set; }
-
         [Parameter("Margin", DefaultValue = 3, Group = "Container Panel")]
         public double PanelMargin { get; set; }
 
         [Parameter("Background Disable Color", DefaultValue = "#FFCCCCCC", Group = "Buttons")]
         public string ButtonsBackgroundDisableColor { get; set; }
 
-        [Parameter("Background Disable Color", DefaultValue = "Red", Group = "Buttons")]
+        [Parameter("Background Enable Color", DefaultValue = "Red", Group = "Buttons")]
         public string ButtonsBackgroundEnableColor { get; set; }
 
         [Parameter("Foreground Color", DefaultValue = "Blue", Group = "Buttons")]
@@ -80,8 +74,7 @@ namespace cAlgo
                 HorizontalAlignment = PanelHorizontalAlignment,
                 VerticalAlignment = PanelVerticalAlignment,
                 Orientation = PanelOrientation,
-                BackgroundColor = ColorParser.Parse(PanelBackgroundColor),
-                Opacity = PanelOpacity,
+                BackgroundColor = Color.Transparent,
                 Margin = PanelMargin,
             };
 
