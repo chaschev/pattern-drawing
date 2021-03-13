@@ -18,66 +18,13 @@ namespace cAlgo.Patterns
 
             ObjectName = string.Format("Pattern_{0}", Name.Replace(" ", "").Replace("_", ""));
 
+            ReloadPatterns(Chart.Objects.ToArray());
+
             Config.Chart.ObjectsRemoved += Chart_ObjectsRemoved;
             Config.Chart.ObjectsUpdated += Chart_ObjectsUpdated;
         }
 
-        public Action<string> Print { get; set; }
-
         protected PatternConfig Config { get; private set; }
-
-        private void Chart_ObjectsUpdated(ChartObjectsUpdatedEventArgs obj)
-        {
-            if (IsDrawing) return;
-
-            var updatedPatternObjects = obj.ChartObjects.Where(iObject => iObject.Name.StartsWith(ObjectName,
-                StringComparison.OrdinalIgnoreCase)).ToArray();
-
-            if (updatedPatternObjects.Length == 0) return;
-
-            Chart.ObjectsUpdated -= Chart_ObjectsUpdated;
-
-            try
-            {
-                foreach (var chartObject in updatedPatternObjects)
-                {
-                    if (chartObject is ChartText) continue;
-
-                    long id;
-
-                    if (!TryGetChartObjectPatternId(chartObject.Name, out id))
-                    {
-                        continue;
-                    }
-
-                    var updatedPatternName = string.Format("{0}_{1}", ObjectName, id);
-
-                    var patternObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
-                        StringComparison.OrdinalIgnoreCase) && iObject.ObjectType != ChartObjectType.Text)
-                        .ToArray();
-
-                    OnPatternChartObjectsUpdated(id, chartObject, patternObjects);
-
-                    if (ShowLabels)
-                    {
-                        var labelObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
-                            StringComparison.OrdinalIgnoreCase) && iObject is ChartText)
-                            .Select(iObject => iObject as ChartText)
-                            .ToArray();
-
-                        UpdateLabels(id, chartObject, labelObjects, patternObjects);
-                    }
-                }
-            }
-            finally
-            {
-                Chart.ObjectsUpdated += Chart_ObjectsUpdated;
-            }
-        }
-
-        public event Action<IPattern> DrawingStarted;
-
-        public event Action<IPattern> DrawingStopped;
 
         protected Chart Chart
         {
@@ -119,6 +66,10 @@ namespace cAlgo.Patterns
         public string ObjectName { get; private set; }
 
         protected long Id { get; private set; }
+
+        public event Action<IPattern> DrawingStarted;
+
+        public event Action<IPattern> DrawingStopped;
 
         public void StartDrawing()
         {
@@ -170,6 +121,13 @@ namespace cAlgo.Patterns
             {
                 drawingStopped.Invoke(this);
             }
+        }
+
+        protected void FinishDrawing()
+        {
+            DrawNonInteractiveObjects();
+
+            StopDrawing();
         }
 
         protected virtual void OnDrawingStopped()
@@ -230,6 +188,22 @@ namespace cAlgo.Patterns
             }
         }
 
+        private void Chart_ObjectsUpdated(ChartObjectsUpdatedEventArgs obj)
+        {
+            if (IsDrawing) return;
+
+            Chart.ObjectsUpdated -= Chart_ObjectsUpdated;
+
+            try
+            {
+                ReloadPatterns(obj.ChartObjects.ToArray());
+            }
+            finally
+            {
+                Chart.ObjectsUpdated += Chart_ObjectsUpdated;
+            }
+        }
+
         private void RemoveObjects(long id)
         {
             var patternObjectNames = string.Format("{0}_{1}", ObjectName, id);
@@ -280,15 +254,19 @@ namespace cAlgo.Patterns
         {
         }
 
+        protected virtual void DrawNonInteractiveObjects()
+        {
+        }
+
         protected virtual void UpdateLabels(long id, ChartObject updatedObject, ChartText[] labels, ChartObject[] patternObjects)
         {
         }
 
-        protected ChartText DrawLabelText(string text, DateTime time, double y, string objectNameKey = null)
+        protected ChartText DrawLabelText(string text, DateTime time, double y, long id, string objectNameKey = null)
         {
             var name = string.IsNullOrWhiteSpace(objectNameKey)
-                ? string.Format("{0}_{1}_Label_{2}", ObjectName, Id, text)
-                : string.Format("{0}_{1}_Label_{2}", ObjectName, Id, objectNameKey);
+                ? string.Format("{0}_{1}_Label_{2}", ObjectName, id, text)
+                : string.Format("{0}_{1}_Label_{2}", ObjectName, id, objectNameKey);
 
             var chartText = Chart.DrawText(name, text, time, y, LabelsColor);
 
@@ -297,11 +275,49 @@ namespace cAlgo.Patterns
             return chartText;
         }
 
-        protected string GetObjectName(string data = null)
+        protected string GetObjectName(string data = null, long? id = null)
         {
             data = data ?? string.Empty;
 
-            return string.Format("{0}_{1}_{2}", ObjectName, Id, data);
+            return string.Format("{0}_{1}_{2}", ObjectName, id.GetValueOrDefault(Id), data);
+        }
+
+        public void ReloadPatterns(ChartObject[] chartObjects)
+        {
+            var updatedPatternObjects = chartObjects.Where(iObject => iObject.Name.StartsWith(ObjectName,
+                StringComparison.OrdinalIgnoreCase)).ToArray();
+
+            if (updatedPatternObjects.Length == 0) return;
+
+            foreach (var chartObject in updatedPatternObjects)
+            {
+                if (chartObject is ChartText) continue;
+
+                long id;
+
+                if (!TryGetChartObjectPatternId(chartObject.Name, out id))
+                {
+                    continue;
+                }
+
+                var updatedPatternName = string.Format("{0}_{1}", ObjectName, id);
+
+                var patternObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
+                    StringComparison.OrdinalIgnoreCase) && iObject.ObjectType != ChartObjectType.Text)
+                    .ToArray();
+
+                OnPatternChartObjectsUpdated(id, chartObject, patternObjects);
+
+                if (ShowLabels)
+                {
+                    var labelObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
+                        StringComparison.OrdinalIgnoreCase) && iObject is ChartText)
+                        .Select(iObject => iObject as ChartText)
+                        .ToArray();
+
+                    UpdateLabels(id, chartObject, labelObjects, patternObjects);
+                }
+            }
         }
     }
 }

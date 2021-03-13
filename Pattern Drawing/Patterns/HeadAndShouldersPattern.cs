@@ -65,7 +65,7 @@ namespace cAlgo.Patterns
         {
             if (MouseUpNumber == 7)
             {
-                StopDrawing();
+                FinishDrawing();
 
                 return;
             }
@@ -138,14 +138,37 @@ namespace cAlgo.Patterns
         {
             if (_leftTriangle == null || _headTriangle == null || _rightTriangle == null) return;
 
-            DrawLabelText("Left", _leftTriangle.Time2, _leftTriangle.Y2);
-            DrawLabelText("Head", _headTriangle.Time2, _headTriangle.Y2);
-            DrawLabelText("Right", _rightTriangle.Time2, _rightTriangle.Y2);
+            DrawLabels(_leftTriangle, _headTriangle, _rightTriangle, Id);
+        }
+
+        private void DrawLabels(ChartTriangle leftTriangle, ChartTriangle headTriangle, ChartTriangle rightTriangle, long id)
+        {
+            DrawLabelText("Left", leftTriangle.Time2, leftTriangle.Y2, id);
+            DrawLabelText("Head", headTriangle.Time2, headTriangle.Y2, id);
+            DrawLabelText("Right", rightTriangle.Time2, rightTriangle.Y2, id);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
         {
             var triangles = patternObjects.Select(iObject => iObject as ChartTriangle).ToArray();
+
+            var leftTriangle = triangles.FirstOrDefault(iTriangle => iTriangle.Name.EndsWith("Left",
+                StringComparison.OrdinalIgnoreCase));
+
+            var headTriangle = triangles.FirstOrDefault(iTriangle => iTriangle.Name.EndsWith("Head",
+                StringComparison.OrdinalIgnoreCase));
+
+            var rightTriangle = triangles.FirstOrDefault(iTriangle => iTriangle.Name.EndsWith("Right",
+                StringComparison.OrdinalIgnoreCase));
+
+            if (leftTriangle == null || rightTriangle == null || headTriangle == null) return;
+
+            if (labels.Length == 0)
+            {
+                DrawLabels(leftTriangle, headTriangle, rightTriangle, id);
+
+                return;
+            }
 
             foreach (var label in labels)
             {

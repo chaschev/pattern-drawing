@@ -12,7 +12,7 @@ namespace cAlgo.Patterns
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
         {
-            if (MouseUpNumber == 3) StopDrawing();
+            if (MouseUpNumber == 3) FinishDrawing();
         }
 
         protected override void OnMouseMove(ChartMouseEventArgs obj)
@@ -50,9 +50,14 @@ namespace cAlgo.Patterns
         {
             if (_triangle == null) return;
 
-            DrawLabelText("A", _triangle.Time1, _triangle.Y1);
-            DrawLabelText("B", _triangle.Time2, _triangle.Y2);
-            DrawLabelText("C", _triangle.Time3, _triangle.Y3);
+            DrawLabels(_triangle, Id);
+        }
+
+        private void DrawLabels(ChartTriangle triangle, long id)
+        {
+            DrawLabelText("A", triangle.Time1, triangle.Y1, id);
+            DrawLabelText("B", triangle.Time2, triangle.Y2, id);
+            DrawLabelText("C", triangle.Time3, triangle.Y3, id);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
@@ -60,6 +65,13 @@ namespace cAlgo.Patterns
             if (chartObject.ObjectType != ChartObjectType.Triangle) return;
 
             var triangle = chartObject as ChartTriangle;
+
+            if (labels.Length == 0)
+            {
+                DrawLabels(triangle, id);
+
+                return;
+            }
 
             foreach (var label in labels)
             {

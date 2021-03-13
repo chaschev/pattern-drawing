@@ -67,7 +67,7 @@ namespace cAlgo
         [Parameter("Margin", DefaultValue = 1, Group = "Buttons")]
         public double ButtonsMargin { get; set; }
 
-        [Parameter("Width", DefaultValue = 100, Group = "Buttons")]
+        [Parameter("Width", DefaultValue = 200, Group = "Buttons")]
         public double ButtonsWidth { get; set; }
 
         [Parameter("Height", DefaultValue = 20, Group = "Buttons")]
@@ -99,12 +99,15 @@ namespace cAlgo
             var patternsColor = ColorParser.Parse(PatternsColor, PatternsColorAlpha);
             var patternsLabelsColor = ColorParser.Parse(PatternsLabelColor, PatternsLabelColorAlpha);
 
-            var patternConfig = new PatternConfig(Chart, patternsColor, PatternsLabelShow, patternsLabelsColor, PatternsLabelInteractive);
+            var patternConfig = new PatternConfig(Chart, patternsColor, PatternsLabelShow, patternsLabelsColor, PatternsLabelInteractive)
+            {
+                Print = Print
+            };
 
             AddPatternButton(new TrianglePattern(patternConfig));
             AddPatternButton(new CyclicLinesPattern(patternConfig));
             AddPatternButton(new HeadAndShouldersPattern(patternConfig));
-            AddPatternButton(new CypherPattern(patternConfig) { Print = Print });
+            AddPatternButton(new CypherPattern(patternConfig));
             AddPatternButton(new AbcdPattern(patternConfig));
             AddPatternButton(new ThreeDrivesPattern(patternConfig));
             AddPatternButton(new ElliottImpulseWavePattern(patternConfig));
@@ -118,7 +121,11 @@ namespace cAlgo
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
                 OffColor = _buttonsBackgroundDisableColor,
-                Width = 200
+            });
+
+            _panel.AddChild(new PatternsRemoveAllButton(Chart)
+            {
+                Style = _buttonsStyle,
             });
 
             Chart.AddControl(_panel);
@@ -135,7 +142,6 @@ namespace cAlgo
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
                 OffColor = _buttonsBackgroundDisableColor,
-                Width = 200
             });
         }
     }

@@ -60,7 +60,7 @@ namespace cAlgo.Patterns
         {
             if (MouseUpNumber == 4)
             {
-                StopDrawing();
+                FinishDrawing();
 
                 return;
             }
@@ -114,16 +114,21 @@ namespace cAlgo.Patterns
         {
             if (_leftTriangle == null || _rightTriangle == null) return;
 
-            DrawLabelText("A", _leftTriangle.Time1, _leftTriangle.Y1);
-            DrawLabelText("B", _leftTriangle.Time2, _leftTriangle.Y2);
-            DrawLabelText("C", _leftTriangle.Time3, _leftTriangle.Y3);
-            DrawLabelText("D", _rightTriangle.Time3, _rightTriangle.Y3);
-
-            DrawLabelAc(_leftTriangle);
-            DrawLabelBd(_leftTriangle, _rightTriangle);
+            DrawLabels(_leftTriangle, _rightTriangle, Id);
         }
 
-        private void DrawLabelAc(ChartTriangle leftTriangle, ChartText label = null)
+        private void DrawLabels(ChartTriangle leftTriangle, ChartTriangle rightTriangle, long id)
+        {
+            DrawLabelText("A", leftTriangle.Time1, leftTriangle.Y1, id);
+            DrawLabelText("B", leftTriangle.Time2, leftTriangle.Y2, id);
+            DrawLabelText("C", leftTriangle.Time3, leftTriangle.Y3, id);
+            DrawLabelText("D", rightTriangle.Time3, rightTriangle.Y3, id);
+
+            DrawLabelAc(leftTriangle, id);
+            DrawLabelBd(leftTriangle, rightTriangle, id);
+        }
+
+        private void DrawLabelAc(ChartTriangle leftTriangle, long id, ChartText label = null)
         {
             var abLength = leftTriangle.Y2 - leftTriangle.Y1;
 
@@ -137,7 +142,7 @@ namespace cAlgo.Patterns
 
             if (label == null)
             {
-                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "AC");
+                DrawLabelText(ratio.ToString(), labelTime, labelY, id, objectNameKey: "AC");
             }
             else
             {
@@ -147,7 +152,7 @@ namespace cAlgo.Patterns
             }
         }
 
-        private void DrawLabelBd(ChartTriangle leftTriangle, ChartTriangle rightTriangle, ChartText label = null)
+        private void DrawLabelBd(ChartTriangle leftTriangle, ChartTriangle rightTriangle, long id, ChartText label = null)
         {
             var abLength = leftTriangle.Y2 - leftTriangle.Y1;
 
@@ -161,7 +166,7 @@ namespace cAlgo.Patterns
 
             if (label == null)
             {
-                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "BD");
+                DrawLabelText(ratio.ToString(), labelTime, labelY, id, objectNameKey: "BD");
             }
             else
             {
@@ -180,6 +185,13 @@ namespace cAlgo.Patterns
                 StringComparison.OrdinalIgnoreCase)) as ChartTriangle;
 
             if (leftTriangle == null || rightTriangle == null) return;
+
+            if (labels.Length == 0)
+            {
+                DrawLabels(leftTriangle, rightTriangle, id);
+
+                return;
+            }
 
             foreach (var label in labels)
             {
@@ -206,8 +218,8 @@ namespace cAlgo.Patterns
                         break;
                 }
 
-                if (label.Name.EndsWith("AC", StringComparison.OrdinalIgnoreCase)) DrawLabelAc(leftTriangle, label);
-                if (label.Name.EndsWith("BD", StringComparison.OrdinalIgnoreCase)) DrawLabelBd(leftTriangle, rightTriangle, label);
+                if (label.Name.EndsWith("AC", StringComparison.OrdinalIgnoreCase)) DrawLabelAc(leftTriangle, id, label);
+                if (label.Name.EndsWith("BD", StringComparison.OrdinalIgnoreCase)) DrawLabelBd(leftTriangle, rightTriangle, id, label);
             }
         }
     }

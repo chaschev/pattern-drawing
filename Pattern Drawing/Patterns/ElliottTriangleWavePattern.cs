@@ -14,12 +14,17 @@ namespace cAlgo.Patterns
         {
             if (FirstLine == null || SecondLine == null || ThirdLine == null || FourthLine == null || FifthLine == null) return;
 
-            DrawLabelText("(0)", FirstLine.Time1, FirstLine.Y1);
-            DrawLabelText("(A)", SecondLine.Time1, SecondLine.Y1);
-            DrawLabelText("(B)", ThirdLine.Time1, ThirdLine.Y1);
-            DrawLabelText("(C)", FourthLine.Time1, FourthLine.Y1);
-            DrawLabelText("(D)", FifthLine.Time1, FifthLine.Y1);
-            DrawLabelText("(E)", FifthLine.Time2, FifthLine.Y2);
+            DrawLabels(FirstLine, SecondLine, ThirdLine, FourthLine, FifthLine, Id);
+        }
+
+        private void DrawLabels(ChartTrendLine firstLine, ChartTrendLine secondLine, ChartTrendLine thirdLine, ChartTrendLine fourthLine, ChartTrendLine fifthLine, long id)
+        {
+            DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id);
+            DrawLabelText("(A)", secondLine.Time1, secondLine.Y1, id);
+            DrawLabelText("(B)", thirdLine.Time1, thirdLine.Y1, id);
+            DrawLabelText("(C)", fourthLine.Time1, fourthLine.Y1, id);
+            DrawLabelText("(D)", fifthLine.Time1, fifthLine.Y1, id);
+            DrawLabelText("(E)", fifthLine.Time2, fifthLine.Y2, id);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
@@ -40,6 +45,13 @@ namespace cAlgo.Patterns
                 StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
 
             if (firstLine == null || secondLine == null || thirdLine == null || fourthLine == null || fifthLine == null) return;
+
+            if (labels.Length == 0)
+            {
+                DrawLabels(firstLine, secondLine, thirdLine, fourthLine, fifthLine, id);
+
+                return;
+            }
 
             foreach (var label in labels)
             {

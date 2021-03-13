@@ -46,29 +46,13 @@ namespace cAlgo.Patterns
                 UpdateSideLines(updatedLine, patternObjects, "FifthLine", null);
             }
 
-            UpdateConnectionLines(patternObjects);
-        }
-
-        private void UpdateConnectionLines(ChartObject[] patternObjects)
-        {
             var firstLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("FirstLine", StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
             var thirdLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("ThirdLine", StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
             var fifthLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("FifthLine", StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
 
-            var firstConnectionLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("FirstConnectionLine", StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
-            var secondConnectionLine = patternObjects.FirstOrDefault(iObject => iObject.Name.EndsWith("SecondConnectionLine", StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
+            if (firstLine == null || thirdLine == null || fifthLine == null) return;
 
-            if (firstLine == null || thirdLine == null || fifthLine == null || firstConnectionLine == null || secondConnectionLine == null) return;
-
-            firstConnectionLine.Time1 = firstLine.Time2;
-            firstConnectionLine.Y1 = firstLine.Y2;
-            firstConnectionLine.Time2 = thirdLine.Time2;
-            firstConnectionLine.Y2 = thirdLine.Y2;
-
-            secondConnectionLine.Time1 = thirdLine.Time2;
-            secondConnectionLine.Y1 = thirdLine.Y2;
-            secondConnectionLine.Time2 = fifthLine.Time2;
-            secondConnectionLine.Y2 = fifthLine.Y2;
+            DrawNonInteractiveObjects(firstLine, thirdLine, fifthLine, id);
         }
 
         private void UpdateSideLines(ChartTrendLine line, ChartObject[] patternObjects, string leftLineName, string rightLineName)
@@ -114,9 +98,7 @@ namespace cAlgo.Patterns
         {
             if (MouseUpNumber == 7)
             {
-                DrawConnectionLines();
-
-                StopDrawing();
+                FinishDrawing();
 
                 return;
             }
@@ -159,19 +141,22 @@ namespace cAlgo.Patterns
             }
         }
 
-        private void DrawConnectionLines()
+        protected override void DrawNonInteractiveObjects()
         {
-            var firstLineName = GetObjectName("FirstConnectionLine");
+            if (_firstLine == null || _thirdLine == null || _fifthLine == null) return;
 
-            _firstConnectionLine = Chart.DrawTrendLine(firstLineName, _firstLine.Time2, _firstLine.Y2, _thirdLine.Time2, _thirdLine.Y2, Color, 1, LineStyle.Dots);
+            DrawNonInteractiveObjects(_firstLine, _thirdLine, _fifthLine, Id);
+        }
 
-            _firstConnectionLine.IsInteractive = true;
+        private void DrawNonInteractiveObjects(ChartTrendLine firstLine, ChartTrendLine thirdLine, ChartTrendLine fifthLine, long id)
+        {
+            var firstLineName = GetObjectName("FirstConnectionLine", id);
 
-            var secondLineName = GetObjectName("SecondConnectionLine");
+            _firstConnectionLine = Chart.DrawTrendLine(firstLineName, firstLine.Time2, firstLine.Y2, thirdLine.Time2, thirdLine.Y2, Color, 1, LineStyle.Dots);
 
-            _secondConnectionLine = Chart.DrawTrendLine(secondLineName, _thirdLine.Time2, _thirdLine.Y2, _fifthLine.Time2, _fifthLine.Y2, Color, 1, LineStyle.Dots);
+            var secondLineName = GetObjectName("SecondConnectionLine", id);
 
-            _secondConnectionLine.IsInteractive = true;
+            _secondConnectionLine = Chart.DrawTrendLine(secondLineName, thirdLine.Time2, thirdLine.Y2, fifthLine.Time2, fifthLine.Y2, Color, 1, LineStyle.Dots);
         }
 
         private void DrawLine(ChartMouseEventArgs mouseEventArgs, string name, ref ChartTrendLine line)
@@ -232,11 +217,16 @@ namespace cAlgo.Patterns
         {
             if (_firstLine == null || _thirdLine == null || _fifthLine == null || _firstConnectionLine == null || _secondConnectionLine == null) return;
 
-            DrawOrUpdateFirstConnectionLineLabel(_firstLine, _thirdLine, _firstConnectionLine);
-            DrawOrUpdateSecondConnectionLineLabel(_fifthLine, _thirdLine, _secondConnectionLine);
+            DrawLabels(_firstLine, _thirdLine, _fifthLine, _firstConnectionLine, _secondConnectionLine, Id);
         }
 
-        private void DrawOrUpdateFirstConnectionLineLabel(ChartTrendLine firstLine, ChartTrendLine thirdLine, ChartTrendLine firstConnectionLine, ChartText label = null)
+        private void DrawLabels(ChartTrendLine firstLine, ChartTrendLine thirdLine, ChartTrendLine fifthLine, ChartTrendLine firstConnectionLine, ChartTrendLine secondConnectionLine, long id)
+        {
+            DrawOrUpdateFirstConnectionLineLabel(firstLine, thirdLine, firstConnectionLine, id);
+            DrawOrUpdateSecondConnectionLineLabel(fifthLine, thirdLine, secondConnectionLine, id);
+        }
+
+        private void DrawOrUpdateFirstConnectionLineLabel(ChartTrendLine firstLine, ChartTrendLine thirdLine, ChartTrendLine firstConnectionLine, long id, ChartText label = null)
         {
             var firstLineLength = firstLine.Y2 - firstLine.Y1;
 
@@ -250,7 +240,7 @@ namespace cAlgo.Patterns
 
             if (label == null)
             {
-                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "FirstConnection");
+                DrawLabelText(ratio.ToString(), labelTime, labelY, id, objectNameKey: "FirstConnection");
             }
             else
             {
@@ -260,7 +250,7 @@ namespace cAlgo.Patterns
             }
         }
 
-        private void DrawOrUpdateSecondConnectionLineLabel(ChartTrendLine fifthLine, ChartTrendLine thirdLine, ChartTrendLine secondConnectionLine, ChartText label = null)
+        private void DrawOrUpdateSecondConnectionLineLabel(ChartTrendLine fifthLine, ChartTrendLine thirdLine, ChartTrendLine secondConnectionLine, long id, ChartText label = null)
         {
             var fifthLineLength = fifthLine.Y2 - fifthLine.Y1;
 
@@ -274,7 +264,7 @@ namespace cAlgo.Patterns
 
             if (label == null)
             {
-                DrawLabelText(ratio.ToString(), labelTime, labelY, objectNameKey: "SecondConnection");
+                DrawLabelText(ratio.ToString(), labelTime, labelY, id, objectNameKey: "SecondConnection");
             }
             else
             {
@@ -303,10 +293,17 @@ namespace cAlgo.Patterns
 
             if (firstLine == null || thirdLine == null || firstConnectionLine == null || secondConnectionLine == null) return;
 
+            if (labels.Length == 0)
+            {
+                DrawLabels(firstLine, thirdLine, fifthLine, firstConnectionLine, secondConnectionLine, id);
+
+                return;
+            }
+
             foreach (var label in labels)
             {
-                if (label.Name.EndsWith("FirstConnection", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateFirstConnectionLineLabel(firstLine, thirdLine, firstConnectionLine, label);
-                if (label.Name.EndsWith("SecondConnection", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateSecondConnectionLineLabel(fifthLine, thirdLine, secondConnectionLine, label);
+                if (label.Name.EndsWith("FirstConnection", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateFirstConnectionLineLabel(firstLine, thirdLine, firstConnectionLine, id, label);
+                if (label.Name.EndsWith("SecondConnection", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateSecondConnectionLineLabel(fifthLine, thirdLine, secondConnectionLine, id, label);
             }
         }
     }

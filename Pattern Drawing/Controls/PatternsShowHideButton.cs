@@ -1,5 +1,5 @@
 ﻿using cAlgo.API;
-using System;
+using cAlgo.Helpers;
 using System.Linq;
 
 namespace cAlgo.Controls
@@ -35,15 +35,10 @@ namespace cAlgo.Controls
 
             foreach (var chartObject in chartObjects)
             {
-                if (!IsPattern(chartObject)) continue;
+                if (!chartObject.IsPattern()) continue;
 
                 chartObject.IsHidden = isHidden;
             }
-        }
-
-        private bool IsPattern(ChartObject chartObject)
-        {
-            return chartObject.Name.StartsWith("Pattern_", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

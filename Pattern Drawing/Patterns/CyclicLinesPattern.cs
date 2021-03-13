@@ -17,10 +17,7 @@ namespace cAlgo.Patterns
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
         {
-            if (MouseUpNumber == 2)
-            {
-                StopDrawing();
-            }
+            if (MouseUpNumber == 2) FinishDrawing();
         }
 
         protected override void OnMouseMove(ChartMouseEventArgs obj)

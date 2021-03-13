@@ -3,7 +3,7 @@ using System;
 
 namespace cAlgo.Helpers
 {
-    public static class ChartTrendLineExtensions
+    public static class ChartTrendLineCenterExtensions
     {
         public static DateTime GetLineCenterTime(this ChartTrendLine line)
         {

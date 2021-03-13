@@ -47,10 +47,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\PatternsRemoveAllButton.cs" />
     <Compile Include="Controls\PatternsShowHideButton.cs" />
     <Compile Include="Controls\PatternButton.cs" />
     <Compile Include="Controls\ToggleButton.cs" />
-    <Compile Include="Helpers\ChartTrendLineExtensions.cs" />
+    <Compile Include="Helpers\ChartObjectsIsPatternExtension.cs" />
+    <Compile Include="Helpers\ChartTrendLineCenterExtensions.cs" />
     <Compile Include="Helpers\ColorParser.cs" />
     <Compile Include="Pattern Drawing.cs" />
     <Compile Include="Patterns\ElliottDoubleComboWavePattern.cs" />

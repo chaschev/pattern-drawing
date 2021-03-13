@@ -14,10 +14,15 @@ namespace cAlgo.Patterns
         {
             if (FirstLine == null || SecondLine == null || ThirdLine == null) return;
 
-            DrawLabelText("(0)", FirstLine.Time1, FirstLine.Y1);
-            DrawLabelText("(A)", SecondLine.Time1, SecondLine.Y1);
-            DrawLabelText("(B)", ThirdLine.Time1, ThirdLine.Y1);
-            DrawLabelText("(C)", ThirdLine.Time2, ThirdLine.Y2);
+            DrawLabels(FirstLine, SecondLine, ThirdLine, Id);
+        }
+
+        private void DrawLabels(ChartTrendLine firstLine, ChartTrendLine secondLine, ChartTrendLine thirdLine, long id)
+        {
+            DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id);
+            DrawLabelText("(A)", secondLine.Time1, secondLine.Y1, id);
+            DrawLabelText("(B)", thirdLine.Time1, thirdLine.Y1, id);
+            DrawLabelText("(C)", thirdLine.Time2, thirdLine.Y2, id);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
@@ -32,6 +37,13 @@ namespace cAlgo.Patterns
                 StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
 
             if (firstLine == null || secondLine == null || thirdLine == null) return;
+
+            if (labels.Length == 0)
+            {
+                DrawLabels(firstLine, secondLine, thirdLine, id);
+
+                return;
+            }
 
             foreach (var label in labels)
             {

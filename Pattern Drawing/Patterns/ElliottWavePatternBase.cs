@@ -110,7 +110,7 @@ namespace cAlgo.Patterns
         {
             if (MouseUpNumber == _linesNumber + 1)
             {
-                StopDrawing();
+                FinishDrawing();
 
                 return;
             }

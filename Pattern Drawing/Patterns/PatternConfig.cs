@@ -1,4 +1,5 @@
 ﻿using cAlgo.API;
+using System;
 
 namespace cAlgo.Patterns
 {
@@ -22,5 +23,7 @@ namespace cAlgo.Patterns
         public Color LabelsColor { get; private set; }
 
         public bool IsLabelsInteractive { get; private set; }
+
+        public Action<string> Print { get; set; }
     }
 }
