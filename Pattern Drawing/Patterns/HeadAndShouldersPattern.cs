@@ -10,7 +10,7 @@ namespace cAlgo.Patterns
         private ChartTriangle _rightTriangle;
         private ChartTriangle _headTriangle;
 
-        public HeadAndShouldersPattern(PatternConfig config) : base("Head and Shoulders", config)
+        public HeadAndShouldersPattern(PatternConfig config) : base("H&S", config)
         {
         }
 

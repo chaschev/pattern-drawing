@@ -5,9 +5,6 @@ using cAlgo.Patterns;
 
 namespace cAlgo
 {
-    /// <summary>
-    /// This indicator allows you to draw chart patterns
-    /// </summary>
     [Indicator(IsOverlay = true, TimeZone = TimeZones.UTC, AccessRights = AccessRights.FullAccess)]
     public class PatternDrawing : Indicator
     {
@@ -61,11 +58,11 @@ namespace cAlgo
         [Parameter("Margin", DefaultValue = 1, Group = "Buttons")]
         public double ButtonsMargin { get; set; }
 
-        [Parameter("Width", DefaultValue = 200, Group = "Buttons")]
-        public double ButtonsWidth { get; set; }
+        [Parameter("Transparency", DefaultValue = 1, MinValue = 0, MaxValue = 1, Group = "Buttons")]
+        public double ButtonsTransparency { get; set; }
 
-        [Parameter("Height", DefaultValue = 20, Group = "Buttons")]
-        public double ButtonsHeight { get; set; }
+        [Parameter("Number", DefaultValue = 100, MinValue = 1, Group = "Cycles")]
+        public int CyclesNumber { get; set; }
 
         protected override void Initialize()
         {
@@ -86,8 +83,9 @@ namespace cAlgo
             _buttonsStyle.Set(ControlProperty.Margin, ButtonsMargin);
             _buttonsStyle.Set(ControlProperty.BackgroundColor, _buttonsBackgroundDisableColor);
             _buttonsStyle.Set(ControlProperty.ForegroundColor, ColorParser.Parse(ButtonsForegroundColor));
-            _buttonsStyle.Set(ControlProperty.Width, ButtonsWidth);
-            _buttonsStyle.Set(ControlProperty.Height, ButtonsHeight);
+            _buttonsStyle.Set(ControlProperty.HorizontalContentAlignment, HorizontalAlignment.Center);
+            _buttonsStyle.Set(ControlProperty.VerticalContentAlignment, VerticalAlignment.Center);
+            _buttonsStyle.Set(ControlProperty.Opacity, ButtonsTransparency);
 
             var patternsColor = ColorParser.Parse(PatternsColor, PatternsColorAlpha);
             var patternsLabelsColor = ColorParser.Parse(PatternsLabelColor, PatternsLabelColorAlpha);
@@ -98,7 +96,7 @@ namespace cAlgo
             };
 
             AddPatternButton(new TrianglePattern(patternConfig));
-            AddPatternButton(new CyclicLinesPattern(patternConfig));
+            AddPatternButton(new CyclesPattern(patternConfig, CyclesNumber));
             AddPatternButton(new HeadAndShouldersPattern(patternConfig));
             AddPatternButton(new CypherPattern(patternConfig));
             AddPatternButton(new AbcdPattern(patternConfig));
@@ -113,7 +111,7 @@ namespace cAlgo
             {
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
-                OffColor = _buttonsBackgroundDisableColor,
+                OffColor = _buttonsBackgroundDisableColor
             });
 
             _panel.AddChild(new PatternsRemoveAllButton(Chart)

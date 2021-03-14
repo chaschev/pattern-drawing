@@ -2,12 +2,14 @@
 
 namespace cAlgo.Patterns
 {
-    public class CyclicLinesPattern : PatternBase
+    public class CyclesPattern : PatternBase
     {
         private int? _mouseDownBarIndex;
+        private readonly int _number;
 
-        public CyclicLinesPattern(PatternConfig config) : base("Cyclic Lines", config)
+        public CyclesPattern(PatternConfig config, int number) : base("Cycles", config)
         {
+            _number = number;
         }
 
         protected override void OnDrawingStopped()
@@ -28,7 +30,7 @@ namespace cAlgo.Patterns
 
             var diff = mouseMoveBarIndex - _mouseDownBarIndex.Value;
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < _number; i++)
             {
                 var name = GetObjectName(i.ToString());
 

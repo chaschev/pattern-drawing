@@ -6,7 +6,7 @@ namespace cAlgo.Patterns
 {
     public class ElliottTriangleWavePattern : ElliottWavePatternBase
     {
-        public ElliottTriangleWavePattern(PatternConfig config) : base("Elliott Triangle Wave (ABCDE)", config, 5)
+        public ElliottTriangleWavePattern(PatternConfig config) : base("EW ABCDE", config, 5)
         {
         }
 
