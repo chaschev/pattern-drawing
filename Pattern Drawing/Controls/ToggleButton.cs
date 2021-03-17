@@ -1,4 +1,5 @@
 ﻿using cAlgo.API;
+using System;
 
 namespace cAlgo.Controls
 {
@@ -21,6 +22,10 @@ namespace cAlgo.Controls
                 }
             };
         }
+
+        public event Action<ToggleButton> TurnedOn;
+
+        public event Action<ToggleButton> TurnedOff;
 
         public Color OnColor
         {
@@ -52,6 +57,10 @@ namespace cAlgo.Controls
 
             BackgroundColor = OnColor;
 
+            var turnedOnEvent = TurnedOn;
+
+            if (turnedOnEvent != null) turnedOnEvent.Invoke(this);
+
             OnTurnedOn();
         }
 
@@ -60,6 +69,10 @@ namespace cAlgo.Controls
             IsOn = false;
 
             BackgroundColor = OffColor;
+
+            var turnedOffEvent = TurnedOff;
+
+            if (turnedOffEvent != null) turnedOffEvent.Invoke(this);
 
             OnTurnedOff();
         }

@@ -2,6 +2,7 @@
 using cAlgo.Controls;
 using cAlgo.Helpers;
 using cAlgo.Patterns;
+using System.Linq;
 
 namespace cAlgo
 {
@@ -46,13 +47,13 @@ namespace cAlgo
         [Parameter("Margin", DefaultValue = 3, Group = "Container Panel")]
         public double PanelMargin { get; set; }
 
-        [Parameter("Background Disable Color", DefaultValue = "#FFCCCCCC", Group = "Buttons")]
+        [Parameter("Disable Color", DefaultValue = "#FFCCCCCC", Group = "Buttons")]
         public string ButtonsBackgroundDisableColor { get; set; }
 
-        [Parameter("Background Enable Color", DefaultValue = "Red", Group = "Buttons")]
+        [Parameter("Enable Color", DefaultValue = "Red", Group = "Buttons")]
         public string ButtonsBackgroundEnableColor { get; set; }
 
-        [Parameter("Foreground Color", DefaultValue = "Blue", Group = "Buttons")]
+        [Parameter("Text Color", DefaultValue = "Blue", Group = "Buttons")]
         public string ButtonsForegroundColor { get; set; }
 
         [Parameter("Margin", DefaultValue = 1, Group = "Buttons")]
@@ -64,6 +65,15 @@ namespace cAlgo
         [Parameter("Number", DefaultValue = 100, MinValue = 1, Group = "Cycles")]
         public int CyclesNumber { get; set; }
 
+        [Parameter("Enable", DefaultValue = false, Group = "TimeFrame Visibility")]
+        public bool IsTimeFrameVisibilityEnabled { get; set; }
+
+        [Parameter("TimeFrame", Group = "TimeFrame Visibility")]
+        public TimeFrame VisibilityTimeFrame { get; set; }
+
+        [Parameter("Only Buttons", Group = "TimeFrame Visibility")]
+        public bool VisibilityOnlyButtons { get; set; }
+
         protected override void Initialize()
         {
             _panel = new StackPanel
@@ -72,7 +82,7 @@ namespace cAlgo
                 VerticalAlignment = PanelVerticalAlignment,
                 Orientation = PanelOrientation,
                 BackgroundColor = Color.Transparent,
-                Margin = PanelMargin,
+                Margin = PanelMargin
             };
 
             _buttonsBackgroundDisableColor = ColorParser.Parse(ButtonsBackgroundDisableColor);
@@ -107,23 +117,45 @@ namespace cAlgo
             AddPatternButton(new ElliottCorrectionWavePattern(patternConfig));
             AddPatternButton(new ElliottDoubleComboWavePattern(patternConfig));
 
-            _panel.AddChild(new PatternsShowHideButton(Chart)
+            var showHideButton = new Controls.ToggleButton()
             {
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
-                OffColor = _buttonsBackgroundDisableColor
-            });
+                OffColor = _buttonsBackgroundDisableColor,
+                Text = "Hide"
+            };
+
+            showHideButton.TurnedOn += ShowHideButton_TurnedOn;
+            showHideButton.TurnedOff += ShowHideButton_TurnedOff;
+
+            _panel.AddChild(showHideButton);
 
             _panel.AddChild(new PatternsRemoveAllButton(Chart)
             {
-                Style = _buttonsStyle,
+                Style = _buttonsStyle
             });
 
             Chart.AddControl(_panel);
+
+            CheckTimeFrameVisibility();
         }
 
         public override void Calculate(int index)
         {
+        }
+
+        private void ShowHideButton_TurnedOff(Controls.ToggleButton obj)
+        {
+            ChangePatternsVisibility(false);
+
+            obj.Text = "Hide";
+        }
+
+        private void ShowHideButton_TurnedOn(Controls.ToggleButton obj)
+        {
+            ChangePatternsVisibility(true);
+
+            obj.Text = "Show";
         }
 
         private void AddPatternButton(IPattern pattern)
@@ -132,8 +164,37 @@ namespace cAlgo
             {
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
-                OffColor = _buttonsBackgroundDisableColor,
+                OffColor = _buttonsBackgroundDisableColor
             });
+        }
+
+        private void ChangePatternsVisibility(bool isHidden)
+        {
+            var chartObjects = Chart.Objects.ToArray();
+
+            foreach (var chartObject in chartObjects)
+            {
+                if (!chartObject.IsPattern()) continue;
+
+                chartObject.IsHidden = isHidden;
+            }
+        }
+
+        private void CheckTimeFrameVisibility()
+        {
+            if (IsTimeFrameVisibilityEnabled)
+            {
+                if (TimeFrame != VisibilityTimeFrame)
+                {
+                    _panel.IsVisible = false;
+
+                    if (!VisibilityOnlyButtons) ChangePatternsVisibility(true);
+                }
+                else if (!VisibilityOnlyButtons)
+                {
+                    ChangePatternsVisibility(false);
+                }
+            }
         }
     }
 }

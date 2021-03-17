@@ -308,7 +308,7 @@ namespace cAlgo.Patterns
 
                 OnPatternChartObjectsUpdated(id, chartObject, patternObjects);
 
-                if (ShowLabels)
+                if (ShowLabels && !patternObjects.All(iObject => iObject.IsHidden))
                 {
                     var labelObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
                         StringComparison.OrdinalIgnoreCase) && iObject is ChartText)
