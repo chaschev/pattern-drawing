@@ -48,8 +48,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChartObjectModels\ChartObjectBaseModel.cs" />
+    <Compile Include="ChartObjectModels\ChartObjectsSerializer.cs" />
+    <Compile Include="ChartObjectModels\ChartShapeModel.cs" />
+    <Compile Include="ChartObjectModels\DrawModelsOnChart.cs" />
+    <Compile Include="ChartObjectModels\ChartObjectToModel.cs" />
+    <Compile Include="ChartObjectModels\ChartTextModel.cs" />
+    <Compile Include="ChartObjectModels\ChartVerticalLineModel.cs" />
+    <Compile Include="ChartObjectModels\ChartTriangleModel.cs" />
+    <Compile Include="ChartObjectModels\ChartTrendLineModel.cs" />
+    <Compile Include="ChartObjectModels\IChartObjectModel.cs" />
     <Compile Include="Controls\PatternsRemoveAllButton.cs" />
     <Compile Include="Controls\PatternButton.cs" />
+    <Compile Include="Controls\PatternsLoadButton.cs" />
+    <Compile Include="Controls\PatternsSaveButton.cs" />
     <Compile Include="Controls\ToggleButton.cs" />
     <Compile Include="Helpers\ChartObjectsIsPatternExtension.cs" />
     <Compile Include="Helpers\ChartTrendLineCenterExtensions.cs" />

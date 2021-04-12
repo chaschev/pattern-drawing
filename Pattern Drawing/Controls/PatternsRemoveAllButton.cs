@@ -16,10 +16,10 @@ namespace cAlgo.Controls
 
             Text = "Remove All";
 
-            Click += PatternsRemoveAllButton_Click;
+            Click += OnClick;
         }
 
-        private void PatternsRemoveAllButton_Click(ButtonClickEventArgs obj)
+        private void OnClick(ButtonClickEventArgs obj)
         {
             var dialogResult = MessageBox.Show("Are you sure you want to remove all patterns from this chart?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 

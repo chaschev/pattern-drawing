@@ -130,6 +130,16 @@ namespace cAlgo
 
             _panel.AddChild(showHideButton);
 
+            _panel.AddChild(new PatternsSaveButton(Chart)
+            {
+                Style = _buttonsStyle
+            });
+
+            _panel.AddChild(new PatternsLoadButton(Chart)
+            {
+                Style = _buttonsStyle
+            });
+
             _panel.AddChild(new PatternsRemoveAllButton(Chart)
             {
                 Style = _buttonsStyle
