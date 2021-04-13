@@ -10,11 +10,19 @@ namespace cAlgo.Patterns
 
         private int _linesNumber;
 
-        public ElliottWavePatternBase(string name, PatternConfig config, int linesNumber) : base(name, config)
+        private readonly ElliottWaveDegree _degree;
+
+        public ElliottWavePatternBase(string name, PatternConfig config, int linesNumber, ElliottWaveDegree degree) : base(degree.ToString(), config, objectName: string.Format("Pattern_{0}{1}", name.Replace(" ", "").Replace("_", ""), degree))
         {
             if (linesNumber > 5) throw new ArgumentOutOfRangeException("linesNumber");
 
             _linesNumber = linesNumber;
+            _degree = degree;
+        }
+
+        protected ElliottWaveDegree Degree
+        {
+            get { return _degree; }
         }
 
         protected ChartTrendLine FirstLine

@@ -11,12 +11,12 @@ namespace cAlgo.Patterns
         private bool _isMouseDown;
         private bool _isDrawing;
 
-        public PatternBase(string name, PatternConfig config)
+        public PatternBase(string name, PatternConfig config, string objectName = null)
         {
             Name = name;
             Config = config;
 
-            ObjectName = string.Format("Pattern_{0}", Name.Replace(" ", "").Replace("_", ""));
+            ObjectName = string.IsNullOrWhiteSpace(objectName) ? string.Format("Pattern_{0}", Name.Replace(" ", "").Replace("_", "")) : objectName;
 
             ReloadPatterns(Chart.Objects.ToArray());
 
@@ -262,7 +262,7 @@ namespace cAlgo.Patterns
         {
         }
 
-        protected ChartText DrawLabelText(string text, DateTime time, double y, long id, string objectNameKey = null)
+        protected ChartText DrawLabelText(string text, DateTime time, double y, long id, bool isBold = false, double fontSize = default(double), string objectNameKey = null)
         {
             var name = string.IsNullOrWhiteSpace(objectNameKey)
                 ? string.Format("{0}_{1}_Label_{2}", ObjectName, id, text)
@@ -271,6 +271,9 @@ namespace cAlgo.Patterns
             var chartText = Chart.DrawText(name, text, time, y, LabelsColor);
 
             chartText.IsInteractive = Config.IsLabelsInteractive;
+            chartText.IsBold = isBold;
+
+            if (fontSize != default(double)) chartText.FontSize = fontSize;
 
             return chartText;
         }

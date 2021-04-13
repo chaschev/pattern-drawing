@@ -9,7 +9,11 @@ namespace cAlgo
     [Indicator(IsOverlay = true, TimeZone = TimeZones.UTC, AccessRights = AccessRights.FullAccess)]
     public class PatternDrawing : Indicator
     {
-        private StackPanel _panel;
+        private StackPanel _mainButtonsPanel;
+
+        private StackPanel _groupButtonsPanel;
+
+        private StackPanel _mainPanel;
 
         private Color _buttonsBackgroundDisableColor;
 
@@ -76,14 +80,30 @@ namespace cAlgo
 
         protected override void Initialize()
         {
-            _panel = new StackPanel
+            _mainPanel = new StackPanel
             {
                 HorizontalAlignment = PanelHorizontalAlignment,
                 VerticalAlignment = PanelVerticalAlignment,
-                Orientation = PanelOrientation,
+                Orientation = PanelOrientation == Orientation.Horizontal ? Orientation.Vertical : Orientation.Horizontal,
                 BackgroundColor = Color.Transparent,
+            };
+
+            _mainButtonsPanel = new StackPanel
+            {
+                Orientation = PanelOrientation,
                 Margin = PanelMargin
             };
+
+            _mainPanel.AddChild(_mainButtonsPanel);
+
+            _groupButtonsPanel = new StackPanel
+            {
+                Orientation = PanelOrientation,
+                Margin = PanelMargin,
+                IsVisible = false
+            };
+
+            _mainPanel.AddChild(_groupButtonsPanel);
 
             _buttonsBackgroundDisableColor = ColorParser.Parse(ButtonsBackgroundDisableColor);
             _buttonsBackgroundEnableColor = ColorParser.Parse(ButtonsBackgroundEnableColor);
@@ -111,11 +131,32 @@ namespace cAlgo
             AddPatternButton(new CypherPattern(patternConfig));
             AddPatternButton(new AbcdPattern(patternConfig));
             AddPatternButton(new ThreeDrivesPattern(patternConfig));
-            AddPatternButton(new ElliottImpulseWavePattern(patternConfig));
-            AddPatternButton(new ElliottTriangleWavePattern(patternConfig));
-            AddPatternButton(new ElliottTripleComboWavePattern(patternConfig));
-            AddPatternButton(new ElliottCorrectionWavePattern(patternConfig));
-            AddPatternButton(new ElliottDoubleComboWavePattern(patternConfig));
+
+            var elliottCorrectionWavePatternGroupButton = AddPatternGroupButton("EW ABC");
+
+            elliottCorrectionWavePatternGroupButton.Patterns = new IPattern[]
+            {
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Mellennium),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMellennium),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.GrandSuperCycle),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SuperCycle),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Cycle),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Primary),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Intermediate),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minor),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minute),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minuette),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMinuette),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Micro),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMicro),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minuscule),
+            };
+
+            AddPatternButton(new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium));
+            AddPatternButton(new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium));
+            AddPatternButton(new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium));
+            AddPatternButton(new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium));
 
             var showHideButton = new Controls.ToggleButton()
             {
@@ -128,24 +169,24 @@ namespace cAlgo
             showHideButton.TurnedOn += ShowHideButton_TurnedOn;
             showHideButton.TurnedOff += ShowHideButton_TurnedOff;
 
-            _panel.AddChild(showHideButton);
+            _mainButtonsPanel.AddChild(showHideButton);
 
-            _panel.AddChild(new PatternsSaveButton(Chart)
+            _mainButtonsPanel.AddChild(new PatternsSaveButton(Chart)
             {
                 Style = _buttonsStyle
             });
 
-            _panel.AddChild(new PatternsLoadButton(Chart)
+            _mainButtonsPanel.AddChild(new PatternsLoadButton(Chart)
             {
                 Style = _buttonsStyle
             });
 
-            _panel.AddChild(new PatternsRemoveAllButton(Chart)
+            _mainButtonsPanel.AddChild(new PatternsRemoveAllButton(Chart)
             {
                 Style = _buttonsStyle
             });
 
-            Chart.AddControl(_panel);
+            Chart.AddControl(_mainPanel);
 
             CheckTimeFrameVisibility();
         }
@@ -170,12 +211,27 @@ namespace cAlgo
 
         private void AddPatternButton(IPattern pattern)
         {
-            _panel.AddChild(new PatternButton(pattern)
+            _mainButtonsPanel.AddChild(new PatternButton(pattern)
             {
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
                 OffColor = _buttonsBackgroundDisableColor
             });
+        }
+
+        private PatternGroupButton AddPatternGroupButton(string text)
+        {
+            var groupButton = new PatternGroupButton(_groupButtonsPanel)
+            {
+                Text = text,
+                Style = _buttonsStyle,
+                OnColor = _buttonsBackgroundEnableColor,
+                OffColor = _buttonsBackgroundDisableColor
+            };
+
+            _mainButtonsPanel.AddChild(groupButton);
+
+            return groupButton;
         }
 
         private void ChangePatternsVisibility(bool isHidden)
@@ -196,7 +252,7 @@ namespace cAlgo
             {
                 if (TimeFrame != VisibilityTimeFrame)
                 {
-                    _panel.IsVisible = false;
+                    _mainButtonsPanel.IsVisible = false;
 
                     if (!VisibilityOnlyButtons) ChangePatternsVisibility(true);
                 }

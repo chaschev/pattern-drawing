@@ -6,7 +6,7 @@ namespace cAlgo.Patterns
 {
     public class ElliottTripleComboWavePattern : ElliottWavePatternBase
     {
-        public ElliottTripleComboWavePattern(PatternConfig config) : base("EW WXYXZ", config, 5)
+        public ElliottTripleComboWavePattern(PatternConfig config, ElliottWaveDegree degree) : base("EW WXYXZ", config, 5, degree)
         {
         }
 

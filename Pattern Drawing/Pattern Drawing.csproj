@@ -58,6 +58,7 @@
     <Compile Include="ChartObjectModels\ChartTriangleModel.cs" />
     <Compile Include="ChartObjectModels\ChartTrendLineModel.cs" />
     <Compile Include="ChartObjectModels\IChartObjectModel.cs" />
+    <Compile Include="Controls\PatternGroupButton.cs" />
     <Compile Include="Controls\PatternsRemoveAllButton.cs" />
     <Compile Include="Controls\PatternButton.cs" />
     <Compile Include="Controls\PatternsLoadButton.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Patterns\ElliottDoubleComboWavePattern.cs" />
     <Compile Include="Patterns\ElliottCorrectionWavePattern.cs" />
     <Compile Include="Patterns\ElliottTripleComboWavePattern.cs" />
+    <Compile Include="Patterns\ElliottWaveDegree.cs" />
     <Compile Include="Patterns\ElliottWavePatternBase.cs" />
     <Compile Include="Patterns\ElliottTriangleWavePattern.cs" />
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
