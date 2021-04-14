@@ -2,6 +2,7 @@
 using cAlgo.Controls;
 using cAlgo.Helpers;
 using cAlgo.Patterns;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace cAlgo
@@ -131,32 +132,11 @@ namespace cAlgo
             AddPatternButton(new CypherPattern(patternConfig));
             AddPatternButton(new AbcdPattern(patternConfig));
             AddPatternButton(new ThreeDrivesPattern(patternConfig));
-
-            var elliottCorrectionWavePatternGroupButton = AddPatternGroupButton("EW ABC");
-
-            elliottCorrectionWavePatternGroupButton.Patterns = new IPattern[]
-            {
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Mellennium),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMellennium),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.GrandSuperCycle),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SuperCycle),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Cycle),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Primary),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Intermediate),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minor),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minute),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minuette),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMinuette),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Micro),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMicro),
-                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minuscule),
-            };
-
-            AddPatternButton(new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium));
-            AddPatternButton(new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium));
-            AddPatternButton(new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium));
-            AddPatternButton(new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium));
+            AddElliottCorrectionWavePattern(patternConfig);
+            AddElliottImpulseWavgePattern(patternConfig);
+            AddElliottTriangleWavePattern(patternConfig);
+            AddElliottTripleComboWavePattern(patternConfig);
+            AddElliottDoubleComboWavePattern(patternConfig);
 
             var showHideButton = new Controls.ToggleButton()
             {
@@ -217,6 +197,8 @@ namespace cAlgo
                 OnColor = _buttonsBackgroundEnableColor,
                 OffColor = _buttonsBackgroundDisableColor
             });
+
+            pattern.Initialize();
         }
 
         private PatternGroupButton AddPatternGroupButton(string text)
@@ -261,6 +243,144 @@ namespace cAlgo
                     ChangePatternsVisibility(false);
                 }
             }
+        }
+
+        private void InitializePatterns(IEnumerable<IPattern> patterns)
+        {
+            foreach (var pattern in patterns)
+            {
+                pattern.Initialize();
+            }
+        }
+
+        private void AddElliottImpulseWavgePattern(PatternConfig patternConfig)
+        {
+            var elliottImpulseWavePatternGroupButton = AddPatternGroupButton("EW 12345");
+
+            elliottImpulseWavePatternGroupButton.Patterns = new IPattern[]
+            {
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Mellennium),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.SubMellennium),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.GrandSuperCycle),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.SuperCycle),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Cycle),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Primary),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Intermediate),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Minor),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Minute),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Minuette),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.SubMinuette),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Micro),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.SubMicro),
+                new ElliottImpulseWavePattern(patternConfig, ElliottWaveDegree.Minuscule),
+            };
+
+            InitializePatterns(elliottImpulseWavePatternGroupButton.Patterns);
+        }
+
+        private void AddElliottCorrectionWavePattern(PatternConfig patternConfig)
+        {
+            var elliottCorrectionWavePatternGroupButton = AddPatternGroupButton("EW ABC");
+
+            elliottCorrectionWavePatternGroupButton.Patterns = new IPattern[]
+            {
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Mellennium),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMellennium),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.GrandSuperCycle),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SuperCycle),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Cycle),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Primary),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Intermediate),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minor),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minute),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minuette),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMinuette),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Micro),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.SubMicro),
+                new ElliottCorrectionWavePattern(patternConfig, ElliottWaveDegree.Minuscule),
+            };
+
+            InitializePatterns(elliottCorrectionWavePatternGroupButton.Patterns);
+        }
+
+        private void AddElliottTriangleWavePattern(PatternConfig patternConfig)
+        {
+            var elliottTriangleWavePatternGroupButton = AddPatternGroupButton("EW ABCDE");
+
+            elliottTriangleWavePatternGroupButton.Patterns = new IPattern[]
+            {
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Mellennium),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.SubMellennium),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.GrandSuperCycle),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.SuperCycle),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Cycle),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Primary),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Intermediate),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Minor),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Minute),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Minuette),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.SubMinuette),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Micro),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.SubMicro),
+                new ElliottTriangleWavePattern(patternConfig, ElliottWaveDegree.Minuscule),
+            };
+
+            InitializePatterns(elliottTriangleWavePatternGroupButton.Patterns);
+        }
+
+        private void AddElliottTripleComboWavePattern(PatternConfig patternConfig)
+        {
+            var elliottTripleComboWavePatternGroupButton = AddPatternGroupButton("EW WXYXZ");
+
+            elliottTripleComboWavePatternGroupButton.Patterns = new IPattern[]
+            {
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Mellennium),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.SubMellennium),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.GrandSuperCycle),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.SuperCycle),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Cycle),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Primary),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Intermediate),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Minor),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Minute),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Minuette),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.SubMinuette),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Micro),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.SubMicro),
+                new ElliottTripleComboWavePattern(patternConfig, ElliottWaveDegree.Minuscule),
+            };
+
+            InitializePatterns(elliottTripleComboWavePatternGroupButton.Patterns);
+        }
+
+        private void AddElliottDoubleComboWavePattern(PatternConfig patternConfig)
+        {
+            var elliottDoubleComboWavePatternGroupButton = AddPatternGroupButton("EW WXY");
+
+            elliottDoubleComboWavePatternGroupButton.Patterns = new IPattern[]
+            {
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.SuperMellennium),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Mellennium),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.SubMellennium),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.GrandSuperCycle),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.SuperCycle),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Cycle),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Primary),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Intermediate),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Minor),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Minute),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Minuette),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.SubMinuette),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Micro),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.SubMicro),
+                new ElliottDoubleComboWavePattern(patternConfig, ElliottWaveDegree.Minuscule),
+            };
+
+            InitializePatterns(elliottDoubleComboWavePatternGroupButton.Patterns);
         }
     }
 }

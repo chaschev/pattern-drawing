@@ -8,6 +8,8 @@ namespace cAlgo.Patterns
 
         event Action<IPattern> DrawingStopped;
 
+        void Initialize();
+
         void StartDrawing();
 
         void StopDrawing();

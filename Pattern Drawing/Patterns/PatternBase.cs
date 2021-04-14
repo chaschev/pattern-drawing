@@ -17,11 +17,6 @@ namespace cAlgo.Patterns
             Config = config;
 
             ObjectName = string.IsNullOrWhiteSpace(objectName) ? string.Format("Pattern_{0}", Name.Replace(" ", "").Replace("_", "")) : objectName;
-
-            ReloadPatterns(Chart.Objects.ToArray());
-
-            Config.Chart.ObjectsRemoved += Chart_ObjectsRemoved;
-            Config.Chart.ObjectsUpdated += Chart_ObjectsUpdated;
         }
 
         protected PatternConfig Config { get; private set; }
@@ -70,6 +65,26 @@ namespace cAlgo.Patterns
         public event Action<IPattern> DrawingStarted;
 
         public event Action<IPattern> DrawingStopped;
+
+        public void Initialize()
+        {
+            OnInitialize();
+
+            ReloadPatterns(Chart.Objects.ToArray());
+
+            Config.Chart.ObjectsRemoved += Chart_ObjectsRemoved;
+            Config.Chart.ObjectsUpdated += Chart_ObjectsUpdated;
+
+            OnInitialized();
+        }
+
+        protected virtual void OnInitialize()
+        {
+        }
+
+        protected virtual void OnInitialized()
+        {
+        }
 
         public void StartDrawing()
         {

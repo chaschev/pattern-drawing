@@ -64,66 +64,66 @@ namespace cAlgo.Patterns
                     break;
 
                 case ElliottWaveDegree.Primary:
-                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, fontSize: 12);
-                    DrawLabelText("((W))", secondLine.Time1, secondLine.Y1, id, fontSize: 12);
-                    DrawLabelText("((X))", thirdLine.Time1, thirdLine.Y1, id, fontSize: 12);
-                    DrawLabelText("((Y))", thirdLine.Time2, thirdLine.Y2, id, fontSize: 12);
-                    break;
-
-                case ElliottWaveDegree.Intermediate:
-                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, fontSize: 12);
-                    DrawLabelText("(W)", secondLine.Time1, secondLine.Y1, id, fontSize: 12);
-                    DrawLabelText("(X)", thirdLine.Time1, thirdLine.Y1, id, fontSize: 12);
-                    DrawLabelText("(Y)", thirdLine.Time2, thirdLine.Y2, id, fontSize: 12);
-                    break;
-
-                case ElliottWaveDegree.Minor:
-                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, fontSize: 12);
-                    DrawLabelText("W", secondLine.Time1, secondLine.Y1, id, fontSize: 12);
-                    DrawLabelText("X", thirdLine.Time1, thirdLine.Y1, id, fontSize: 12);
-                    DrawLabelText("Y", thirdLine.Time2, thirdLine.Y2, id, fontSize: 12);
-                    break;
-
-                case ElliottWaveDegree.Minute:
-                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, fontSize: 12);
-                    DrawLabelText("((w))", secondLine.Time1, secondLine.Y1, id, fontSize: 12);
-                    DrawLabelText("((x))", thirdLine.Time1, thirdLine.Y1, id, fontSize: 12);
-                    DrawLabelText("((y))", thirdLine.Time2, thirdLine.Y2, id, fontSize: 12);
-                    break;
-
-                case ElliottWaveDegree.Minuette:
-                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, fontSize: 12);
-                    DrawLabelText("(w)", secondLine.Time1, secondLine.Y1, id, fontSize: 12);
-                    DrawLabelText("(x)", thirdLine.Time1, thirdLine.Y1, id, fontSize: 12);
-                    DrawLabelText("(y)", thirdLine.Time2, thirdLine.Y2, id, fontSize: 12);
-                    break;
-
-                case ElliottWaveDegree.SubMinuette:
-                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, fontSize: 12);
-                    DrawLabelText("w", secondLine.Time1, secondLine.Y1, id, fontSize: 12);
-                    DrawLabelText("x", thirdLine.Time1, thirdLine.Y1, id, fontSize: 12);
-                    DrawLabelText("y", thirdLine.Time2, thirdLine.Y2, id, fontSize: 12);
-                    break;
-
-                case ElliottWaveDegree.Micro:
                     DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
                     DrawLabelText("((W))", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
                     DrawLabelText("((X))", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
                     DrawLabelText("((Y))", thirdLine.Time2, thirdLine.Y2, id, fontSize: 10);
                     break;
 
-                case ElliottWaveDegree.SubMicro:
+                case ElliottWaveDegree.Intermediate:
                     DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
                     DrawLabelText("(W)", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
                     DrawLabelText("(X)", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
                     DrawLabelText("(Y)", thirdLine.Time2, thirdLine.Y2, id, fontSize: 10);
                     break;
 
-                case ElliottWaveDegree.Minuscule:
+                case ElliottWaveDegree.Minor:
                     DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
                     DrawLabelText("W", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
                     DrawLabelText("X", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
                     DrawLabelText("Y", thirdLine.Time2, thirdLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.Minute:
+                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((w))", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((x))", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((y))", thirdLine.Time2, thirdLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.Minuette:
+                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(w)", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(x)", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(y)", thirdLine.Time2, thirdLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.SubMinuette:
+                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("w", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("x", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("y", thirdLine.Time2, thirdLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.Micro:
+                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, fontSize: 7);
+                    DrawLabelText("((W))", secondLine.Time1, secondLine.Y1, id, fontSize: 7);
+                    DrawLabelText("((X))", thirdLine.Time1, thirdLine.Y1, id, fontSize: 7);
+                    DrawLabelText("((Y))", thirdLine.Time2, thirdLine.Y2, id, fontSize: 7);
+                    break;
+
+                case ElliottWaveDegree.SubMicro:
+                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, fontSize: 7);
+                    DrawLabelText("(W)", secondLine.Time1, secondLine.Y1, id, fontSize: 7);
+                    DrawLabelText("(X)", thirdLine.Time1, thirdLine.Y1, id, fontSize: 7);
+                    DrawLabelText("(Y)", thirdLine.Time2, thirdLine.Y2, id, fontSize: 7);
+                    break;
+
+                case ElliottWaveDegree.Minuscule:
+                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, fontSize: 7);
+                    DrawLabelText("W", secondLine.Time1, secondLine.Y1, id, fontSize: 7);
+                    DrawLabelText("X", thirdLine.Time1, thirdLine.Y1, id, fontSize: 7);
+                    DrawLabelText("Y", thirdLine.Time2, thirdLine.Y2, id, fontSize: 7);
                     break;
             }
         }
@@ -156,89 +156,7 @@ namespace cAlgo.Patterns
             switch (Degree)
             {
                 case ElliottWaveDegree.SuperMellennium:
-                    firstLabelText = "((0))";
-                    secondLabelText = "((W))";
-                    thirdLabelText = "((X))";
-                    fourthLabelText = "((Y))";
-                    break;
-
-                case ElliottWaveDegree.Mellennium:
-                    firstLabelText = "(0)";
-                    secondLabelText = "(W)";
-                    thirdLabelText = "(X)";
-                    fourthLabelText = "(Y)";
-                    break;
-
-                case ElliottWaveDegree.SubMellennium:
-                    firstLabelText = "0";
-                    secondLabelText = "W";
-                    thirdLabelText = "X";
-                    fourthLabelText = "Y";
-                    break;
-
-                case ElliottWaveDegree.GrandSuperCycle:
-                    firstLabelText = "((0))";
-                    secondLabelText = "((w))";
-                    thirdLabelText = "((x))";
-                    fourthLabelText = "((y))";
-                    break;
-
-                case ElliottWaveDegree.SuperCycle:
-                    firstLabelText = "(0)";
-                    secondLabelText = "(w)";
-                    thirdLabelText = "(x)";
-                    fourthLabelText = "(y)";
-                    break;
-
-                case ElliottWaveDegree.Cycle:
-                    firstLabelText = "0";
-                    secondLabelText = "w";
-                    thirdLabelText = "x";
-                    fourthLabelText = "y";
-                    break;
-
                 case ElliottWaveDegree.Primary:
-                    firstLabelText = "((0))";
-                    secondLabelText = "((W))";
-                    thirdLabelText = "((X))";
-                    fourthLabelText = "((Y))";
-                    break;
-
-                case ElliottWaveDegree.Intermediate:
-                    firstLabelText = "(0)";
-                    secondLabelText = "(W)";
-                    thirdLabelText = "(X)";
-                    fourthLabelText = "(Y)";
-                    break;
-
-                case ElliottWaveDegree.Minor:
-                    firstLabelText = "0";
-                    secondLabelText = "W";
-                    thirdLabelText = "X";
-                    fourthLabelText = "Y";
-                    break;
-
-                case ElliottWaveDegree.Minute:
-                    firstLabelText = "((0))";
-                    secondLabelText = "((w))";
-                    thirdLabelText = "((x))";
-                    fourthLabelText = "((y))";
-                    break;
-
-                case ElliottWaveDegree.Minuette:
-                    firstLabelText = "(0)";
-                    secondLabelText = "(w)";
-                    thirdLabelText = "(x)";
-                    fourthLabelText = "(y)";
-                    break;
-
-                case ElliottWaveDegree.SubMinuette:
-                    firstLabelText = "0";
-                    secondLabelText = "w";
-                    thirdLabelText = "x";
-                    fourthLabelText = "y";
-                    break;
-
                 case ElliottWaveDegree.Micro:
                     firstLabelText = "((0))";
                     secondLabelText = "((W))";
@@ -246,6 +164,8 @@ namespace cAlgo.Patterns
                     fourthLabelText = "((Y))";
                     break;
 
+                case ElliottWaveDegree.Mellennium:
+                case ElliottWaveDegree.Intermediate:
                 case ElliottWaveDegree.SubMicro:
                     firstLabelText = "(0)";
                     secondLabelText = "(W)";
@@ -253,11 +173,37 @@ namespace cAlgo.Patterns
                     fourthLabelText = "(Y)";
                     break;
 
+                case ElliottWaveDegree.SubMellennium:
+                case ElliottWaveDegree.Minor:
                 case ElliottWaveDegree.Minuscule:
                     firstLabelText = "0";
                     secondLabelText = "W";
                     thirdLabelText = "X";
                     fourthLabelText = "Y";
+                    break;
+
+                case ElliottWaveDegree.GrandSuperCycle:
+                case ElliottWaveDegree.Minute:
+                    firstLabelText = "((0))";
+                    secondLabelText = "((w))";
+                    thirdLabelText = "((x))";
+                    fourthLabelText = "((y))";
+                    break;
+
+                case ElliottWaveDegree.SuperCycle:
+                case ElliottWaveDegree.Minuette:
+                    firstLabelText = "(0)";
+                    secondLabelText = "(w)";
+                    thirdLabelText = "(x)";
+                    fourthLabelText = "(y)";
+                    break;
+
+                case ElliottWaveDegree.Cycle:
+                case ElliottWaveDegree.SubMinuette:
+                    firstLabelText = "0";
+                    secondLabelText = "w";
+                    thirdLabelText = "x";
+                    fourthLabelText = "y";
                     break;
 
                 default:

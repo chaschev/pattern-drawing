@@ -19,12 +19,143 @@ namespace cAlgo.Patterns
 
         private void DrawLabels(ChartTrendLine firstLine, ChartTrendLine secondLine, ChartTrendLine thirdLine, ChartTrendLine fourthLine, ChartTrendLine fifthLine, long id)
         {
-            DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id);
-            DrawLabelText("(W)", secondLine.Time1, secondLine.Y1, id);
-            DrawLabelText("(X)", thirdLine.Time1, thirdLine.Y1, id);
-            DrawLabelText("(Y)", fourthLine.Time1, fourthLine.Y1, id);
-            DrawLabelText("(X2)", fifthLine.Time1, fifthLine.Y1, id);
-            DrawLabelText("(Z)", fifthLine.Time2, fifthLine.Y2, id);
+            switch (Degree)
+            {
+                case ElliottWaveDegree.SuperMellennium:
+                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, isBold: true);
+                    DrawLabelText("((W))", secondLine.Time1, secondLine.Y1, id, isBold: true);
+                    DrawLabelText("((X))", thirdLine.Time1, thirdLine.Y1, id, isBold: true);
+                    DrawLabelText("((Y))", fourthLine.Time1, fourthLine.Y1, id, isBold: true);
+                    DrawLabelText("((X2))", fifthLine.Time1, fifthLine.Y1, id, isBold: true);
+                    DrawLabelText("((Z))", fifthLine.Time2, fifthLine.Y2, id, isBold: true);
+                    break;
+
+                case ElliottWaveDegree.Mellennium:
+                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, isBold: true);
+                    DrawLabelText("(W)", secondLine.Time1, secondLine.Y1, id, isBold: true);
+                    DrawLabelText("(X)", thirdLine.Time1, thirdLine.Y1, id, isBold: true);
+                    DrawLabelText("(Y)", fourthLine.Time1, fourthLine.Y1, id, isBold: true);
+                    DrawLabelText("(X2)", fifthLine.Time1, fifthLine.Y1, id, isBold: true);
+                    DrawLabelText("(Z)", fifthLine.Time2, fifthLine.Y2, id, isBold: true);
+                    break;
+
+                case ElliottWaveDegree.SubMellennium:
+                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, isBold: true);
+                    DrawLabelText("W", secondLine.Time1, secondLine.Y1, id, isBold: true);
+                    DrawLabelText("X", thirdLine.Time1, thirdLine.Y1, id, isBold: true);
+                    DrawLabelText("Y", fourthLine.Time1, fourthLine.Y1, id, isBold: true);
+                    DrawLabelText("X2", fifthLine.Time1, fifthLine.Y1, id, isBold: true);
+                    DrawLabelText("Z", fifthLine.Time2, fifthLine.Y2, id, isBold: true);
+                    break;
+
+                case ElliottWaveDegree.GrandSuperCycle:
+                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, isBold: true);
+                    DrawLabelText("((w))", secondLine.Time1, secondLine.Y1, id, isBold: true);
+                    DrawLabelText("((x))", thirdLine.Time1, thirdLine.Y1, id, isBold: true);
+                    DrawLabelText("((y))", fourthLine.Time1, fourthLine.Y1, id, isBold: true);
+                    DrawLabelText("((x2))", fifthLine.Time1, fifthLine.Y1, id, isBold: true);
+                    DrawLabelText("((z))", fifthLine.Time2, fifthLine.Y2, id, isBold: true);
+                    break;
+
+                case ElliottWaveDegree.SuperCycle:
+                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, isBold: true);
+                    DrawLabelText("(w)", secondLine.Time1, secondLine.Y1, id, isBold: true);
+                    DrawLabelText("(x)", thirdLine.Time1, thirdLine.Y1, id, isBold: true);
+                    DrawLabelText("(y)", fourthLine.Time1, fourthLine.Y1, id, isBold: true);
+                    DrawLabelText("(x2)", fifthLine.Time1, fifthLine.Y1, id, isBold: true);
+                    DrawLabelText("(z)", fifthLine.Time2, fifthLine.Y2, id, isBold: true);
+                    break;
+
+                case ElliottWaveDegree.Cycle:
+                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, isBold: true);
+                    DrawLabelText("w", secondLine.Time1, secondLine.Y1, id, isBold: true);
+                    DrawLabelText("x", thirdLine.Time1, thirdLine.Y1, id, isBold: true);
+                    DrawLabelText("y", fourthLine.Time1, fourthLine.Y1, id, isBold: true);
+                    DrawLabelText("x2", fifthLine.Time1, fifthLine.Y1, id, isBold: true);
+                    DrawLabelText("z", fifthLine.Time2, fifthLine.Y2, id, isBold: true);
+                    break;
+
+                case ElliottWaveDegree.Primary:
+                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((W))", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((X))", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((Y))", fourthLine.Time1, fourthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((X2))", fifthLine.Time1, fifthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((Z))", fifthLine.Time2, fifthLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.Intermediate:
+                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(W)", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(X)", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(Y)", fourthLine.Time1, fourthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(X2)", fifthLine.Time1, fifthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(Z)", fifthLine.Time2, fifthLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.Minor:
+                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("W", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("X", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("Y", fourthLine.Time1, fourthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("X2", fifthLine.Time1, fifthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("Z", fifthLine.Time2, fifthLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.Minute:
+                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((w))", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((x))", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((y))", fourthLine.Time1, fourthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((x2))", fifthLine.Time1, fifthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("((z))", fifthLine.Time2, fifthLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.Minuette:
+                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(w)", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(x)", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(y)", fourthLine.Time1, fourthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(x2)", fifthLine.Time1, fifthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("(z)", fifthLine.Time2, fifthLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.SubMinuette:
+                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, fontSize: 10);
+                    DrawLabelText("w", secondLine.Time1, secondLine.Y1, id, fontSize: 10);
+                    DrawLabelText("x", thirdLine.Time1, thirdLine.Y1, id, fontSize: 10);
+                    DrawLabelText("y", fourthLine.Time1, fourthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("x2", fifthLine.Time1, fifthLine.Y1, id, fontSize: 10);
+                    DrawLabelText("z", fifthLine.Time2, fifthLine.Y2, id, fontSize: 10);
+                    break;
+
+                case ElliottWaveDegree.Micro:
+                    DrawLabelText("((0))", firstLine.Time1, firstLine.Y1, id, fontSize: 7);
+                    DrawLabelText("((W))", secondLine.Time1, secondLine.Y1, id, fontSize: 7);
+                    DrawLabelText("((X))", thirdLine.Time1, thirdLine.Y1, id, fontSize: 7);
+                    DrawLabelText("((Y))", fourthLine.Time1, fourthLine.Y1, id, fontSize: 7);
+                    DrawLabelText("((X2))", fifthLine.Time1, fifthLine.Y1, id, fontSize: 7);
+                    DrawLabelText("((Z))", fifthLine.Time2, fifthLine.Y2, id, fontSize: 7);
+                    break;
+
+                case ElliottWaveDegree.SubMicro:
+                    DrawLabelText("(0)", firstLine.Time1, firstLine.Y1, id, fontSize: 7);
+                    DrawLabelText("(W)", secondLine.Time1, secondLine.Y1, id, fontSize: 7);
+                    DrawLabelText("(X)", thirdLine.Time1, thirdLine.Y1, id, fontSize: 7);
+                    DrawLabelText("(Y)", fourthLine.Time1, fourthLine.Y1, id, fontSize: 7);
+                    DrawLabelText("(X2)", fifthLine.Time1, fifthLine.Y1, id, fontSize: 7);
+                    DrawLabelText("(Z)", fifthLine.Time2, fifthLine.Y2, id, fontSize: 7);
+                    break;
+
+                case ElliottWaveDegree.Minuscule:
+                    DrawLabelText("0", firstLine.Time1, firstLine.Y1, id, fontSize: 7);
+                    DrawLabelText("W", secondLine.Time1, secondLine.Y1, id, fontSize: 7);
+                    DrawLabelText("X", thirdLine.Time1, thirdLine.Y1, id, fontSize: 7);
+                    DrawLabelText("Y", fourthLine.Time1, fourthLine.Y1, id, fontSize: 7);
+                    DrawLabelText("X2", fifthLine.Time1, fifthLine.Y1, id, fontSize: 7);
+                    DrawLabelText("Z", fifthLine.Time2, fifthLine.Y2, id, fontSize: 7);
+                    break;
+            }
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
@@ -53,39 +184,113 @@ namespace cAlgo.Patterns
                 return;
             }
 
+            string firstLabelText;
+            string secondLabelText;
+            string thirdLabelText;
+            string fourthLabelText;
+            string fifthLabelText;
+            string sixthLabelText;
+
+            switch (Degree)
+            {
+                case ElliottWaveDegree.SuperMellennium:
+                case ElliottWaveDegree.Primary:
+                case ElliottWaveDegree.Micro:
+                    firstLabelText = "((0))";
+                    secondLabelText = "((W))";
+                    thirdLabelText = "((X))";
+                    fourthLabelText = "((Y))";
+                    fifthLabelText = "((X2))";
+                    sixthLabelText = "((Z))";
+                    break;
+
+                case ElliottWaveDegree.Mellennium:
+                case ElliottWaveDegree.Intermediate:
+                case ElliottWaveDegree.SubMicro:
+                    firstLabelText = "(0)";
+                    secondLabelText = "(W)";
+                    thirdLabelText = "(X)";
+                    fourthLabelText = "(Y)";
+                    fifthLabelText = "(X2)";
+                    sixthLabelText = "(Z)";
+                    break;
+
+                case ElliottWaveDegree.SubMellennium:
+                case ElliottWaveDegree.Minor:
+                case ElliottWaveDegree.Minuscule:
+                    firstLabelText = "0";
+                    secondLabelText = "W";
+                    thirdLabelText = "X";
+                    fourthLabelText = "Y";
+                    fifthLabelText = "X2";
+                    sixthLabelText = "Z";
+                    break;
+
+                case ElliottWaveDegree.GrandSuperCycle:
+                case ElliottWaveDegree.Minute:
+                    firstLabelText = "((0))";
+                    secondLabelText = "((w))";
+                    thirdLabelText = "((x))";
+                    fourthLabelText = "((y))";
+                    fifthLabelText = "((x2))";
+                    sixthLabelText = "((z))";
+                    break;
+
+                case ElliottWaveDegree.SuperCycle:
+                case ElliottWaveDegree.Minuette:
+                    firstLabelText = "(0)";
+                    secondLabelText = "(w)";
+                    thirdLabelText = "(x)";
+                    fourthLabelText = "(y)";
+                    fifthLabelText = "(x2)";
+                    sixthLabelText = "(z)";
+                    break;
+
+                case ElliottWaveDegree.Cycle:
+                case ElliottWaveDegree.SubMinuette:
+                    firstLabelText = "0";
+                    secondLabelText = "w";
+                    thirdLabelText = "x";
+                    fourthLabelText = "y";
+                    fifthLabelText = "x2";
+                    sixthLabelText = "z";
+                    break;
+
+                default:
+                    throw new InvalidOperationException("Invalid degree");
+            }
+
             foreach (var label in labels)
             {
-                switch (label.Text)
+                if (label.Text.Equals(firstLabelText, StringComparison.Ordinal))
                 {
-                    case "(0)":
-                        label.Time = firstLine.Time1;
-                        label.Y = firstLine.Y1;
-                        break;
-
-                    case "(W)":
-                        label.Time = secondLine.Time1;
-                        label.Y = secondLine.Y1;
-                        break;
-
-                    case "(X)":
-                        label.Time = thirdLine.Time1;
-                        label.Y = thirdLine.Y1;
-                        break;
-
-                    case "(Y)":
-                        label.Time = fourthLine.Time1;
-                        label.Y = fourthLine.Y1;
-                        break;
-
-                    case "(X2)":
-                        label.Time = fifthLine.Time1;
-                        label.Y = fifthLine.Y1;
-                        break;
-
-                    case "(Z)":
-                        label.Time = fifthLine.Time2;
-                        label.Y = fifthLine.Y2;
-                        break;
+                    label.Time = firstLine.Time1;
+                    label.Y = firstLine.Y1;
+                }
+                else if (label.Text.Equals(secondLabelText, StringComparison.Ordinal))
+                {
+                    label.Time = secondLine.Time1;
+                    label.Y = secondLine.Y1;
+                }
+                else if (label.Text.Equals(thirdLabelText, StringComparison.Ordinal))
+                {
+                    label.Time = thirdLine.Time1;
+                    label.Y = thirdLine.Y1;
+                }
+                else if (label.Text.Equals(fourthLabelText, StringComparison.Ordinal))
+                {
+                    label.Time = fourthLine.Time1;
+                    label.Y = fourthLine.Y1;
+                }
+                else if (label.Text.Equals(fifthLabelText, StringComparison.Ordinal))
+                {
+                    label.Time = fifthLine.Time1;
+                    label.Y = fifthLine.Y1;
+                }
+                else if (label.Text.Equals(sixthLabelText, StringComparison.Ordinal))
+                {
+                    label.Time = fifthLine.Time2;
+                    label.Y = fifthLine.Y2;
                 }
             }
         }
