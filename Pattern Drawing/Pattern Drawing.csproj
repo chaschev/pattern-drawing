@@ -51,6 +51,7 @@
     <Compile Include="ChartObjectModels\ChartObjectBaseModel.cs" />
     <Compile Include="ChartObjectModels\ChartObjectsSerializer.cs" />
     <Compile Include="ChartObjectModels\ChartShapeModel.cs" />
+    <Compile Include="ChartObjectModels\ChartRectangleModel.cs" />
     <Compile Include="ChartObjectModels\DrawModelsOnChart.cs" />
     <Compile Include="ChartObjectModels\ChartObjectToModel.cs" />
     <Compile Include="ChartObjectModels\ChartTextModel.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Patterns\ElliottWavePatternBase.cs" />
     <Compile Include="Patterns\ElliottTriangleWavePattern.cs" />
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
+    <Compile Include="Patterns\GannBoxPattern.cs" />
     <Compile Include="Patterns\PatternConfig.cs" />
     <Compile Include="Patterns\ThreeDrivesPattern.cs" />
     <Compile Include="Patterns\AbcdPattern.cs" />

@@ -17,6 +17,7 @@ namespace cAlgo.ChartObjectModels
                     TriangleModels = chartObjectModels.Where(iModel => iModel is ChartTriangleModel).Cast<ChartTriangleModel>().ToArray(),
                     VerticalLineModels = chartObjectModels.Where(iModel => iModel is ChartVerticalLineModel).Cast<ChartVerticalLineModel>().ToArray(),
                     TrendLineModels = chartObjectModels.Where(iModel => iModel is ChartTrendLineModel).Cast<ChartTrendLineModel>().ToArray(),
+                    RectangleModels = chartObjectModels.Where(iModel => iModel is ChartRectangleModel).Cast<ChartRectangleModel>().ToArray(),
                 };
 
                 var serializer = new XmlSerializer(typeof(ChartObjectsContainer));
@@ -41,6 +42,8 @@ namespace cAlgo.ChartObjectModels
 
             public ChartTriangleModel[] TriangleModels { get; set; }
 
+            public ChartRectangleModel[] RectangleModels { get; set; }
+
             public ChartVerticalLineModel[] VerticalLineModels { get; set; }
 
             public ChartTrendLineModel[] TrendLineModels { get; set; }
@@ -51,6 +54,7 @@ namespace cAlgo.ChartObjectModels
 
                 models.AddRange(TextModels);
                 models.AddRange(TriangleModels);
+                models.AddRange(RectangleModels);
                 models.AddRange(VerticalLineModels);
                 models.AddRange(TrendLineModels);
 

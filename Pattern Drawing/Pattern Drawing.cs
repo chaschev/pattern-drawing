@@ -132,6 +132,7 @@ namespace cAlgo
             AddPatternButton(new CypherPattern(patternConfig));
             AddPatternButton(new AbcdPattern(patternConfig));
             AddPatternButton(new ThreeDrivesPattern(patternConfig));
+            AddPatternButton(new GannBoxPattern(patternConfig));
             AddElliottCorrectionWavePattern(patternConfig);
             AddElliottImpulseWavgePattern(patternConfig);
             AddElliottTriangleWavePattern(patternConfig);

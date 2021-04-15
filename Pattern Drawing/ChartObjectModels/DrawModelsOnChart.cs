@@ -46,6 +46,13 @@ namespace cAlgo.ChartObjectModels
 
                     break;
 
+                case ChartObjectType.Rectangle:
+                    var rectangleModel = model as ChartRectangleModel;
+
+                    chartObject = chart.DrawRectangle(rectangleModel.Name, rectangleModel.Time1, rectangleModel.Y1, rectangleModel.Time2, rectangleModel.Y2, Color.FromHex(rectangleModel.ColorHex));
+
+                    break;
+
                 case ChartObjectType.VerticalLine:
                     var verticalLineModel = model as ChartVerticalLineModel;
 

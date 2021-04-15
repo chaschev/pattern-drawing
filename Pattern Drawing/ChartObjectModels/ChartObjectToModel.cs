@@ -66,6 +66,19 @@ namespace cAlgo.ChartObjectModels
 
                     break;
 
+                case ChartObjectType.Rectangle:
+                    var chartRectangle = chartObject as ChartRectangle;
+
+                    chartObjectModel = new ChartRectangleModel
+                    {
+                        Time1 = chartRectangle.Time1,
+                        Time2 = chartRectangle.Time2,
+                        Y1 = chartRectangle.Y1,
+                        Y2 = chartRectangle.Y2,
+                    };
+
+                    break;
+
                 case ChartObjectType.VerticalLine:
                     var chartVerticalLine = chartObject as ChartVerticalLine;
 
