@@ -65,6 +65,8 @@
     <Compile Include="Controls\PatternsLoadButton.cs" />
     <Compile Include="Controls\PatternsSaveButton.cs" />
     <Compile Include="Controls\ToggleButton.cs" />
+    <Compile Include="Helpers\DataSeriesAverageDistanceExtension.cs" />
+    <Compile Include="Helpers\BarsOpenTimeExtensions.cs" />
     <Compile Include="Helpers\ChartObjectsIsPatternExtension.cs" />
     <Compile Include="Helpers\ChartTrendLineCenterExtensions.cs" />
     <Compile Include="Helpers\ColorParser.cs" />

@@ -1,4 +1,5 @@
 ﻿using cAlgo.API;
+using cAlgo.Helpers;
 using System;
 using System.Linq;
 
@@ -17,10 +18,6 @@ namespace cAlgo.Patterns
 
         protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
         {
-            var otherTriangle = updatedChartObject as ChartTriangle;
-
-            if (otherTriangle == null) return;
-
             var chartObjects = Chart.Objects.ToArray();
 
             var objectNameId = string.Format("{0}_{1}", ObjectName, id);
@@ -32,25 +29,6 @@ namespace cAlgo.Patterns
                     || !chartObject.Name.StartsWith(objectNameId, StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
-                }
-
-                var triangle = chartObject as ChartTriangle;
-
-                if ((triangle.Name.EndsWith("Left", StringComparison.InvariantCultureIgnoreCase)
-                    && otherTriangle.Name.EndsWith("Head", StringComparison.InvariantCultureIgnoreCase))
-                    || (triangle.Name.EndsWith("Head", StringComparison.InvariantCultureIgnoreCase)
-                    && otherTriangle.Name.EndsWith("Right", StringComparison.InvariantCultureIgnoreCase)))
-                {
-                    triangle.Time3 = otherTriangle.Time1;
-                    triangle.Y3 = otherTriangle.Y1;
-                }
-                else if ((triangle.Name.EndsWith("Head", StringComparison.InvariantCultureIgnoreCase)
-                    && otherTriangle.Name.EndsWith("Left", StringComparison.InvariantCultureIgnoreCase))
-                    || (triangle.Name.EndsWith("Right", StringComparison.InvariantCultureIgnoreCase)
-                    && otherTriangle.Name.EndsWith("Head", StringComparison.InvariantCultureIgnoreCase)))
-                {
-                    triangle.Time1 = otherTriangle.Time3;
-                    triangle.Y1 = otherTriangle.Y3;
                 }
             }
         }
@@ -78,8 +56,91 @@ namespace cAlgo.Patterns
                 _rectangle = Chart.DrawRectangle(name, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, Color);
 
                 _rectangle.IsInteractive = true;
+            }
+        }
 
-                _rectangle.IsFilled = true;
+        private void DrawHorizontalLines(ChartRectangle rectangle)
+        {
+            _horizontalTrendLines = new ChartTrendLine[5];
+
+            DateTime startTime, endTime;
+
+            if (rectangle.Time1 < rectangle.Time2)
+            {
+                startTime = rectangle.Time1;
+                endTime = rectangle.Time2;
+            }
+            else
+            {
+                startTime = rectangle.Time2;
+                endTime = rectangle.Time1;
+            }
+
+            var diff = Math.Abs(rectangle.Y2 - rectangle.Y1);
+
+            var lineLevels = new double[]
+            {
+                diff * 0.25,
+                diff * 0.382,
+                diff * 0.5,
+                diff * 0.618,
+                diff * 0.75
+            };
+
+            for (int i = 0; i < lineLevels.Length; i++)
+            {
+                var level = rectangle.Y2 > rectangle.Y1 ? rectangle.Y1 + lineLevels[i] : rectangle.Y1 - lineLevels[i];
+
+                var objectName = GetObjectName(string.Format("HorizontalLine{0}", i));
+
+                _horizontalTrendLines[i] = Chart.DrawTrendLine(objectName, startTime, level, endTime, level, Color);
+
+                _horizontalTrendLines[i].IsInteractive = true;
+            }
+        }
+
+        private void DrawVerticalLines(ChartRectangle rectangle)
+        {
+            _verticalTrendLines = new ChartTrendLine[5];
+
+            var rectangleFirstBarIndex = Chart.Bars.GetBarIndex(rectangle.Time1);
+            var rectangleSecondBarIndex = Chart.Bars.GetBarIndex(rectangle.Time2);
+
+            double startBarIndex, endBarIndex;
+
+            if (rectangleFirstBarIndex < rectangleSecondBarIndex)
+            {
+                startBarIndex = rectangleFirstBarIndex;
+                endBarIndex = rectangleSecondBarIndex;
+            }
+            else
+            {
+                startBarIndex = rectangleSecondBarIndex;
+                endBarIndex = rectangleFirstBarIndex;
+            }
+
+            var diff = endBarIndex - startBarIndex;
+
+            var lineLevels = new double[]
+            {
+                diff * 0.25,
+                diff * 0.382,
+                diff * 0.5,
+                diff * 0.618,
+                diff * 0.75
+            };
+
+            for (int i = 0; i < lineLevels.Length; i++)
+            {
+                var barIndex = startBarIndex + lineLevels[i];
+
+                var time = Chart.Bars.GetOpenTime(barIndex);
+
+                var objectName = GetObjectName(string.Format("VerticalLine{0}", i));
+
+                _verticalTrendLines[i] = Chart.DrawTrendLine(objectName, time, rectangle.Y1, time, rectangle.Y2, Color);
+
+                _verticalTrendLines[i].IsInteractive = true;
             }
         }
 
@@ -89,6 +150,9 @@ namespace cAlgo.Patterns
 
             _rectangle.Time2 = obj.TimeValue;
             _rectangle.Y2 = obj.YValue;
+
+            DrawHorizontalLines(_rectangle);
+            DrawVerticalLines(_rectangle);
         }
 
         protected override void DrawLabels()
@@ -100,9 +164,20 @@ namespace cAlgo.Patterns
 
         private void DrawLabels(ChartRectangle rectangle, ChartTrendLine[] horizontalTrendLines, ChartTrendLine[] verticalTrendLines, long id)
         {
-            //DrawLabelText("Left", leftTriangle.Time2, leftTriangle.Y2, id);
-            //DrawLabelText("Head", headTriangle.Time2, headTriangle.Y2, id);
-            //DrawLabelText("Right", rightTriangle.Time2, rightTriangle.Y2, id);
+            var timeDistance = TimeSpan.FromHours(Chart.Bars.GetTimeDiff().TotalHours * 2);
+            var priceDistance = Chart.Bars.ClosePrices.GetAverageDistance(10) / 2;
+
+            DrawLabelText("0", rectangle.Time1, rectangle.Y1, id, objectNameKey: "0.0");
+            DrawLabelText("1", rectangle.Time1, rectangle.Y2, id, objectNameKey: "1.1");
+
+            DrawLabelText("0", rectangle.Time1.Add(timeDistance), rectangle.Y1 + priceDistance, id, objectNameKey: "0.2");
+            DrawLabelText("1", rectangle.Time2.Add(timeDistance), rectangle.Y1 + priceDistance, id, objectNameKey: "1.3");
+
+            DrawLabelText("0", rectangle.Time2, rectangle.Y1, id, objectNameKey: "0.4");
+            DrawLabelText("1", rectangle.Time2, rectangle.Y2, id, objectNameKey: "1.5");
+
+            DrawLabelText("0", rectangle.Time1.Add(timeDistance), rectangle.Y2 + priceDistance, id, objectNameKey: "0.6");
+            DrawLabelText("1", rectangle.Time2.Add(timeDistance), rectangle.Y2 + priceDistance, id, objectNameKey: "1.7");
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
