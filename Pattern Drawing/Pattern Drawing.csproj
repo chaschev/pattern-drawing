@@ -65,6 +65,7 @@
     <Compile Include="Controls\PatternsLoadButton.cs" />
     <Compile Include="Controls\PatternsSaveButton.cs" />
     <Compile Include="Controls\ToggleButton.cs" />
+    <Compile Include="Helpers\ChartRectangleExtensions.cs" />
     <Compile Include="Helpers\DataSeriesAverageDistanceExtension.cs" />
     <Compile Include="Helpers\BarsOpenTimeExtensions.cs" />
     <Compile Include="Helpers\ChartObjectsIsPatternExtension.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Patterns\ElliottWavePatternBase.cs" />
     <Compile Include="Patterns\ElliottTriangleWavePattern.cs" />
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
+    <Compile Include="Patterns\GannSquarePattern.cs" />
     <Compile Include="Patterns\GannBoxPattern.cs" />
     <Compile Include="Patterns\PatternConfig.cs" />
     <Compile Include="Patterns\ThreeDrivesPattern.cs" />
