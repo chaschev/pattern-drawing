@@ -51,6 +51,11 @@ namespace cAlgo.Helpers
             return Math.Round(endBarIndex - startBarIndex, 2);
         }
 
+        public static TimeSpan GetTimeDelta(this ChartRectangle rectangle)
+        {
+            return rectangle.GetEndTime() - rectangle.GetStartTime();
+        }
+
         public static double GetPriceToBarsRatio(this ChartRectangle rectangle, Bars bars)
         {
             var verticalDelta = rectangle.GetPriceDelta();
