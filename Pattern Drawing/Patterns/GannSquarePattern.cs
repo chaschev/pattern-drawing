@@ -46,8 +46,10 @@ namespace cAlgo.Patterns
             var topPrice = rectangle.GetTopPrice();
             var bottomPrice = rectangle.GetBottomPrice();
 
-            var rectangleTimeDelta = rectangle.GetTimeDelta();
             var rectanglePriceDelta = rectangle.GetPriceDelta();
+            var rectangleBarsNumber = rectangle.GetBarsNumber(Chart.Bars);
+
+            var BarsTimeDiffInMilliseconds = Chart.Bars.GetTimeDiff().TotalMilliseconds;
 
             foreach (var fan in fans)
             {
@@ -76,23 +78,23 @@ namespace cAlgo.Patterns
                             switch (fanName)
                             {
                                 case "1x2":
-                                    fan.Time2 = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 2);
+                                    fan.Time2 = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 2));
                                     break;
 
                                 case "1x3":
-                                    fan.Time2 = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 3);
+                                    fan.Time2 = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 3));
                                     break;
 
                                 case "1x4":
-                                    fan.Time2 = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 4);
+                                    fan.Time2 = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 4));
                                     break;
 
                                 case "1x5":
-                                    fan.Time2 = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 5);
+                                    fan.Time2 = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 5));
                                     break;
 
                                 case "1x8":
-                                    fan.Time2 = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 8);
+                                    fan.Time2 = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 8));
                                     break;
                             }
 
