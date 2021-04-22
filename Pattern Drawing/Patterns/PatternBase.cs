@@ -187,6 +187,8 @@ namespace cAlgo.Patterns
             {
                 foreach (var chartObject in removedPatternObjects)
                 {
+                    if (chartObject.ObjectType == ChartObjectType.Text) continue;
+
                     long id;
 
                     if (!TryGetChartObjectPatternId(chartObject.Name, out id))

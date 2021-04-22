@@ -403,7 +403,7 @@ namespace cAlgo.Patterns
         {
             DrawLabelText(Math.Round(rectangle.GetPriceDelta(), Chart.Symbol.Digits).ToString(), rectangle.GetStartTime(), rectangle.GetTopPrice(), id, objectNameKey: "Price", fontSize: 10);
             DrawLabelText(rectangle.GetBarsNumber(Chart.Bars).ToString(), rectangle.GetEndTime(), rectangle.GetBottomPrice(), id, objectNameKey: "BarsNumber", fontSize: 10);
-            DrawLabelText(rectangle.GetPriceToBarsRatio(Chart.Bars).ToString(), rectangle.GetEndTime(), rectangle.GetTopPrice(), id, objectNameKey: "PriceToBarsRatio", fontSize: 10);
+            DrawLabelText(rectangle.GetPriceToBarsRatio(Chart.Bars).ToString("0." + new string('#', 339)), rectangle.GetEndTime(), rectangle.GetTopPrice(), id, objectNameKey: "PriceToBarsRatio", fontSize: 10);
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)

@@ -132,8 +132,9 @@ namespace cAlgo
             AddPatternButton(new CypherPattern(patternConfig));
             AddPatternButton(new AbcdPattern(patternConfig));
             AddPatternButton(new ThreeDrivesPattern(patternConfig));
-            AddPatternButton(new GannBoxPattern(patternConfig));
-            AddPatternButton(new GannSquarePattern(patternConfig));
+
+            AddGannPatterns(patternConfig);
+
             AddElliottCorrectionWavePattern(patternConfig);
             AddElliottImpulseWavgePattern(patternConfig);
             AddElliottTriangleWavePattern(patternConfig);
@@ -253,6 +254,20 @@ namespace cAlgo
             {
                 pattern.Initialize();
             }
+        }
+
+        private void AddGannPatterns(PatternConfig patternConfig)
+        {
+            var gannPatternsGroupButton = AddPatternGroupButton("Gann");
+
+            gannPatternsGroupButton.Patterns = new IPattern[]
+            {
+                new GannBoxPattern(patternConfig),
+                new GannSquarePattern(patternConfig),
+                new GannFanPattern(patternConfig)
+            };
+
+            InitializePatterns(gannPatternsGroupButton.Patterns);
         }
 
         private void AddElliottImpulseWavgePattern(PatternConfig patternConfig)

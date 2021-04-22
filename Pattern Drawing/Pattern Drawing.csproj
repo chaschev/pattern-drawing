@@ -79,6 +79,7 @@
     <Compile Include="Patterns\ElliottWavePatternBase.cs" />
     <Compile Include="Patterns\ElliottTriangleWavePattern.cs" />
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
+    <Compile Include="Patterns\GannFanPattern.cs" />
     <Compile Include="Patterns\GannSquarePattern.cs" />
     <Compile Include="Patterns\GannBoxPattern.cs" />
     <Compile Include="Patterns\PatternConfig.cs" />
