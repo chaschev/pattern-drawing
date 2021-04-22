@@ -17,7 +17,7 @@ namespace cAlgo.ChartObjectModels
                     var chartTrendLine = chart.DrawTrendLine(trendLineModel.Name, trendLineModel.Time1, trendLineModel.Y1, trendLineModel.Time2, trendLineModel.Y2, Color.FromHex(trendLineModel.ColorHex), trendLineModel.Thickness, trendLineModel.LineStyle);
 
                     chartTrendLine.ShowAngle = trendLineModel.ShowAngle;
-                    chartTrendLine.ExtendToInfinity = chartTrendLine.ExtendToInfinity;
+                    chartTrendLine.ExtendToInfinity = trendLineModel.ExtendToInfinity;
 
                     chartObject = chartTrendLine;
 
