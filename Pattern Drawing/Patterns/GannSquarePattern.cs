@@ -196,8 +196,10 @@ namespace cAlgo.Patterns
             var topPrice = rectangle.GetTopPrice();
             var bottomPrice = rectangle.GetBottomPrice();
 
-            var rectangleTimeDelta = rectangle.GetTimeDelta();
             var rectanglePriceDelta = rectangle.GetPriceDelta();
+            var rectangleBarsNumber = rectangle.GetBarsNumber(Chart.Bars);
+
+            var BarsTimeDiffInMilliseconds = Chart.Bars.GetTimeDiff().TotalMilliseconds;
 
             var levels = new[] { 1, 2, 3, 4, 5, 8, -2, -3, -4, -5, -8 };
 
@@ -233,23 +235,23 @@ namespace cAlgo.Patterns
                             switch (level)
                             {
                                 case 2:
-                                    secondTime = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 2);
+                                    secondTime = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 2));
                                     break;
 
                                 case 3:
-                                    secondTime = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 3);
+                                    secondTime = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 3));
                                     break;
 
                                 case 4:
-                                    secondTime = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 4);
+                                    secondTime = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 4));
                                     break;
 
                                 case 5:
-                                    secondTime = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 5);
+                                    secondTime = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 5));
                                     break;
 
                                 case 8:
-                                    secondTime = startTime.AddMilliseconds(rectangleTimeDelta.TotalMilliseconds / 8);
+                                    secondTime = startTime.AddMilliseconds(BarsTimeDiffInMilliseconds * (rectangleBarsNumber / 8));
                                     break;
                             }
 
