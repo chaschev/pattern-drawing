@@ -22,6 +22,9 @@ namespace cAlgo
 
         private Style _buttonsStyle;
 
+        private List<Button> _buttons = new List<Button>();
+        private Button _expandButton;
+
         [Parameter("Color", DefaultValue = "Red", Group = "Patterns Color")]
         public string PatternsColor { get; set; }
 
@@ -64,7 +67,7 @@ namespace cAlgo
         [Parameter("Margin", DefaultValue = 1, Group = "Buttons")]
         public double ButtonsMargin { get; set; }
 
-        [Parameter("Transparency", DefaultValue = 1, MinValue = 0, MaxValue = 1, Group = "Buttons")]
+        [Parameter("Transparency", DefaultValue = 0.5, MinValue = 0, MaxValue = 1, Group = "Buttons")]
         public double ButtonsTransparency { get; set; }
 
         [Parameter("Number", DefaultValue = 100, MinValue = 1, Group = "Cycles")]
@@ -126,6 +129,16 @@ namespace cAlgo
                 Print = Print
             };
 
+            _expandButton = new Button
+            {
+                Style = _buttonsStyle,
+                Text = "Expand Patterns"
+            };
+
+            _expandButton.Click += ExpandButton_Click;
+
+            _mainButtonsPanel.AddChild(_expandButton);
+
             AddPatternButton(new TrianglePattern(patternConfig));
             AddPatternButton(new CyclesPattern(patternConfig, CyclesNumber));
             AddPatternButton(new HeadAndShouldersPattern(patternConfig));
@@ -146,32 +159,74 @@ namespace cAlgo
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
                 OffColor = _buttonsBackgroundDisableColor,
-                Text = "Hide"
+                Text = "Hide",
+                IsVisible = false
             };
 
             showHideButton.TurnedOn += ShowHideButton_TurnedOn;
             showHideButton.TurnedOff += ShowHideButton_TurnedOff;
 
             _mainButtonsPanel.AddChild(showHideButton);
+            _buttons.Add(showHideButton);
 
-            _mainButtonsPanel.AddChild(new PatternsSaveButton(Chart)
+            var saveButton = new PatternsSaveButton(Chart)
             {
-                Style = _buttonsStyle
-            });
+                Style = _buttonsStyle,
+                IsVisible = false
+            };
 
-            _mainButtonsPanel.AddChild(new PatternsLoadButton(Chart)
-            {
-                Style = _buttonsStyle
-            });
+            _mainButtonsPanel.AddChild(saveButton);
+            _buttons.Add(saveButton);
 
-            _mainButtonsPanel.AddChild(new PatternsRemoveAllButton(Chart)
+            var loadButton = new PatternsLoadButton(Chart)
             {
-                Style = _buttonsStyle
-            });
+                Style = _buttonsStyle,
+                IsVisible = false
+            };
+
+            _mainButtonsPanel.AddChild(loadButton);
+            _buttons.Add(loadButton);
+
+            var removeAllButton = new PatternsRemoveAllButton(Chart)
+            {
+                Style = _buttonsStyle,
+                IsVisible = false
+            };
+
+            _mainButtonsPanel.AddChild(removeAllButton);
+            _buttons.Add(removeAllButton);
+
+            var collapseButton = new Button
+            {
+                Style = _buttonsStyle,
+                Text = "Collapse",
+                IsVisible = false
+            };
+
+            collapseButton.Click += CollapseButton_Click;
+
+            _mainButtonsPanel.AddChild(collapseButton);
+            _buttons.Add(collapseButton);
 
             Chart.AddControl(_mainPanel);
 
             CheckTimeFrameVisibility();
+        }
+
+        private void CollapseButton_Click(ButtonClickEventArgs obj)
+        {
+            _buttons.ForEach(iButton => iButton.IsVisible = false);
+
+            _groupButtonsPanel.IsVisible = false;
+
+            _expandButton.IsVisible = true;
+        }
+
+        private void ExpandButton_Click(ButtonClickEventArgs obj)
+        {
+            _buttons.ForEach(iButton => iButton.IsVisible = true);
+
+            obj.Button.IsVisible = false;
         }
 
         public override void Calculate(int index)
@@ -194,12 +249,17 @@ namespace cAlgo
 
         private void AddPatternButton(IPattern pattern)
         {
-            _mainButtonsPanel.AddChild(new PatternButton(pattern)
+            var button = new PatternButton(pattern)
             {
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
-                OffColor = _buttonsBackgroundDisableColor
-            });
+                OffColor = _buttonsBackgroundDisableColor,
+                IsVisible = false
+            };
+
+            _buttons.Add(button);
+
+            _mainButtonsPanel.AddChild(button);
 
             pattern.Initialize();
         }
@@ -211,8 +271,11 @@ namespace cAlgo
                 Text = text,
                 Style = _buttonsStyle,
                 OnColor = _buttonsBackgroundEnableColor,
-                OffColor = _buttonsBackgroundDisableColor
+                OffColor = _buttonsBackgroundDisableColor,
+                IsVisible = false
             };
+
+            _buttons.Add(groupButton);
 
             _mainButtonsPanel.AddChild(groupButton);
 
