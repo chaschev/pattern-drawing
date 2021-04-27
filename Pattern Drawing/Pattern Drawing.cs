@@ -148,6 +148,8 @@ namespace cAlgo
 
             AddGannPatterns(patternConfig);
 
+            AddFibonacciPatterns(patternConfig);
+
             AddElliottCorrectionWavePattern(patternConfig);
             AddElliottImpulseWavgePattern(patternConfig);
             AddElliottTriangleWavePattern(patternConfig);
@@ -328,6 +330,108 @@ namespace cAlgo
                 new GannBoxPattern(patternConfig),
                 new GannSquarePattern(patternConfig),
                 new GannFanPattern(patternConfig)
+            };
+
+            InitializePatterns(gannPatternsGroupButton.Patterns);
+        }
+
+        private void AddFibonacciPatterns(PatternConfig patternConfig)
+        {
+            var gannPatternsGroupButton = AddPatternGroupButton("Fibonacci");
+
+            gannPatternsGroupButton.Patterns = new IPattern[]
+            {
+                new FibonacciRetracementPattern(patternConfig, new List<FibonacciRetracementLevel>
+                {
+                     new FibonacciRetracementLevel
+                    {
+                        Percent = 0,
+                        Color = Color.Gray,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 0.236,
+                        Color = Color.Red,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 0.382,
+                        Color = Color.GreenYellow,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 0.5,
+                        Color = Color.DarkGreen,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 0.618,
+                        Color = Color.BlueViolet,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 0.786,
+                        Color = Color.AliceBlue,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 1,
+                        Color = Color.Bisque,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 1.618,
+                        Color = Color.Azure,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 2.618,
+                        Color = Color.Aqua,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 3.618,
+                        Color = Color.Aquamarine,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                    new FibonacciRetracementLevel
+                    {
+                        Percent = 4.236,
+                        Color = Color.Chocolate,
+                        Style = LineStyle.Solid,
+                        Thickness = 1,
+                        ColorAlpha = 50
+                    },
+                }),
             };
 
             InitializePatterns(gannPatternsGroupButton.Patterns);
