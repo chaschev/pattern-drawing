@@ -27,7 +27,7 @@ namespace cAlgo.Patterns
 
         protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
         {
-            if (updatedChartObject.ObjectType != ChartObjectType.TrendLine) return;
+            if (updatedChartObject.ObjectType != ChartObjectType.TrendLine && updatedChartObject.ObjectType != ChartObjectType.Rectangle) return;
 
             var mainLine = patternObjects.FirstOrDefault(iObject => iObject.ObjectType == ChartObjectType.TrendLine && iObject.Name.EndsWith("MainLine", StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
 
