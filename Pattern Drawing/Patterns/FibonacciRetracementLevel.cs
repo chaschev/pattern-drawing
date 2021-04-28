@@ -6,17 +6,9 @@ namespace cAlgo.Patterns
     {
         public double Percent { get; set; }
 
-        public Color Color { get; set; }
+        public Color LineColor { get; set; }
 
-        public int ColorAlpha { get; set; }
-
-        public Color FillColor
-        {
-            get
-            {
-                return Color.FromArgb(ColorAlpha, Color.R, Color.G, Color.B);
-            }
-        }
+        public Color FillColor { get; set; }
 
         public LineStyle Style { get; set; }
 

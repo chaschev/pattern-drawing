@@ -146,7 +146,10 @@ namespace cAlgo.Patterns
 
                 var price = mainLine.Y2 > mainLine.Y1 ? mainLine.Y2 - levelAmount : mainLine.Y2 + levelAmount;
 
-                var levelLine = Chart.DrawTrendLine(levelLineName, startTime, price, endTime, price, level.Color, level.Thickness, level.Style);
+                var levelLine = Chart.DrawTrendLine(levelLineName, startTime, price, endTime, price, level.LineColor, level.Thickness, level.Style);
+
+                levelLine.IsInteractive = true;
+                levelLine.IsLocked = true;
 
                 _levelLines[level.Percent] = levelLine;
 
@@ -162,6 +165,9 @@ namespace cAlgo.Patterns
                 var rectangle = Chart.DrawRectangle(levelRectangleName, startTime, previousLevelPrice, endTime, price, level.FillColor, 0);
 
                 rectangle.IsFilled = true;
+
+                rectangle.IsInteractive = true;
+                rectangle.IsLocked = true;
 
                 previousLevelPrice = price;
             }

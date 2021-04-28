@@ -82,6 +82,204 @@ namespace cAlgo
         [Parameter("Only Buttons", Group = "TimeFrame Visibility")]
         public bool VisibilityOnlyButtons { get; set; }
 
+        [Parameter("Show 1st Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowFirstFibonacciRetracement { get; set; }
+
+        [Parameter("1st Level Percent", DefaultValue = 0, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double FirstFibonacciRetracementPercent { get; set; }
+
+        [Parameter("1st Level Color", DefaultValue = "Gray", Group = "Fibonacci Retracement")]
+        public string FirstFibonacciRetracementColor { get; set; }
+
+        [Parameter("1st Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int FirstFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("1st Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int FirstFibonacciRetracementThickness { get; set; }
+
+        [Parameter("1st Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle FirstFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 2nd Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowSecondFibonacciRetracement { get; set; }
+
+        [Parameter("2nd Level Percent", DefaultValue = 0.236, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double SecondFibonacciRetracementPercent { get; set; }
+
+        [Parameter("2nd Level Color", DefaultValue = "Red", Group = "Fibonacci Retracement")]
+        public string SecondFibonacciRetracementColor { get; set; }
+
+        [Parameter("2nd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int SecondFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("2nd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int SecondFibonacciRetracementThickness { get; set; }
+
+        [Parameter("2nd Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle SecondFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 3rd Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowThirdFibonacciRetracement { get; set; }
+
+        [Parameter("3rd Level Percent", DefaultValue = 0.382, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double ThirdFibonacciRetracementPercent { get; set; }
+
+        [Parameter("3rd Level Color", DefaultValue = "GreenYellow", Group = "Fibonacci Retracement")]
+        public string ThirdFibonacciRetracementColor { get; set; }
+
+        [Parameter("3rd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int ThirdFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("3rd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int ThirdFibonacciRetracementThickness { get; set; }
+
+        [Parameter("3rd Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle ThirdFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 4th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowFourthFibonacciRetracement { get; set; }
+
+        [Parameter("4th Level Percent", DefaultValue = 0.5, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double FourthFibonacciRetracementPercent { get; set; }
+
+        [Parameter("4th Level Color", DefaultValue = "DarkGreen", Group = "Fibonacci Retracement")]
+        public string FourthFibonacciRetracementColor { get; set; }
+
+        [Parameter("4th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int FourthFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("4th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int FourthFibonacciRetracementThickness { get; set; }
+
+        [Parameter("4th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle FourthFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 5th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowFifthFibonacciRetracement { get; set; }
+
+        [Parameter("5th Level Percent", DefaultValue = 0.618, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double FifthFibonacciRetracementPercent { get; set; }
+
+        [Parameter("5th Level Color", DefaultValue = "BlueViolet", Group = "Fibonacci Retracement")]
+        public string FifthFibonacciRetracementColor { get; set; }
+
+        [Parameter("5th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int FifthFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("5th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int FifthFibonacciRetracementThickness { get; set; }
+
+        [Parameter("5th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle FifthFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 6th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowSixthFibonacciRetracement { get; set; }
+
+        [Parameter("6th Level Percent", DefaultValue = 0.786, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double SixthFibonacciRetracementPercent { get; set; }
+
+        [Parameter("6th Level Color", DefaultValue = "AliceBlue", Group = "Fibonacci Retracement")]
+        public string SixthFibonacciRetracementColor { get; set; }
+
+        [Parameter("6th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int SixthFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("6th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int SixthFibonacciRetracementThickness { get; set; }
+
+        [Parameter("6th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle SixthFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 7th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowSeventhFibonacciRetracement { get; set; }
+
+        [Parameter("7th Level Percent", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double SeventhFibonacciRetracementPercent { get; set; }
+
+        [Parameter("7th Level Color", DefaultValue = "Bisque", Group = "Fibonacci Retracement")]
+        public string SeventhFibonacciRetracementColor { get; set; }
+
+        [Parameter("7th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int SeventhFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("7th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int SeventhFibonacciRetracementThickness { get; set; }
+
+        [Parameter("7th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle SeventhFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 8th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowEighthFibonacciRetracement { get; set; }
+
+        [Parameter("8th Level Percent", DefaultValue = 1.618, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double EighthFibonacciRetracementPercent { get; set; }
+
+        [Parameter("8th Level Color", DefaultValue = "Azure", Group = "Fibonacci Retracement")]
+        public string EighthFibonacciRetracementColor { get; set; }
+
+        [Parameter("8th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int EighthFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("8th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int EighthFibonacciRetracementThickness { get; set; }
+
+        [Parameter("8th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle EighthFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 9th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowNinthFibonacciRetracement { get; set; }
+
+        [Parameter("9th Level Percent", DefaultValue = 2.618, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double NinthFibonacciRetracementPercent { get; set; }
+
+        [Parameter("9th Level Color", DefaultValue = "Aqua", Group = "Fibonacci Retracement")]
+        public string NinthFibonacciRetracementColor { get; set; }
+
+        [Parameter("9th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int NinthFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("9th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int NinthFibonacciRetracementThickness { get; set; }
+
+        [Parameter("9th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle NinthFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 10th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowTenthFibonacciRetracement { get; set; }
+
+        [Parameter("10th Level Percent", DefaultValue = 3.618, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double TenthFibonacciRetracementPercent { get; set; }
+
+        [Parameter("10th Level Color", DefaultValue = "Aquamarine", Group = "Fibonacci Retracement")]
+        public string TenthFibonacciRetracementColor { get; set; }
+
+        [Parameter("10th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int TenthFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("10th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int TenthFibonacciRetracementThickness { get; set; }
+
+        [Parameter("10th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle TenthFibonacciRetracementStyle { get; set; }
+
+        [Parameter("Show 11th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
+        public bool ShowEleventhFibonacciRetracement { get; set; }
+
+        [Parameter("11th Level Percent", DefaultValue = 4.236, MinValue = 0, Group = "Fibonacci Retracement")]
+        public double EleventhFibonacciRetracementPercent { get; set; }
+
+        [Parameter("11th Level Color", DefaultValue = "Chocolate", Group = "Fibonacci Retracement")]
+        public string EleventhFibonacciRetracementColor { get; set; }
+
+        [Parameter("11th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Retracement")]
+        public int EleventhFibonacciRetracementAlpha { get; set; }
+
+        [Parameter("11th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        public int EleventhFibonacciRetracementThickness { get; set; }
+
+        [Parameter("11th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
+        public LineStyle EleventhFibonacciRetracementStyle { get; set; }
+
         protected override void Initialize()
         {
             _mainPanel = new StackPanel
@@ -335,103 +533,152 @@ namespace cAlgo
             InitializePatterns(gannPatternsGroupButton.Patterns);
         }
 
+        private IEnumerable<FibonacciRetracementLevel> GetFibonacciRetracementLevels()
+        {
+            var fibonacciRetracementLevels = new List<FibonacciRetracementLevel>();
+
+            if (ShowFirstFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = FirstFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(FirstFibonacciRetracementColor),
+                    Style = FirstFibonacciRetracementStyle,
+                    Thickness = FirstFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(FirstFibonacciRetracementColor, FirstFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowSecondFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = SecondFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(SecondFibonacciRetracementColor),
+                    Style = SecondFibonacciRetracementStyle,
+                    Thickness = SecondFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(SecondFibonacciRetracementColor, SecondFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowThirdFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = ThirdFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(ThirdFibonacciRetracementColor),
+                    Style = ThirdFibonacciRetracementStyle,
+                    Thickness = ThirdFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(ThirdFibonacciRetracementColor, ThirdFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowFourthFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = FourthFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(FourthFibonacciRetracementColor),
+                    Style = FourthFibonacciRetracementStyle,
+                    Thickness = FourthFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(FourthFibonacciRetracementColor, FourthFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowFifthFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = FifthFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(FifthFibonacciRetracementColor),
+                    Style = FifthFibonacciRetracementStyle,
+                    Thickness = FifthFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(FifthFibonacciRetracementColor, FifthFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowSixthFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = SixthFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(SixthFibonacciRetracementColor),
+                    Style = SixthFibonacciRetracementStyle,
+                    Thickness = SixthFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(SixthFibonacciRetracementColor, SixthFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowSeventhFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = SeventhFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(SeventhFibonacciRetracementColor),
+                    Style = SeventhFibonacciRetracementStyle,
+                    Thickness = SeventhFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(SeventhFibonacciRetracementColor, SeventhFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowEighthFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = EighthFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(EighthFibonacciRetracementColor),
+                    Style = EighthFibonacciRetracementStyle,
+                    Thickness = EighthFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(EighthFibonacciRetracementColor, EighthFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowNinthFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = NinthFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(NinthFibonacciRetracementColor),
+                    Style = NinthFibonacciRetracementStyle,
+                    Thickness = NinthFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(NinthFibonacciRetracementColor, NinthFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowTenthFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = TenthFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(TenthFibonacciRetracementColor),
+                    Style = TenthFibonacciRetracementStyle,
+                    Thickness = TenthFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(TenthFibonacciRetracementColor, TenthFibonacciRetracementAlpha),
+                });
+            }
+
+            if (ShowEleventhFibonacciRetracement)
+            {
+                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                {
+                    Percent = EleventhFibonacciRetracementPercent,
+                    LineColor = ColorParser.Parse(EleventhFibonacciRetracementColor),
+                    Style = EleventhFibonacciRetracementStyle,
+                    Thickness = EleventhFibonacciRetracementThickness,
+                    FillColor = ColorParser.Parse(EleventhFibonacciRetracementColor, EleventhFibonacciRetracementAlpha),
+                });
+            }
+
+            return fibonacciRetracementLevels;
+        }
+
         private void AddFibonacciPatterns(PatternConfig patternConfig)
         {
             var gannPatternsGroupButton = AddPatternGroupButton("Fibonacci");
 
             gannPatternsGroupButton.Patterns = new IPattern[]
             {
-                new FibonacciRetracementPattern(patternConfig, new List<FibonacciRetracementLevel>
-                {
-                     new FibonacciRetracementLevel
-                    {
-                        Percent = 0,
-                        Color = Color.Gray,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 0.236,
-                        Color = Color.Red,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 0.382,
-                        Color = Color.GreenYellow,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 0.5,
-                        Color = Color.DarkGreen,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 0.618,
-                        Color = Color.BlueViolet,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 0.786,
-                        Color = Color.AliceBlue,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 1,
-                        Color = Color.Bisque,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 1.618,
-                        Color = Color.Azure,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 2.618,
-                        Color = Color.Aqua,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 3.618,
-                        Color = Color.Aquamarine,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                    new FibonacciRetracementLevel
-                    {
-                        Percent = 4.236,
-                        Color = Color.Chocolate,
-                        Style = LineStyle.Solid,
-                        Thickness = 1,
-                        ColorAlpha = 50
-                    },
-                }),
+                new FibonacciRetracementPattern(patternConfig, GetFibonacciRetracementLevels()),
             };
 
             InitializePatterns(gannPatternsGroupButton.Patterns);
