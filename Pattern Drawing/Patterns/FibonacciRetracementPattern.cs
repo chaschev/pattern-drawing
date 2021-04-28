@@ -2,6 +2,7 @@
 using cAlgo.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace cAlgo.Patterns
@@ -11,6 +12,8 @@ namespace cAlgo.Patterns
         private ChartTrendLine _mainLine;
 
         private readonly IOrderedEnumerable<FibonacciRetracementLevel> _levels;
+
+        private readonly Dictionary<double, ChartTrendLine> _levelLines = new Dictionary<double, ChartTrendLine>();
 
         public FibonacciRetracementPattern(PatternConfig config, IEnumerable<FibonacciRetracementLevel> levels) : base("Fibonacci Retracement", config)
         {
@@ -26,16 +29,75 @@ namespace cAlgo.Patterns
         {
             if (updatedChartObject.ObjectType != ChartObjectType.TrendLine) return;
 
-            var trendLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine).Cast<ChartTrendLine>().ToArray();
+            var mainLine = patternObjects.FirstOrDefault(iObject => iObject.ObjectType == ChartObjectType.TrendLine && iObject.Name.EndsWith("MainLine", StringComparison.OrdinalIgnoreCase)) as ChartTrendLine;
 
-            var mainFan = trendLines.FirstOrDefault(iLine => iLine.Name.IndexOf("1x1", StringComparison.OrdinalIgnoreCase) > -1);
+            if (mainLine == null) return;
 
-            var sideFans = trendLines.Where(iLine => iLine != mainFan).ToDictionary(iLine => iLine.Name.Split('_').Last());
+            var levelLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine && iObject != mainLine)
+                .Cast<ChartTrendLine>()
+                .ToDictionary(trendLine => double.Parse(trendLine.Name.Split('_').Last(), CultureInfo.InvariantCulture))
+                .OrderBy(iLevelLine => iLevelLine.Key);
+
+            if (levelLines == null || !levelLines.Any()) return;
+
+            var levelRectangles = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.Rectangle)
+                .Cast<ChartRectangle>()
+                .ToDictionary(trendLine => double.Parse(trendLine.Name.Split('_').Last(), CultureInfo.InvariantCulture));
+
+            if (levelRectangles == null || levelRectangles.Count == 0) return;
+
+            UpdatePattern(mainLine, levelLines, levelRectangles);
+        }
+
+        private void UpdatePattern(ChartTrendLine mainLine, IOrderedEnumerable<KeyValuePair<double, ChartTrendLine>> levelLines, Dictionary<double, ChartRectangle> levelRectangles)
+        {
+            var verticalDelta = mainLine.GetVerticalDelta();
+
+            var previousLevelPrice = double.NaN;
+
+            var startTime = mainLine.GetStartTime();
+            var endTime = mainLine.GetEndTime();
+
+            foreach (var levelLine in levelLines)
+            {
+                var percent = levelLine.Key;
+
+                var levelAmount = percent == 0 ? 0 : verticalDelta * percent;
+
+                var price = mainLine.Y2 > mainLine.Y1 ? mainLine.Y2 - levelAmount : mainLine.Y2 + levelAmount;
+
+                levelLine.Value.Time1 = startTime;
+                levelLine.Value.Time2 = endTime;
+
+                levelLine.Value.Y1 = price;
+                levelLine.Value.Y2 = price;
+
+                if (double.IsNaN(previousLevelPrice))
+                {
+                    previousLevelPrice = price;
+
+                    continue;
+                }
+
+                ChartRectangle levelRectangle;
+
+                if (!levelRectangles.TryGetValue(percent, out levelRectangle)) continue;
+
+                levelRectangle.Time1 = startTime;
+                levelRectangle.Time2 = endTime;
+
+                levelRectangle.Y1 = previousLevelPrice;
+                levelRectangle.Y2 = price;
+
+                previousLevelPrice = price;
+            }
         }
 
         protected override void OnDrawingStopped()
         {
             _mainLine = null;
+
+            _levelLines.Clear();
         }
 
         protected override void OnMouseUp(ChartMouseEventArgs obj)
@@ -73,6 +135,9 @@ namespace cAlgo.Patterns
 
             var previousLevelPrice = double.NaN;
 
+            var startTime = mainLine.GetStartTime();
+            var endTime = mainLine.GetEndTime();
+
             foreach (var level in _levels)
             {
                 var levelAmount = level.Percent == 0 ? 0 : verticalDelta * level.Percent;
@@ -81,7 +146,9 @@ namespace cAlgo.Patterns
 
                 var price = mainLine.Y2 > mainLine.Y1 ? mainLine.Y2 - levelAmount : mainLine.Y2 + levelAmount;
 
-                Chart.DrawTrendLine(levelLineName, _mainLine.Time1, price, _mainLine.Time2, price, level.Color, level.Thickness, level.Style);
+                var levelLine = Chart.DrawTrendLine(levelLineName, startTime, price, endTime, price, level.Color, level.Thickness, level.Style);
+
+                _levelLines[level.Percent] = levelLine;
 
                 var levelRectangleName = GetObjectName(string.Format("LevelRectangle_{0}", level.Percent));
 
@@ -92,7 +159,7 @@ namespace cAlgo.Patterns
                     continue;
                 }
 
-                var rectangle = Chart.DrawRectangle(levelRectangleName, _mainLine.Time1, previousLevelPrice, _mainLine.Time2, price, level.FillColor, 0);
+                var rectangle = Chart.DrawRectangle(levelRectangleName, startTime, previousLevelPrice, endTime, price, level.FillColor, 0);
 
                 rectangle.IsFilled = true;
 
@@ -102,62 +169,45 @@ namespace cAlgo.Patterns
 
         protected override void DrawLabels()
         {
-            if (_mainLine == null) return;
-
-            //DrawLabels(_mainFan, _sideFans, Id);
+            DrawLabels(_levelLines, Id);
         }
 
-        private void DrawLabels(ChartTrendLine mainFan, Dictionary<string, ChartTrendLine> sideFans, long id)
+        private void DrawLabels(Dictionary<double, ChartTrendLine> levelLines, long id)
         {
-            DrawLabelText("1/1", mainFan.Time2, mainFan.Y2, id, fontSize: 10);
+            foreach (var levelLine in levelLines)
+            {
+                var text = string.Format("{0} ({1})", levelLine.Key, Math.Round(levelLine.Value.Y1, Chart.Symbol.Digits));
 
-            DrawLabelText("1/2", sideFans["1x2"].Time2, sideFans["1x2"].Y2, id, fontSize: 10);
-            DrawLabelText("1/3", sideFans["1x3"].Time2, sideFans["1x3"].Y2, id, fontSize: 10);
-            DrawLabelText("1/4", sideFans["1x4"].Time2, sideFans["1x4"].Y2, id, fontSize: 10);
-            DrawLabelText("1/8", sideFans["1x8"].Time2, sideFans["1x8"].Y2, id, fontSize: 10);
-
-            DrawLabelText("2/1", sideFans["2x1"].Time2, sideFans["2x1"].Y2, id, fontSize: 10);
-            DrawLabelText("3/1", sideFans["3x1"].Time2, sideFans["3x1"].Y2, id, fontSize: 10);
-            DrawLabelText("4/1", sideFans["4x1"].Time2, sideFans["4x1"].Y2, id, fontSize: 10);
-            DrawLabelText("8/1", sideFans["8x1"].Time2, sideFans["8x1"].Y2, id, fontSize: 10);
+                DrawLabelText(text, levelLine.Value.GetStartTime(), levelLine.Value.Y1, id, objectNameKey: levelLine.Key.ToString(CultureInfo.InvariantCulture));
+            }
         }
 
         protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
         {
-            var trendLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine).Cast<ChartTrendLine>().ToArray();
+            var levelLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine && !iObject.Name.EndsWith("MainLine", StringComparison.OrdinalIgnoreCase))
+                .Cast<ChartTrendLine>()
+                .ToDictionary(trendLine => double.Parse(trendLine.Name.Split('_').Last(), CultureInfo.InvariantCulture));
 
-            if (trendLines == null) return;
-
-            var mainFan = trendLines.FirstOrDefault(iLine => iLine.Name.IndexOf("1x1", StringComparison.OrdinalIgnoreCase) > -1);
-
-            if (mainFan == null) return;
-
-            var sideFans = trendLines.Where(iLine => iLine != mainFan).ToDictionary(iLine => iLine.Name.Split('_').Last());
+            if (levelLines == null || levelLines.Count == 0) return;
 
             if (labels.Length == 0)
             {
-                DrawLabels(mainFan, sideFans, id);
+                DrawLabels(levelLines, id);
 
                 return;
             }
 
             foreach (var label in labels)
             {
-                ChartTrendLine line;
+                var percent = double.Parse(label.Name.Split('_').Last(), CultureInfo.InvariantCulture);
 
-                if (label.Text.Equals("1/1", StringComparison.OrdinalIgnoreCase))
-                {
-                    line = mainFan;
-                }
-                else
-                {
-                    var keyName = label.Text[0] == '1' ? string.Format("1x{0}", label.Text[2]) : string.Format("{0}x1", label.Text[0]);
+                ChartTrendLine levelLine;
 
-                    if (!sideFans.TryGetValue(keyName, out line)) continue;
-                }
+                if (!levelLines.TryGetValue(percent, out levelLine)) continue;
 
-                label.Time = line.Time2;
-                label.Y = line.Y2;
+                label.Text = string.Format("{0} ({1})", percent, Math.Round(levelLine.Y1, Chart.Symbol.Digits));
+                label.Time = levelLine.GetStartTime();
+                label.Y = levelLine.Y1;
             }
         }
     }

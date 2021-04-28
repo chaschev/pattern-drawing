@@ -19,5 +19,15 @@ namespace cAlgo.Helpers
         {
             return Math.Abs(line.Y1 - line.Y2);
         }
+
+        public static DateTime GetStartTime(this ChartTrendLine line)
+        {
+            return line.Time1 > line.Time2 ? line.Time2 : line.Time1;
+        }
+
+        public static DateTime GetEndTime(this ChartTrendLine line)
+        {
+            return line.Time1 > line.Time2 ? line.Time1 : line.Time2;
+        }
     }
 }
