@@ -171,6 +171,8 @@ namespace cAlgo.Patterns
 
                 previousLevelPrice = price;
             }
+
+            mainLine.ZIndex = Chart.Objects.Count - 1;
         }
 
         protected override void DrawLabels()
