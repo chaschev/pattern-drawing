@@ -1,5 +1,6 @@
 ﻿using cAlgo.API;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace cAlgo.Patterns
@@ -200,6 +201,19 @@ namespace cAlgo.Patterns
                     _fifthLine.Y2 = obj.YValue;
                     return;
             }
+        }
+
+        protected override ChartObject[] GetFrontObjects()
+        {
+            var frontObjects = new List<ChartObject>();
+
+            if (_firstLine != null) frontObjects.Add(_firstLine);
+            if (_secondLine != null) frontObjects.Add(_secondLine);
+            if (_thirdLine != null) frontObjects.Add(_thirdLine);
+            if (_fourthLine != null) frontObjects.Add(_fourthLine);
+            if (_fifthLine != null) frontObjects.Add(_fifthLine);
+
+            return frontObjects.ToArray();
         }
     }
 }

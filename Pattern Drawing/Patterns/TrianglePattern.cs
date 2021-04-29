@@ -94,5 +94,10 @@ namespace cAlgo.Patterns
                 }
             }
         }
+
+        protected override ChartObject[] GetFrontObjects()
+        {
+            return new ChartObject[] { _triangle };
+        }
     }
 }

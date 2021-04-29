@@ -222,5 +222,10 @@ namespace cAlgo.Patterns
                 if (label.Name.EndsWith("BD", StringComparison.OrdinalIgnoreCase)) DrawLabelBd(leftTriangle, rightTriangle, id, label);
             }
         }
+
+        protected override ChartObject[] GetFrontObjects()
+        {
+            return new ChartObject[] { _leftTriangle, _rightTriangle };
+        }
     }
 }

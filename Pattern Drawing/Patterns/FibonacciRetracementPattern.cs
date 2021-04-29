@@ -171,8 +171,6 @@ namespace cAlgo.Patterns
 
                 previousLevelPrice = price;
             }
-
-            mainLine.ZIndex = Chart.Objects.Count - 1;
         }
 
         protected override void DrawLabels()
@@ -217,6 +215,11 @@ namespace cAlgo.Patterns
                 label.Time = levelLine.GetStartTime();
                 label.Y = levelLine.Y1;
             }
+        }
+
+        protected override ChartObject[] GetFrontObjects()
+        {
+            return new ChartObject[] { _mainLine };
         }
     }
 }

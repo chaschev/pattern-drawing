@@ -58,7 +58,7 @@ namespace cAlgo.Patterns
                 }
             }
 
-            DrawNonInteractiveObjects(leftTriangle, rightTriangle, id);
+            DrawOtherLinesObjects(leftTriangle, rightTriangle, id);
         }
 
         protected override void OnDrawingStopped()
@@ -73,6 +73,11 @@ namespace cAlgo.Patterns
         {
             if (MouseUpNumber == 5)
             {
+                if (_leftTriangle != null && _rightTriangle != null)
+                {
+                    DrawOtherLinesObjects(_leftTriangle, _rightTriangle, Id);
+                }
+
                 FinishDrawing();
 
                 return;
@@ -152,22 +157,21 @@ namespace cAlgo.Patterns
             DrawOrUpdateBdLabel(rightTriangle, id);
         }
 
-        protected override void DrawNonInteractiveObjects()
-        {
-            if (_leftTriangle == null || _rightTriangle == null) return;
-
-            DrawNonInteractiveObjects(_leftTriangle, _rightTriangle, Id);
-        }
-
-        private void DrawNonInteractiveObjects(ChartTriangle leftTriangle, ChartTriangle rightTriangle, long id)
+        private void DrawOtherLinesObjects(ChartTriangle leftTriangle, ChartTriangle rightTriangle, long id)
         {
             var acLineName = GetObjectName("ACLine", id);
 
             _acLine = Chart.DrawTrendLine(acLineName, leftTriangle.Time2, leftTriangle.Y2, rightTriangle.Time2, rightTriangle.Y2, Color, 1, LineStyle.Dots);
 
+            _acLine.IsInteractive = true;
+            _acLine.IsLocked = true;
+
             var xdLineName = GetObjectName("XDLine", id);
 
             _xdLine = Chart.DrawTrendLine(xdLineName, leftTriangle.Time1, leftTriangle.Y1, rightTriangle.Time3, rightTriangle.Y3, Color, 1, LineStyle.Dots);
+
+            _xdLine.IsInteractive = true;
+            _xdLine.IsLocked = true;
         }
 
         private void DrawOrUpdateBdLabel(ChartTriangle rightTriangle, long id, ChartText label = null)
@@ -324,6 +328,11 @@ namespace cAlgo.Patterns
                 if (label.Name.EndsWith("XB", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateXbLabel(leftTriangle, id, label);
                 if (label.Name.EndsWith("BD", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateBdLabel(rightTriangle, id, label);
             }
+        }
+
+        protected override ChartObject[] GetFrontObjects()
+        {
+            return new ChartObject[] { _leftTriangle, _rightTriangle };
         }
     }
 }

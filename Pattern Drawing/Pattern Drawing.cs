@@ -40,8 +40,8 @@ namespace cAlgo
         [Parameter("Alpha", DefaultValue = 100, MinValue = 0, MaxValue = 255, Group = "Patterns Label")]
         public int PatternsLabelColorAlpha { get; set; }
 
-        [Parameter("Interactive", DefaultValue = "Red", Group = "Patterns Label")]
-        public bool PatternsLabelInteractive { get; set; }
+        [Parameter("Locked", DefaultValue = true, Group = "Patterns Label")]
+        public bool PatternsLabelLocked { get; set; }
 
         [Parameter("Orientation", DefaultValue = Orientation.Vertical, Group = "Container Panel")]
         public Orientation PanelOrientation { get; set; }
@@ -322,7 +322,7 @@ namespace cAlgo
             var patternsColor = ColorParser.Parse(PatternsColor, PatternsColorAlpha);
             var patternsLabelsColor = ColorParser.Parse(PatternsLabelColor, PatternsLabelColorAlpha);
 
-            var patternConfig = new PatternConfig(Chart, patternsColor, PatternsLabelShow, patternsLabelsColor, PatternsLabelInteractive)
+            var patternConfig = new PatternConfig(Chart, patternsColor, PatternsLabelShow, patternsLabelsColor, PatternsLabelLocked)
             {
                 Print = Print
             };

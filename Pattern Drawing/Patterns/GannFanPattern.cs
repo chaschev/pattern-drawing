@@ -209,5 +209,10 @@ namespace cAlgo.Patterns
                 label.Y = line.Y2;
             }
         }
+
+        protected override ChartObject[] GetFrontObjects()
+        {
+            return new ChartObject[] { _mainFan };
+        }
     }
 }

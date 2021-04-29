@@ -98,6 +98,11 @@ namespace cAlgo.Patterns
         {
             if (MouseUpNumber == 7)
             {
+                if (_firstLine != null && _thirdLine != null && _fifthLine != null)
+                {
+                    DrawNonInteractiveObjects(_firstLine, _thirdLine, _fifthLine, Id);
+                }
+
                 FinishDrawing();
 
                 return;
@@ -141,22 +146,21 @@ namespace cAlgo.Patterns
             }
         }
 
-        protected override void DrawNonInteractiveObjects()
-        {
-            if (_firstLine == null || _thirdLine == null || _fifthLine == null) return;
-
-            DrawNonInteractiveObjects(_firstLine, _thirdLine, _fifthLine, Id);
-        }
-
         private void DrawNonInteractiveObjects(ChartTrendLine firstLine, ChartTrendLine thirdLine, ChartTrendLine fifthLine, long id)
         {
             var firstLineName = GetObjectName("FirstConnectionLine", id);
 
             _firstConnectionLine = Chart.DrawTrendLine(firstLineName, firstLine.Time2, firstLine.Y2, thirdLine.Time2, thirdLine.Y2, Color, 1, LineStyle.Dots);
 
+            _firstConnectionLine.IsInteractive = true;
+            _firstConnectionLine.IsLocked = true;
+
             var secondLineName = GetObjectName("SecondConnectionLine", id);
 
             _secondConnectionLine = Chart.DrawTrendLine(secondLineName, thirdLine.Time2, thirdLine.Y2, fifthLine.Time2, fifthLine.Y2, Color, 1, LineStyle.Dots);
+
+            _secondConnectionLine.IsInteractive = true;
+            _secondConnectionLine.IsLocked = true;
         }
 
         private void DrawLine(ChartMouseEventArgs mouseEventArgs, string name, ref ChartTrendLine line)
@@ -305,6 +309,11 @@ namespace cAlgo.Patterns
                 if (label.Name.EndsWith("FirstConnection", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateFirstConnectionLineLabel(firstLine, thirdLine, firstConnectionLine, id, label);
                 if (label.Name.EndsWith("SecondConnection", StringComparison.OrdinalIgnoreCase)) DrawOrUpdateSecondConnectionLineLabel(fifthLine, thirdLine, secondConnectionLine, id, label);
             }
+        }
+
+        protected override ChartObject[] GetFrontObjects()
+        {
+            return new ChartObject[] { _firstLine, _secondLine, _thirdLine, _fourthLine, _fifthLine, _sixthLine };
         }
     }
 }

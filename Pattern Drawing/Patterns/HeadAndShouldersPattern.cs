@@ -181,5 +181,10 @@ namespace cAlgo.Patterns
                 label.Y = labelTriangle.Y2;
             }
         }
+
+        protected override ChartObject[] GetFrontObjects()
+        {
+            return new ChartObject[] { _leftTriangle, _headTriangle, _rightTriangle };
+        }
     }
 }
