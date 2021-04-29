@@ -82,9 +82,12 @@
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
     <Compile Include="Patterns\FibonacciRetracementLevel.cs" />
     <Compile Include="Patterns\FibonacciRetracementPattern.cs" />
+    <Compile Include="Patterns\GannBoxSettings.cs" />
     <Compile Include="Patterns\GannFanPattern.cs" />
+    <Compile Include="Patterns\GannFanSettings.cs" />
     <Compile Include="Patterns\GannSquarePattern.cs" />
     <Compile Include="Patterns\GannBoxPattern.cs" />
+    <Compile Include="Patterns\GannSquareSettings.cs" />
     <Compile Include="Patterns\PatternConfig.cs" />
     <Compile Include="Patterns\ThreeDrivesPattern.cs" />
     <Compile Include="Patterns\AbcdPattern.cs" />
