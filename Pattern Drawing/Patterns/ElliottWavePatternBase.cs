@@ -77,6 +77,17 @@ namespace cAlgo.Patterns
             {
                 UpdateSideLines(updatedLine, patternObjects, "FourthLine", null);
             }
+
+            foreach (var patternObject in patternObjects)
+            {
+                if (patternObject.ObjectType != ChartObjectType.TrendLine || patternObject == updatedChartObject) continue;
+
+                var trendLine = patternObject as ChartTrendLine;
+
+                trendLine.Color = updatedLine.Color;
+                trendLine.LineStyle = updatedLine.LineStyle;
+                trendLine.Thickness = updatedLine.Thickness;
+            }
         }
 
         private void UpdateSideLines(ChartTrendLine line, ChartObject[] patternObjects, string leftLineName, string rightLineName)

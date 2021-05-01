@@ -22,7 +22,8 @@ namespace cAlgo
 
         private Style _buttonsStyle;
 
-        private List<Button> _buttons = new List<Button>();
+        private readonly List<Button> _buttons = new List<Button>();
+
         private Button _expandButton;
 
         [Parameter("Color", DefaultValue = "Red", Group = "Patterns Color")]
