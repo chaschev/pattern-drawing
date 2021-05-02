@@ -12,6 +12,24 @@ namespace cAlgo.Patterns
             _number = number;
         }
 
+        protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
+        {
+            var updatedLine = updatedChartObject as ChartVerticalLine;
+
+            if (updatedLine == null) return;
+
+            foreach (var patternObject in patternObjects)
+            {
+                if (patternObject.ObjectType != ChartObjectType.VerticalLine || patternObject == updatedChartObject) continue;
+
+                var verticalLine = patternObject as ChartVerticalLine;
+
+                verticalLine.Color = updatedLine.Color;
+                verticalLine.LineStyle = updatedLine.LineStyle;
+                verticalLine.Thickness = updatedLine.Thickness;
+            }
+        }
+
         protected override void OnDrawingStopped()
         {
             _mouseDownBarIndex = null;
