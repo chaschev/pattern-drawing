@@ -46,10 +46,10 @@ namespace cAlgo.Patterns
 
             if (levelRectangles == null || levelRectangles.Count == 0) return;
 
-            UpdatePattern(mainLine, levelLines, levelRectangles);
+            UpdatePattern(mainLine, levelLines, levelRectangles, updatedChartObject);
         }
 
-        private void UpdatePattern(ChartTrendLine mainLine, IOrderedEnumerable<KeyValuePair<double, ChartTrendLine>> levelLines, Dictionary<double, ChartRectangle> levelRectangles)
+        private void UpdatePattern(ChartTrendLine mainLine, IOrderedEnumerable<KeyValuePair<double, ChartTrendLine>> levelLines, Dictionary<double, ChartRectangle> levelRectangles, ChartObject updatedChartObject)
         {
             var verticalDelta = mainLine.GetVerticalDelta();
 
@@ -90,6 +90,19 @@ namespace cAlgo.Patterns
                 levelRectangle.Y2 = price;
 
                 previousLevelPrice = price;
+
+                var level = _levels.FirstOrDefault(iLevel => iLevel.Percent == percent);
+
+                if (level == null) continue;
+
+                if (levelLine.Value == updatedChartObject)
+                {
+                    levelRectangle.Color = Color.FromArgb(level.FillColor.A, levelLine.Value.Color);
+                }
+                else if (levelRectangle == updatedChartObject)
+                {
+                    levelLine.Value.Color = Color.FromArgb(level.LineColor.A, levelRectangle.Color);
+                }
             }
         }
 
