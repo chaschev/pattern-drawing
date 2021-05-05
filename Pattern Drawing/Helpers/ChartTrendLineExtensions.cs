@@ -1,4 +1,5 @@
 ﻿using cAlgo.API;
+using cAlgo.API.Internals;
 using System;
 
 namespace cAlgo.Helpers
@@ -28,6 +29,37 @@ namespace cAlgo.Helpers
         public static DateTime GetEndTime(this ChartTrendLine line)
         {
             return line.Time1 > line.Time2 ? line.Time1 : line.Time2;
+        }
+
+        public static double GetStartBarIndex(this ChartTrendLine line, Bars bars, Symbol symbol)
+        {
+            return bars.GetBarIndex(line.GetStartTime(), symbol);
+        }
+
+        public static double GetEndBarIndex(this ChartTrendLine line, Bars bars, Symbol symbol)
+        {
+            return bars.GetBarIndex(line.GetEndTime(), symbol);
+        }
+
+        public static double GetTopPrice(this ChartTrendLine line)
+        {
+            return line.Y2 > line.Y1 ? line.Y2 : line.Y1;
+        }
+
+        public static double GetBottomPrice(this ChartTrendLine line)
+        {
+            return line.Y2 > line.Y1 ? line.Y1 : line.Y2;
+        }
+
+        public static double GetBarsNumber(this ChartTrendLine line, Bars bars, Symbol symbol)
+        {
+            var startX = line.GetStartTime();
+            var endX = line.GetEndTime();
+
+            var startBarIndex = bars.GetBarIndex(startX, symbol);
+            var endBarIndex = bars.GetBarIndex(endX, symbol);
+
+            return Math.Round(endBarIndex - startBarIndex, 2);
         }
     }
 }

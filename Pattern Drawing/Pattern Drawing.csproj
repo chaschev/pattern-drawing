@@ -71,6 +71,7 @@
     <Compile Include="Helpers\ChartObjectsIsPatternExtension.cs" />
     <Compile Include="Helpers\ChartTrendLineExtensions.cs" />
     <Compile Include="Helpers\ColorParser.cs" />
+    <Compile Include="Helpers\DoubleToStringNonScientificExtension.cs" />
     <Compile Include="Helpers\SymbolTradingSessionExtensions.cs" />
     <Compile Include="Pattern Drawing.cs" />
     <Compile Include="Patterns\ElliottDoubleComboWavePattern.cs" />
@@ -80,13 +81,17 @@
     <Compile Include="Patterns\ElliottWavePatternBase.cs" />
     <Compile Include="Patterns\ElliottTriangleWavePattern.cs" />
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
+    <Compile Include="Patterns\SideFanSettings.cs" />
+    <Compile Include="Patterns\FanSettings.cs" />
     <Compile Include="Patterns\FibonacciRetracementLevel.cs" />
     <Compile Include="Patterns\FibonacciRetracementPattern.cs" />
     <Compile Include="Patterns\GannBoxSettings.cs" />
+    <Compile Include="Patterns\FanPatternBase.cs" />
     <Compile Include="Patterns\GannFanPattern.cs" />
-    <Compile Include="Patterns\GannFanSettings.cs" />
+    <Compile Include="Patterns\FibonacciSpeedResistanceFanPattern.cs" />
     <Compile Include="Patterns\GannSquarePattern.cs" />
     <Compile Include="Patterns\GannBoxPattern.cs" />
+    <Compile Include="Patterns\FibonacciSpeedResistanceFanSettings.cs" />
     <Compile Include="Patterns\GannSquareSettings.cs" />
     <Compile Include="Patterns\PatternConfig.cs" />
     <Compile Include="Patterns\ThreeDrivesPattern.cs" />
