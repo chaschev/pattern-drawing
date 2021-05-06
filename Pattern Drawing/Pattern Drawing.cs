@@ -389,6 +389,111 @@ namespace cAlgo
         [Parameter("11th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
         public LineStyle EleventhFibonacciRetracementStyle { get; set; }
 
+        [Parameter("Rectangle Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanRectangleThickness { get; set; }
+
+        [Parameter("Rectangle Style", DefaultValue = LineStyle.Dots, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanRectangleStyle { get; set; }
+
+        [Parameter("Rectangle Color", DefaultValue = "Blue", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanRectangleColor { get; set; }
+
+        [Parameter("Extended Lines Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanExtendedLinesThickness { get; set; }
+
+        [Parameter("Extended Lines Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanExtendedLinesStyle { get; set; }
+
+        [Parameter("Extended Lines Color", DefaultValue = "Blue", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanExtendedLinesColor { get; set; }
+
+        [Parameter("Price Levels Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanPriceLevelsThickness { get; set; }
+
+        [Parameter("Price Levels Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanPriceLevelsStyle { get; set; }
+
+        [Parameter("Price Levels Color", DefaultValue = "Magenta", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanPriceLevelsColor { get; set; }
+
+        [Parameter("Time Levels Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanTimeLevelsThickness { get; set; }
+
+        [Parameter("Time Levels Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanTimeLevelsStyle { get; set; }
+
+        [Parameter("Time Levels Color", DefaultValue = "Yellow", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanTimeLevelsColor { get; set; }
+
+        [Parameter("Main Fan Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanMainFanThickness { get; set; }
+
+        [Parameter("Main Fan Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanMainFanStyle { get; set; }
+
+        [Parameter("Main Fan Color", DefaultValue = "Yellow", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanMainFanColor { get; set; }
+
+        [Parameter("1st Fan Percent", DefaultValue = 0.25, Group = "Fibonacci Speed Resistance Fan")]
+        public double FibonacciSpeedResistanceFanFirstFanPercent { get; set; }
+
+        [Parameter("1st Fan Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanFirstFanThickness { get; set; }
+
+        [Parameter("1st Fan Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanFirstFanStyle { get; set; }
+
+        [Parameter("1st Fan Color", DefaultValue = "Red", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanFirstFanColor { get; set; }
+
+        [Parameter("2nd Fan Percent", DefaultValue = 0.382, Group = "Fibonacci Speed Resistance Fan")]
+        public double FibonacciSpeedResistanceFanSecondFanPercent { get; set; }
+
+        [Parameter("2nd Fan Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanSecondFanThickness { get; set; }
+
+        [Parameter("2nd Fan Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanSecondFanStyle { get; set; }
+
+        [Parameter("2nd Fan Color", DefaultValue = "Brown", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanSecondFanColor { get; set; }
+
+        [Parameter("3rd Fan Percent", DefaultValue = 0.5, Group = "Fibonacci Speed Resistance Fan")]
+        public double FibonacciSpeedResistanceFanThirdFanPercent { get; set; }
+
+        [Parameter("3rd Fan Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanThirdFanThickness { get; set; }
+
+        [Parameter("3rd Fan Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanThirdFanStyle { get; set; }
+
+        [Parameter("3rd Fan Color", DefaultValue = "Lime", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanThirdFanColor { get; set; }
+
+        [Parameter("4th Fan Percent", DefaultValue = 0.618, Group = "Fibonacci Speed Resistance Fan")]
+        public double FibonacciSpeedResistanceFanFourthFanPercent { get; set; }
+
+        [Parameter("4th Fan Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanFourthFanThickness { get; set; }
+
+        [Parameter("4th Fan Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanFourthFanStyle { get; set; }
+
+        [Parameter("4th Fan Color", DefaultValue = "Magenta", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanFourthFanColor { get; set; }
+
+        [Parameter("5th Fan Percent", DefaultValue = 0.75, Group = "Fibonacci Speed Resistance Fan")]
+        public double FibonacciSpeedResistanceFanFifthFanPercent { get; set; }
+
+        [Parameter("5th Fan Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
+        public int FibonacciSpeedResistanceFanFifthFanThickness { get; set; }
+
+        [Parameter("5th Fan Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Speed Resistance Fan")]
+        public LineStyle FibonacciSpeedResistanceFanFifthFanStyle { get; set; }
+
+        [Parameter("5th Fan Color", DefaultValue = "Blue", Group = "Fibonacci Speed Resistance Fan")]
+        public string FibonacciSpeedResistanceFanFifthFanColor { get; set; }
+
         protected override void Initialize()
         {
             _mainPanel = new StackPanel
@@ -886,106 +991,106 @@ namespace cAlgo
                 new FibonacciRetracementPattern(patternConfig, GetFibonacciRetracementLevels()),
                 new FibonacciSpeedResistanceFanPattern(patternConfig, new FibonacciSpeedResistanceFanSettings
                 {
-                    RectangleThickness = GannSquareRectangleThickness,
-                    RectangleStyle = GannSquareRectangleStyle,
-                    RectangleColor = ColorParser.Parse(GannSquareRectangleColor),
-                    PriceLevelsThickness = GannSquarePriceLevelsThickness,
-                    PriceLevelsStyle = GannSquarePriceLevelsStyle,
-                    PriceLevelsColor = ColorParser.Parse(GannSquarePriceLevelsColor),
-                    TimeLevelsThickness = GannSquareTimeLevelsThickness,
-                    TimeLevelsStyle = GannSquareTimeLevelsStyle,
-                    TimeLevelsColor = ColorParser.Parse(GannSquareTimeLevelsColor),
-                    FansThickness = GannSquareFansThickness,
-                    FansStyle = GannSquareFansStyle,
-                    FansColor = ColorParser.Parse(GannSquareFansColor),
+                    RectangleThickness = FibonacciSpeedResistanceFanRectangleThickness,
+                    RectangleStyle = FibonacciSpeedResistanceFanRectangleStyle,
+                    RectangleColor = ColorParser.Parse(FibonacciSpeedResistanceFanRectangleColor),
+                    PriceLevelsThickness = FibonacciSpeedResistanceFanPriceLevelsThickness,
+                    PriceLevelsStyle = FibonacciSpeedResistanceFanPriceLevelsStyle,
+                    PriceLevelsColor = ColorParser.Parse(FibonacciSpeedResistanceFanPriceLevelsColor),
+                    TimeLevelsThickness = FibonacciSpeedResistanceFanTimeLevelsThickness,
+                    TimeLevelsStyle = FibonacciSpeedResistanceFanTimeLevelsStyle,
+                    TimeLevelsColor = ColorParser.Parse(FibonacciSpeedResistanceFanTimeLevelsColor),
+                    ExtendedLinesThickness = FibonacciSpeedResistanceFanExtendedLinesThickness,
+                    ExtendedLinesStyle = FibonacciSpeedResistanceFanExtendedLinesStyle,
+                    ExtendedLinesColor = ColorParser.Parse(FibonacciSpeedResistanceFanExtendedLinesColor),
                     MainFanSettings = new FanSettings
                     {
-                        Color = ColorParser.Parse(GannFanOneColor),
-                        Style = GannFanOneStyle,
-                        Thickness = GannFanOneThickness
+                        Color = ColorParser.Parse(FibonacciSpeedResistanceFanMainFanColor),
+                        Style = FibonacciSpeedResistanceFanMainFanStyle,
+                        Thickness = FibonacciSpeedResistanceFanMainFanThickness
                     },
                     SideFanSettings = new SideFanSettings[]
                     {
                         new SideFanSettings
                         {
                             Name = "1x2",
-                            Percent = 0.25,
-                            Color = ColorParser.Parse(GannFanTwoColor),
-                            Style = GannFanTwoStyle,
-                            Thickness = GannFanTwoThickness
+                            Percent = FibonacciSpeedResistanceFanFirstFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanFirstFanColor),
+                            Style = FibonacciSpeedResistanceFanFirstFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanFirstFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "1x3",
-                            Percent = 0.382,
-                            Color = ColorParser.Parse(GannFanThreeColor),
-                            Style = GannFanThreeStyle,
-                            Thickness = GannFanThreeThickness
+                            Percent = FibonacciSpeedResistanceFanSecondFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanSecondFanColor),
+                            Style = FibonacciSpeedResistanceFanSecondFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanSecondFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "1x4",
-                            Percent = 0.5,
-                            Color = ColorParser.Parse(GannFanFourColor),
-                            Style = GannFanFourStyle,
-                            Thickness = GannFanFourThickness
+                            Percent = FibonacciSpeedResistanceFanThirdFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanThirdFanColor),
+                            Style = FibonacciSpeedResistanceFanThirdFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanThirdFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "1x8",
-                            Percent = 0.618,
-                            Color = ColorParser.Parse(GannFanEightColor),
-                            Style = GannFanEightStyle,
-                            Thickness = GannFanEightThickness
+                            Percent = FibonacciSpeedResistanceFanFourthFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanFourthFanColor),
+                            Style = FibonacciSpeedResistanceFanFourthFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanFourthFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "1x9",
-                            Percent = 0.75,
-                            Color = ColorParser.Parse(GannFanEightColor),
-                            Style = GannFanEightStyle,
-                            Thickness = GannFanEightThickness
+                            Percent = FibonacciSpeedResistanceFanFifthFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanFifthFanColor),
+                            Style = FibonacciSpeedResistanceFanFifthFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanFifthFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "2x1",
-                            Percent = -0.25,
-                            Color = ColorParser.Parse(GannFanTwoColor),
-                            Style = GannFanTwoStyle,
-                            Thickness = GannFanTwoThickness
+                            Percent = -FibonacciSpeedResistanceFanFirstFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanFirstFanColor),
+                            Style = FibonacciSpeedResistanceFanFirstFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanFirstFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "3x1",
-                            Percent = -0.382,
-                            Color = ColorParser.Parse(GannFanThreeColor),
-                            Style = GannFanThreeStyle,
-                            Thickness = GannFanThreeThickness
+                            Percent = -FibonacciSpeedResistanceFanSecondFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanSecondFanColor),
+                            Style = FibonacciSpeedResistanceFanSecondFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanSecondFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "4x1",
-                            Percent = -0.5,
-                            Color = ColorParser.Parse(GannFanFourColor),
-                            Style = GannFanFourStyle,
-                            Thickness = GannFanFourThickness
+                            Percent = -FibonacciSpeedResistanceFanThirdFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanThirdFanColor),
+                            Style = FibonacciSpeedResistanceFanThirdFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanThirdFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "8x1",
-                            Percent = -0.618,
-                            Color = ColorParser.Parse(GannFanEightColor),
-                            Style = GannFanEightStyle,
-                            Thickness = GannFanEightThickness
+                            Percent = -FibonacciSpeedResistanceFanFourthFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanFourthFanColor),
+                            Style = FibonacciSpeedResistanceFanFourthFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanFourthFanThickness
                         },
                         new SideFanSettings
                         {
                             Name = "9x1",
-                            Percent = -0.75,
-                            Color = ColorParser.Parse(GannFanEightColor),
-                            Style = GannFanEightStyle,
-                            Thickness = GannFanEightThickness
-                        },
+                            Percent = -FibonacciSpeedResistanceFanFifthFanPercent,
+                            Color = ColorParser.Parse(FibonacciSpeedResistanceFanFifthFanColor),
+                            Style = FibonacciSpeedResistanceFanFifthFanStyle,
+                            Thickness = FibonacciSpeedResistanceFanFifthFanThickness
+                        }
                     }
                 })
             };

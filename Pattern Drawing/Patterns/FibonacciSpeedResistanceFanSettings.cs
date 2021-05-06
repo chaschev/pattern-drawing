@@ -22,11 +22,11 @@ namespace cAlgo.Patterns
 
         public Color TimeLevelsColor { get; set; }
 
-        public int FansThickness { get; set; }
+        public int ExtendedLinesThickness { get; set; }
 
-        public LineStyle FansStyle { get; set; }
+        public LineStyle ExtendedLinesStyle { get; set; }
 
-        public Color FansColor { get; set; }
+        public Color ExtendedLinesColor { get; set; }
 
         public SideFanSettings[] SideFanSettings { get; set; }
 
