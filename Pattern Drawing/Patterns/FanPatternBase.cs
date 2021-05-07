@@ -61,7 +61,7 @@ namespace cAlgo.Patterns
 
             var mainFan = trendLines.First(iLine => iLine.Name.IndexOf("1x1", StringComparison.OrdinalIgnoreCase) > -1);
 
-            var sideFans = trendLines.Where(iLine => iLine != mainFan).ToDictionary(iLine => iLine.Name.Split('_').Last());
+            var sideFans = trendLines.Where(iLine => iLine.Name.IndexOf("SideFan", StringComparison.OrdinalIgnoreCase) > -1).ToDictionary(iLine => iLine.Name.Split('_').Last());
 
             UpdateSideFans(mainFan, sideFans);
         }
@@ -139,7 +139,7 @@ namespace cAlgo.Patterns
 
                 var y2 = mainFan.Y2 > mainFan.Y1 ? mainFan.Y2 + yAmount : mainFan.Y2 - yAmount;
 
-                var objectName = GetObjectName(fanSettings.Name);
+                var objectName = GetObjectName(string.Format("SideFan_{0}", fanSettings.Name));
 
                 var trendLine = Chart.DrawTrendLine(objectName, mainFan.Time1, mainFan.Y1, mainFan.Time2, y2, fanSettings.Color, fanSettings.Thickness, fanSettings.Style);
 
@@ -148,67 +148,6 @@ namespace cAlgo.Patterns
                 trendLine.ExtendToInfinity = true;
 
                 _sideFanLines[fanSettings.Name] = trendLine;
-            }
-        }
-
-        protected override void DrawLabels()
-        {
-            if (_mainFanLine == null || _sideFanLines.Count < 8) return;
-
-            DrawLabels(_mainFanLine, _sideFanLines, Id);
-        }
-
-        private void DrawLabels(ChartTrendLine mainFan, Dictionary<string, ChartTrendLine> sideFans, long id)
-        {
-            DrawLabelText("1/1", mainFan.Time2, mainFan.Y2, id, fontSize: 10);
-
-            DrawLabelText("1/2", sideFans["1x2"].Time2, sideFans["1x2"].Y2, id, fontSize: 10);
-            DrawLabelText("1/3", sideFans["1x3"].Time2, sideFans["1x3"].Y2, id, fontSize: 10);
-            DrawLabelText("1/4", sideFans["1x4"].Time2, sideFans["1x4"].Y2, id, fontSize: 10);
-            DrawLabelText("1/8", sideFans["1x8"].Time2, sideFans["1x8"].Y2, id, fontSize: 10);
-
-            DrawLabelText("2/1", sideFans["2x1"].Time2, sideFans["2x1"].Y2, id, fontSize: 10);
-            DrawLabelText("3/1", sideFans["3x1"].Time2, sideFans["3x1"].Y2, id, fontSize: 10);
-            DrawLabelText("4/1", sideFans["4x1"].Time2, sideFans["4x1"].Y2, id, fontSize: 10);
-            DrawLabelText("8/1", sideFans["8x1"].Time2, sideFans["8x1"].Y2, id, fontSize: 10);
-        }
-
-        protected override void UpdateLabels(long id, ChartObject chartObject, ChartText[] labels, ChartObject[] patternObjects)
-        {
-            var trendLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine).Cast<ChartTrendLine>().ToArray();
-
-            if (trendLines == null) return;
-
-            var mainFan = trendLines.FirstOrDefault(iLine => iLine.Name.IndexOf("1x1", StringComparison.OrdinalIgnoreCase) > -1);
-
-            if (mainFan == null) return;
-
-            var sideFans = trendLines.Where(iLine => iLine != mainFan).ToDictionary(iLine => iLine.Name.Split('_').Last());
-
-            if (labels.Length == 0)
-            {
-                DrawLabels(mainFan, sideFans, id);
-
-                return;
-            }
-
-            foreach (var label in labels)
-            {
-                ChartTrendLine line;
-
-                if (label.Text.Equals("1/1", StringComparison.OrdinalIgnoreCase))
-                {
-                    line = mainFan;
-                }
-                else
-                {
-                    var keyName = label.Text[0] == '1' ? string.Format("1x{0}", label.Text[2]) : string.Format("{0}x1", label.Text[0]);
-
-                    if (!sideFans.TryGetValue(keyName, out line)) continue;
-                }
-
-                label.Time = line.Time2;
-                label.Y = line.Y2;
             }
         }
 

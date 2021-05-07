@@ -43,7 +43,7 @@ namespace cAlgo.Patterns
 
             if (mainFan == null) return;
 
-            var sideFans = trendLines.Where(iLine => iLine != mainFan).ToDictionary(iLine => iLine.Name.Split('_').Last());
+            var sideFans = trendLines.Where(iLine => iLine.Name.IndexOf("SideFan", StringComparison.OrdinalIgnoreCase) > -1).ToDictionary(iLine => iLine.Name.Split('_').Last());
 
             if (labels.Length == 0)
             {

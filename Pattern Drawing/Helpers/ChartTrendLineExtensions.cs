@@ -16,7 +16,7 @@ namespace cAlgo.Helpers
             return line.Y1 + ((line.Y2 - line.Y1) / 2);
         }
 
-        public static double GetVerticalDelta(this ChartTrendLine line)
+        public static double GetPriceDelta(this ChartTrendLine line)
         {
             return Math.Abs(line.Y1 - line.Y2);
         }
@@ -60,6 +60,11 @@ namespace cAlgo.Helpers
             var endBarIndex = bars.GetBarIndex(endX, symbol);
 
             return Math.Round(endBarIndex - startBarIndex, 2);
+        }
+
+        public static TimeSpan GetTimeDelta(this ChartTrendLine line)
+        {
+            return line.GetEndTime() - line.GetStartTime();
         }
     }
 }

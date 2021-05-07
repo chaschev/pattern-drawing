@@ -51,7 +51,7 @@ namespace cAlgo.Patterns
 
         private void UpdatePattern(ChartTrendLine mainLine, IOrderedEnumerable<KeyValuePair<double, ChartTrendLine>> levelLines, Dictionary<double, ChartRectangle> levelRectangles, ChartObject updatedChartObject)
         {
-            var verticalDelta = mainLine.GetVerticalDelta();
+            var verticalDelta = mainLine.GetPriceDelta();
 
             var previousLevelPrice = double.NaN;
 
@@ -144,7 +144,7 @@ namespace cAlgo.Patterns
 
         private void DrawLevels(ChartTrendLine mainLine)
         {
-            var verticalDelta = mainLine.GetVerticalDelta();
+            var verticalDelta = mainLine.GetPriceDelta();
 
             var previousLevelPrice = double.NaN;
 
