@@ -34,7 +34,7 @@ namespace cAlgo.Patterns
 
             var trendLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine).Cast<ChartTrendLine>();
 
-            var mainFan = trendLines.FirstOrDefault(iLine => iLine.Name.IndexOf("1x1", StringComparison.OrdinalIgnoreCase) > -1);
+            var mainFan = trendLines.FirstOrDefault(iLine => iLine.Name.IndexOf("MainFan", StringComparison.OrdinalIgnoreCase) > -1);
 
             if (mainFan == null) return;
 
@@ -106,7 +106,7 @@ namespace cAlgo.Patterns
             base.OnMouseMove(obj);
         }
 
-        protected override void UpdateSideFans(ChartTrendLine mainFan, Dictionary<string, ChartTrendLine> sideFans)
+        protected override void UpdateSideFans(ChartTrendLine mainFan, Dictionary<double, ChartTrendLine> sideFans)
         {
             var startBarIndex = mainFan.GetStartBarIndex(Chart.Bars, Chart.Symbol);
             var endBarIndex = mainFan.GetEndBarIndex(Chart.Bars, Chart.Symbol);
@@ -143,7 +143,7 @@ namespace cAlgo.Patterns
 
                 ChartTrendLine fanLine;
 
-                if (!sideFans.TryGetValue(fanSettings.Name, out fanLine)) continue;
+                if (!sideFans.TryGetValue(fanSettings.Percent, out fanLine)) continue;
 
                 fanLine.Time1 = mainFan.Time1;
                 fanLine.Time2 = time2;
@@ -188,7 +188,7 @@ namespace cAlgo.Patterns
                     time2 = Chart.Bars.GetOpenTime(barIndex, Chart.Symbol);
                 }
 
-                var objectName = GetObjectName(string.Format("SideFan_{0}", fanSettings.Name));
+                var objectName = GetObjectName(string.Format("SideFan_{0}", fanSettings.Percent));
 
                 var trendLine = Chart.DrawTrendLine(objectName, mainFan.Time1, mainFan.Y1, time2, y2, fanSettings.Color, fanSettings.Thickness, fanSettings.Style);
 
@@ -196,7 +196,7 @@ namespace cAlgo.Patterns
                 trendLine.IsLocked = true;
                 trendLine.ExtendToInfinity = true;
 
-                SideFanLines[fanSettings.Name] = trendLine;
+                SideFanLines[fanSettings.Percent] = trendLine;
             }
         }
 
@@ -412,9 +412,11 @@ namespace cAlgo.Patterns
 
             var verticalLines = trendLines.Where(iTrendLine => iTrendLine.Name.LastIndexOf("VerticalLine", StringComparison.OrdinalIgnoreCase) > -1).ToDictionary(iLine => double.Parse(iLine.Name.Split('_').Last(), CultureInfo.InvariantCulture));
 
-            var mainFan = trendLines.FirstOrDefault(iLine => iLine.Name.IndexOf("1x1", StringComparison.OrdinalIgnoreCase) > -1);
+            var mainFan = trendLines.FirstOrDefault(iLine => iLine.Name.IndexOf("MainFan", StringComparison.OrdinalIgnoreCase) > -1);
 
-            if (horizontalLines == null || verticalLines == null || mainFan == null) return;
+            var sideFans = trendLines.Where(iLine => iLine.Name.IndexOf("SideFan", StringComparison.OrdinalIgnoreCase) > -1).ToDictionary(iLine => double.Parse(iLine.Name.Split('_').Last(), CultureInfo.InvariantCulture));
+
+            if (horizontalLines == null || verticalLines == null || mainFan == null || sideFans == null) return;
 
             if (labels.Length == 0)
             {
@@ -425,6 +427,10 @@ namespace cAlgo.Patterns
 
             foreach (var horizontalLine in horizontalLines)
             {
+                ChartTrendLine sideFanLine;
+
+                if (!sideFans.TryGetValue(horizontalLine.Key, out sideFanLine)) continue;
+
                 var firstLabelObjectNameKey = string.Format("Horizontal_0_{0}", horizontalLine.Key);
 
                 var firstLabel = labels.FirstOrDefault(iLabel => iLabel.Name.LastIndexOf(firstLabelObjectNameKey, StringComparison.OrdinalIgnoreCase) > -1);
@@ -433,6 +439,7 @@ namespace cAlgo.Patterns
 
                 firstLabel.Time = horizontalLine.Value.Time1;
                 firstLabel.Y = horizontalLine.Value.Y1;
+                firstLabel.Color = sideFanLine.Color;
 
                 var secondLabelObjectNameKey = string.Format("Horizontal_1_{0}", horizontalLine.Key);
 
@@ -442,10 +449,15 @@ namespace cAlgo.Patterns
 
                 secondLabel.Time = horizontalLine.Value.Time2;
                 secondLabel.Y = horizontalLine.Value.Y2;
+                secondLabel.Color = sideFanLine.Color;
             }
 
             foreach (var verticalLine in verticalLines)
             {
+                ChartTrendLine sideFanLine;
+
+                if (!sideFans.TryGetValue(verticalLine.Key, out sideFanLine)) continue;
+
                 var firstLabelObjectNameKey = string.Format("Vertical_0_{0}", verticalLine.Key);
 
                 var firstLabel = labels.FirstOrDefault(iLabel => iLabel.Name.LastIndexOf(firstLabelObjectNameKey, StringComparison.OrdinalIgnoreCase) > -1);
@@ -454,6 +466,7 @@ namespace cAlgo.Patterns
 
                 firstLabel.Time = verticalLine.Value.Time1;
                 firstLabel.Y = verticalLine.Value.Y1;
+                firstLabel.Color = sideFanLine.Color;
 
                 var secondLabelObjectNameKey = string.Format("Vertical_1_{0}", verticalLine.Key);
 
@@ -463,10 +476,15 @@ namespace cAlgo.Patterns
 
                 secondLabel.Time = verticalLine.Value.Time2;
                 secondLabel.Y = verticalLine.Value.Y2;
+                secondLabel.Color = sideFanLine.Color;
             }
 
             foreach (var label in labels)
             {
+                if (label.Name.LastIndexOf("Label_0", StringComparison.OrdinalIgnoreCase) < 0 && label.Name.LastIndexOf("Label_1", StringComparison.OrdinalIgnoreCase) < 0) continue;
+
+                label.Color = mainFan.Color;
+
                 var labelKey = label.Name.Split('_').Last();
 
                 var timeDistance = -TimeSpan.FromHours(Chart.Bars.GetTimeDiff().TotalHours * 2);
@@ -513,6 +531,20 @@ namespace cAlgo.Patterns
                         label.Y = mainFan.Y2;
                         break;
                 }
+            }
+        }
+
+        protected override void UpdateLabelsStyle(ChartText[] labels, ChartText updatedLabel)
+        {
+            foreach (var label in labels)
+            {
+                label.FontSize = updatedLabel.FontSize;
+                label.IsBold = updatedLabel.IsBold;
+                label.IsItalic = updatedLabel.IsItalic;
+                label.IsLocked = updatedLabel.IsLocked;
+                label.IsUnderlined = updatedLabel.IsUnderlined;
+                label.HorizontalAlignment = updatedLabel.HorizontalAlignment;
+                label.VerticalAlignment = updatedLabel.VerticalAlignment;
             }
         }
     }
