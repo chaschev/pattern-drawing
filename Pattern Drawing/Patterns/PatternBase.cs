@@ -91,8 +91,6 @@ namespace cAlgo.Patterns
         {
             if (IsDrawing) return;
 
-            _isDrawing = true;
-
             Id = DateTime.Now.Ticks;
 
             Chart.MouseDown += Chart_MouseDown;
@@ -100,6 +98,8 @@ namespace cAlgo.Patterns
             Chart.MouseUp += Chart_MouseUp;
 
             Chart.IsScrollingEnabled = false;
+
+            _isDrawing = true;
 
             OnDrawingStarted();
 
@@ -115,8 +115,6 @@ namespace cAlgo.Patterns
         {
             if (!IsDrawing) return;
 
-            _isDrawing = false;
-
             if (ShowLabels) DrawLabels();
 
             Chart.MouseDown -= Chart_MouseDown;
@@ -130,6 +128,8 @@ namespace cAlgo.Patterns
             Id = 0;
 
             SetFrontObjectsZIndex();
+
+            _isDrawing = false;
 
             OnDrawingStopped();
 
@@ -325,27 +325,38 @@ namespace cAlgo.Patterns
             return string.Format("{0}_{1}_{2}", ObjectName, id.GetValueOrDefault(Id), data);
         }
 
-        public void ReloadPatterns(ChartObject[] chartObjects)
+        public void ReloadPatterns(ChartObject[] updatedChartObjects)
         {
-            var updatedPatternObjects = chartObjects.Where(iObject => iObject.Name.StartsWith(ObjectName,
+            var updatedPatternObjects = updatedChartObjects.Where(iObject => iObject.Name.StartsWith(ObjectName,
                 StringComparison.OrdinalIgnoreCase)).ToArray();
+
+            var chartObjects = Chart.Objects.ToArray();
 
             if (updatedPatternObjects.Length == 0) return;
 
             foreach (var chartObject in updatedPatternObjects)
             {
-                if (chartObject is ChartText) continue;
-
                 long id;
 
-                if (!TryGetChartObjectPatternId(chartObject.Name, out id))
-                {
-                    continue;
-                }
+                if (!TryGetChartObjectPatternId(chartObject.Name, out id)) continue;
 
                 var updatedPatternName = string.Format("{0}_{1}", ObjectName, id);
 
-                var patternObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
+                var labelObjects = chartObjects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
+                    StringComparison.OrdinalIgnoreCase) && iObject is ChartText)
+                    .Select(iObject => iObject as ChartText).ToArray();
+
+                if (chartObject is ChartText)
+                {
+                    if (Config.IsLabelsStyleLinked && ShowLabels)
+                    {
+                        UpdateLabelsStyle(labelObjects, chartObject as ChartText);
+                    }
+
+                    continue;
+                }
+
+                var patternObjects = chartObjects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
                     StringComparison.OrdinalIgnoreCase) && iObject.ObjectType != ChartObjectType.Text)
                     .ToArray();
 
@@ -353,13 +364,23 @@ namespace cAlgo.Patterns
 
                 if (ShowLabels && !patternObjects.All(iObject => iObject.IsHidden))
                 {
-                    var labelObjects = Chart.Objects.Where(iObject => iObject.Name.StartsWith(updatedPatternName,
-                        StringComparison.OrdinalIgnoreCase) && iObject is ChartText)
-                        .Select(iObject => iObject as ChartText)
-                        .ToArray();
-
                     UpdateLabels(id, chartObject, labelObjects, patternObjects);
                 }
+            }
+        }
+
+        protected virtual void UpdateLabelsStyle(ChartText[] labels, ChartText updatedLabel)
+        {
+            foreach (var label in labels)
+            {
+                label.Color = updatedLabel.Color;
+                label.FontSize = updatedLabel.FontSize;
+                label.IsBold = updatedLabel.IsBold;
+                label.IsItalic = updatedLabel.IsItalic;
+                label.IsLocked = updatedLabel.IsLocked;
+                label.IsUnderlined = updatedLabel.IsUnderlined;
+                label.HorizontalAlignment = updatedLabel.HorizontalAlignment;
+                label.VerticalAlignment = updatedLabel.VerticalAlignment;
             }
         }
 
