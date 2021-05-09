@@ -197,7 +197,7 @@ namespace cAlgo
         [Parameter("Show 1st Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowFirstFibonacciRetracement { get; set; }
 
-        [Parameter("1st Level Percent", DefaultValue = 0, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("1st Level Percent", DefaultValue = 0, Group = "Fibonacci Retracement")]
         public double FirstFibonacciRetracementPercent { get; set; }
 
         [Parameter("1st Level Color", DefaultValue = "Gray", Group = "Fibonacci Retracement")]
@@ -215,7 +215,7 @@ namespace cAlgo
         [Parameter("Show 2nd Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowSecondFibonacciRetracement { get; set; }
 
-        [Parameter("2nd Level Percent", DefaultValue = 0.236, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("2nd Level Percent", DefaultValue = 0.236, Group = "Fibonacci Retracement")]
         public double SecondFibonacciRetracementPercent { get; set; }
 
         [Parameter("2nd Level Color", DefaultValue = "Red", Group = "Fibonacci Retracement")]
@@ -233,7 +233,7 @@ namespace cAlgo
         [Parameter("Show 3rd Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowThirdFibonacciRetracement { get; set; }
 
-        [Parameter("3rd Level Percent", DefaultValue = 0.382, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("3rd Level Percent", DefaultValue = 0.382, Group = "Fibonacci Retracement")]
         public double ThirdFibonacciRetracementPercent { get; set; }
 
         [Parameter("3rd Level Color", DefaultValue = "GreenYellow", Group = "Fibonacci Retracement")]
@@ -251,7 +251,7 @@ namespace cAlgo
         [Parameter("Show 4th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowFourthFibonacciRetracement { get; set; }
 
-        [Parameter("4th Level Percent", DefaultValue = 0.5, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("4th Level Percent", DefaultValue = 0.5, Group = "Fibonacci Retracement")]
         public double FourthFibonacciRetracementPercent { get; set; }
 
         [Parameter("4th Level Color", DefaultValue = "DarkGreen", Group = "Fibonacci Retracement")]
@@ -269,7 +269,7 @@ namespace cAlgo
         [Parameter("Show 5th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowFifthFibonacciRetracement { get; set; }
 
-        [Parameter("5th Level Percent", DefaultValue = 0.618, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("5th Level Percent", DefaultValue = 0.618, Group = "Fibonacci Retracement")]
         public double FifthFibonacciRetracementPercent { get; set; }
 
         [Parameter("5th Level Color", DefaultValue = "BlueViolet", Group = "Fibonacci Retracement")]
@@ -287,7 +287,7 @@ namespace cAlgo
         [Parameter("Show 6th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowSixthFibonacciRetracement { get; set; }
 
-        [Parameter("6th Level Percent", DefaultValue = 0.786, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("6th Level Percent", DefaultValue = 0.786, Group = "Fibonacci Retracement")]
         public double SixthFibonacciRetracementPercent { get; set; }
 
         [Parameter("6th Level Color", DefaultValue = "AliceBlue", Group = "Fibonacci Retracement")]
@@ -305,7 +305,7 @@ namespace cAlgo
         [Parameter("Show 7th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowSeventhFibonacciRetracement { get; set; }
 
-        [Parameter("7th Level Percent", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("7th Level Percent", DefaultValue = 1, Group = "Fibonacci Retracement")]
         public double SeventhFibonacciRetracementPercent { get; set; }
 
         [Parameter("7th Level Color", DefaultValue = "Bisque", Group = "Fibonacci Retracement")]
@@ -323,7 +323,7 @@ namespace cAlgo
         [Parameter("Show 8th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowEighthFibonacciRetracement { get; set; }
 
-        [Parameter("8th Level Percent", DefaultValue = 1.618, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("8th Level Percent", DefaultValue = 1.618, Group = "Fibonacci Retracement")]
         public double EighthFibonacciRetracementPercent { get; set; }
 
         [Parameter("8th Level Color", DefaultValue = "Azure", Group = "Fibonacci Retracement")]
@@ -341,7 +341,7 @@ namespace cAlgo
         [Parameter("Show 9th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowNinthFibonacciRetracement { get; set; }
 
-        [Parameter("9th Level Percent", DefaultValue = 2.618, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("9th Level Percent", DefaultValue = 2.618, Group = "Fibonacci Retracement")]
         public double NinthFibonacciRetracementPercent { get; set; }
 
         [Parameter("9th Level Color", DefaultValue = "Aqua", Group = "Fibonacci Retracement")]
@@ -359,7 +359,7 @@ namespace cAlgo
         [Parameter("Show 10th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowTenthFibonacciRetracement { get; set; }
 
-        [Parameter("10th Level Percent", DefaultValue = 3.618, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("10th Level Percent", DefaultValue = 3.618, Group = "Fibonacci Retracement")]
         public double TenthFibonacciRetracementPercent { get; set; }
 
         [Parameter("10th Level Color", DefaultValue = "Aquamarine", Group = "Fibonacci Retracement")]
@@ -377,7 +377,7 @@ namespace cAlgo
         [Parameter("Show 11th Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowEleventhFibonacciRetracement { get; set; }
 
-        [Parameter("11th Level Percent", DefaultValue = 4.236, MinValue = 0, Group = "Fibonacci Retracement")]
+        [Parameter("11th Level Percent", DefaultValue = 4.236, Group = "Fibonacci Retracement")]
         public double EleventhFibonacciRetracementPercent { get; set; }
 
         [Parameter("11th Level Color", DefaultValue = "Chocolate", Group = "Fibonacci Retracement")]
