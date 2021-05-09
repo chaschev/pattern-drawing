@@ -1,4 +1,5 @@
 ﻿using cAlgo.API;
+using cAlgo.Helpers;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -70,7 +71,7 @@ namespace cAlgo.Patterns
         {
             OnInitialize();
 
-            ReloadPatterns(Chart.Objects.ToArray());
+            ExecuteInTryCatch(() => ReloadPatterns(Chart.Objects.ToArray()));
 
             Config.Chart.ObjectsRemoved += Chart_ObjectsRemoved;
             Config.Chart.ObjectsUpdated += Chart_ObjectsUpdated;
@@ -178,14 +179,14 @@ namespace cAlgo.Patterns
 
         private void Chart_MouseMove(ChartMouseEventArgs obj)
         {
-            OnMouseMove(obj);
+            ExecuteInTryCatch(() => OnMouseMove(obj));
         }
 
         private void Chart_MouseDown(ChartMouseEventArgs obj)
         {
             _isMouseDown = true;
 
-            OnMouseDown(obj);
+            ExecuteInTryCatch(() => OnMouseDown(obj));
         }
 
         private void Chart_MouseUp(ChartMouseEventArgs obj)
@@ -194,7 +195,7 @@ namespace cAlgo.Patterns
 
             _mouseUpNumber++;
 
-            OnMouseUp(obj);
+            ExecuteInTryCatch(() => OnMouseUp(obj));
         }
 
         private void Chart_ObjectsRemoved(ChartObjectsRemovedEventArgs obj)
@@ -236,7 +237,7 @@ namespace cAlgo.Patterns
 
             try
             {
-                ReloadPatterns(obj.ChartObjects.ToArray());
+                ExecuteInTryCatch(() => ReloadPatterns(obj.ChartObjects.ToArray()));
             }
             finally
             {
@@ -359,6 +360,20 @@ namespace cAlgo.Patterns
 
                     UpdateLabels(id, chartObject, labelObjects, patternObjects);
                 }
+            }
+        }
+
+        private void ExecuteInTryCatch(Action action)
+        {
+            try
+            {
+                action();
+            }
+            catch (Exception ex)
+            {
+                Config.Print(ex.GetLog());
+
+                throw ex;
             }
         }
     }
