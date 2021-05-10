@@ -13,5 +13,7 @@ namespace cAlgo.Patterns
         public LineStyle Style { get; set; }
 
         public int Thickness { get; set; }
+
+        public bool IsFilled { get; set; }
     }
 }

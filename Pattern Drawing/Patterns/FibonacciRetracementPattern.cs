@@ -44,7 +44,7 @@ namespace cAlgo.Patterns
                 .Cast<ChartRectangle>()
                 .ToDictionary(trendLine => double.Parse(trendLine.Name.Split('_').Last(), CultureInfo.InvariantCulture));
 
-            if (levelRectangles == null || levelRectangles.Count == 0) return;
+            if (levelRectangles == null) return;
 
             UpdatePattern(mainLine, levelLines, levelRectangles, updatedChartObject);
         }
@@ -55,12 +55,18 @@ namespace cAlgo.Patterns
 
             var previousLevelPrice = double.NaN;
 
+            FibonacciRetracementLevel previousLevel = null;
+
             var startTime = mainLine.GetStartTime();
             var endTime = mainLine.GetEndTime();
 
             foreach (var levelLine in levelLines)
             {
                 var percent = levelLine.Key;
+
+                var level = _levels.FirstOrDefault(iLevel => iLevel.Percent == percent);
+
+                if (level == null) continue;
 
                 var levelAmount = percent == 0 ? 0 : verticalDelta * percent;
 
@@ -72,37 +78,47 @@ namespace cAlgo.Patterns
                 levelLine.Value.Y1 = price;
                 levelLine.Value.Y2 = price;
 
-                if (double.IsNaN(previousLevelPrice))
+                if (previousLevel == null)
                 {
                     previousLevelPrice = price;
+
+                    previousLevel = level;
 
                     continue;
                 }
 
-                ChartRectangle levelRectangle;
+                if (level.IsFilled)
+                {
+                    ChartRectangle levelRectangle;
 
-                if (!levelRectangles.TryGetValue(percent, out levelRectangle)) continue;
+                    if (levelRectangles.TryGetValue(level.Percent, out levelRectangle))
+                    {
+                        if (levelLine.Value == updatedChartObject)
+                        {
+                            levelRectangle.Color = Color.FromArgb(level.FillColor.A, levelLine.Value.Color);
+                        }
+                        else if (levelRectangle == updatedChartObject)
+                        {
+                            levelLine.Value.Color = Color.FromArgb(level.LineColor.A, levelRectangle.Color);
+                        }
+                    }
+                }
 
-                levelRectangle.Time1 = startTime;
-                levelRectangle.Time2 = endTime;
+                if (previousLevel.IsFilled)
+                {
+                    ChartRectangle previousLevelRectangle;
 
-                levelRectangle.Y1 = previousLevelPrice;
-                levelRectangle.Y2 = price;
+                    if (!levelRectangles.TryGetValue(previousLevel.Percent, out previousLevelRectangle)) continue;
+
+                    previousLevelRectangle.Time1 = startTime;
+                    previousLevelRectangle.Time2 = endTime;
+
+                    previousLevelRectangle.Y1 = previousLevelPrice;
+                    previousLevelRectangle.Y2 = price;
+                }
 
                 previousLevelPrice = price;
-
-                var level = _levels.FirstOrDefault(iLevel => iLevel.Percent == percent);
-
-                if (level == null) continue;
-
-                if (levelLine.Value == updatedChartObject)
-                {
-                    levelRectangle.Color = Color.FromArgb(level.FillColor.A, levelLine.Value.Color);
-                }
-                else if (levelRectangle == updatedChartObject)
-                {
-                    levelLine.Value.Color = Color.FromArgb(level.LineColor.A, levelRectangle.Color);
-                }
+                previousLevel = level;
             }
         }
 
@@ -148,6 +164,8 @@ namespace cAlgo.Patterns
 
             var previousLevelPrice = double.NaN;
 
+            FibonacciRetracementLevel previousLevel = null;
+
             var startTime = mainLine.GetStartTime();
             var endTime = mainLine.GetEndTime();
 
@@ -159,30 +177,38 @@ namespace cAlgo.Patterns
 
                 var price = mainLine.Y2 > mainLine.Y1 ? mainLine.Y2 - levelAmount : mainLine.Y2 + levelAmount;
 
-                var levelLine = Chart.DrawTrendLine(levelLineName, startTime, price, endTime, price, level.LineColor, level.Thickness, level.Style);
+                var lineColor = level.IsFilled ? level.LineColor : level.FillColor;
+
+                var levelLine = Chart.DrawTrendLine(levelLineName, startTime, price, endTime, price, lineColor, level.Thickness, level.Style);
 
                 levelLine.IsInteractive = true;
                 levelLine.IsLocked = true;
 
                 _levelLines[level.Percent] = levelLine;
 
-                var levelRectangleName = GetObjectName(string.Format("LevelRectangle_{0}", level.Percent));
-
-                if (double.IsNaN(previousLevelPrice))
+                if (previousLevel == null)
                 {
                     previousLevelPrice = price;
+
+                    previousLevel = level;
 
                     continue;
                 }
 
-                var rectangle = Chart.DrawRectangle(levelRectangleName, startTime, previousLevelPrice, endTime, price, level.FillColor, 0);
+                if (level.IsFilled)
+                {
+                    var levelRectangleName = GetObjectName(string.Format("LevelRectangle_{0}", previousLevel.Percent));
 
-                rectangle.IsFilled = true;
+                    var rectangle = Chart.DrawRectangle(levelRectangleName, startTime, previousLevelPrice, endTime, price, previousLevel.FillColor, 0);
 
-                rectangle.IsInteractive = true;
-                rectangle.IsLocked = true;
+                    rectangle.IsFilled = true;
+
+                    rectangle.IsInteractive = true;
+                    rectangle.IsLocked = true;
+                }
 
                 previousLevelPrice = price;
+                previousLevel = level;
             }
         }
 
