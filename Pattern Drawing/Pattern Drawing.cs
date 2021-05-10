@@ -530,6 +530,204 @@ namespace cAlgo
         [Parameter("5th Fan Color", DefaultValue = "Blue", Group = "Fibonacci Speed Resistance Fan")]
         public string FibonacciSpeedResistanceFanFifthFanColor { get; set; }
 
+        [Parameter("Show 1st Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowFirstFibonacciTimeZone { get; set; }
+
+        [Parameter("1st Level Percent", DefaultValue = 0, Group = "Fibonacci Time Zone")]
+        public double FirstFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("1st Level Color", DefaultValue = "Gray", Group = "Fibonacci Time Zone")]
+        public string FirstFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("1st Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int FirstFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("1st Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int FirstFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("1st Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle FirstFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 2nd Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowSecondFibonacciTimeZone { get; set; }
+
+        [Parameter("2nd Level Percent", DefaultValue = 1, Group = "Fibonacci Time Zone")]
+        public double SecondFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("2nd Level Color", DefaultValue = "Red", Group = "Fibonacci Time Zone")]
+        public string SecondFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("2nd Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int SecondFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("2nd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int SecondFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("2nd Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle SecondFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 3rd Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowThirdFibonacciTimeZone { get; set; }
+
+        [Parameter("3rd Level Percent", DefaultValue = 2, Group = "Fibonacci Time Zone")]
+        public double ThirdFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("3rd Level Color", DefaultValue = "GreenYellow", Group = "Fibonacci Time Zone")]
+        public string ThirdFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("3rd Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int ThirdFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("3rd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int ThirdFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("3rd Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle ThirdFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 4th Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowFourthFibonacciTimeZone { get; set; }
+
+        [Parameter("4th Level Percent", DefaultValue = 3, Group = "Fibonacci Time Zone")]
+        public double FourthFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("4th Level Color", DefaultValue = "DarkGreen", Group = "Fibonacci Time Zone")]
+        public string FourthFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("4th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int FourthFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("4th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int FourthFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("4th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle FourthFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 5th Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowFifthFibonacciTimeZone { get; set; }
+
+        [Parameter("5th Level Percent", DefaultValue = 5, Group = "Fibonacci Time Zone")]
+        public double FifthFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("5th Level Color", DefaultValue = "BlueViolet", Group = "Fibonacci Time Zone")]
+        public string FifthFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("5th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int FifthFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("5th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int FifthFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("5th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle FifthFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 6th Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowSixthFibonacciTimeZone { get; set; }
+
+        [Parameter("6th Level Percent", DefaultValue = 8, Group = "Fibonacci Time Zone")]
+        public double SixthFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("6th Level Color", DefaultValue = "AliceBlue", Group = "Fibonacci Time Zone")]
+        public string SixthFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("6th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int SixthFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("6th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int SixthFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("6th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle SixthFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 7th Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowSeventhFibonacciTimeZone { get; set; }
+
+        [Parameter("7th Level Percent", DefaultValue = 13, Group = "Fibonacci Time Zone")]
+        public double SeventhFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("7th Level Color", DefaultValue = "Bisque", Group = "Fibonacci Time Zone")]
+        public string SeventhFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("7th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int SeventhFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("7th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int SeventhFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("7th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle SeventhFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 8th Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowEighthFibonacciTimeZone { get; set; }
+
+        [Parameter("8th Level Percent", DefaultValue = 21, Group = "Fibonacci Time Zone")]
+        public double EighthFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("8th Level Color", DefaultValue = "Azure", Group = "Fibonacci Time Zone")]
+        public string EighthFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("8th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int EighthFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("8th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int EighthFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("8th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle EighthFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 9th Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowNinthFibonacciTimeZone { get; set; }
+
+        [Parameter("9th Level Percent", DefaultValue = 34, Group = "Fibonacci Time Zone")]
+        public double NinthFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("9th Level Color", DefaultValue = "Aqua", Group = "Fibonacci Time Zone")]
+        public string NinthFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("9th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int NinthFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("9th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int NinthFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("9th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle NinthFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 10th Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowTenthFibonacciTimeZone { get; set; }
+
+        [Parameter("10th Level Percent", DefaultValue = 55, Group = "Fibonacci Time Zone")]
+        public double TenthFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("10th Level Color", DefaultValue = "Aquamarine", Group = "Fibonacci Time Zone")]
+        public string TenthFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("10th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int TenthFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("10th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int TenthFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("10th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle TenthFibonacciTimeZoneStyle { get; set; }
+
+        [Parameter("Show 11th Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
+        public bool ShowEleventhFibonacciTimeZone { get; set; }
+
+        [Parameter("11th Level Percent", DefaultValue = 89, Group = "Fibonacci Time Zone")]
+        public double EleventhFibonacciTimeZonePercent { get; set; }
+
+        [Parameter("11th Level Color", DefaultValue = "Chocolate", Group = "Fibonacci Time Zone")]
+        public string EleventhFibonacciTimeZoneColor { get; set; }
+
+        [Parameter("11th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Fibonacci Time Zone")]
+        public int EleventhFibonacciTimeZoneAlpha { get; set; }
+
+        [Parameter("11th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Time Zone")]
+        public int EleventhFibonacciTimeZoneThickness { get; set; }
+
+        [Parameter("11th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
+        public LineStyle EleventhFibonacciTimeZoneStyle { get; set; }
+
         protected override void Initialize()
         {
             _mainPanel = new StackPanel
@@ -879,13 +1077,13 @@ namespace cAlgo
             InitializePatterns(gannPatternsGroupButton.Patterns);
         }
 
-        private IEnumerable<FibonacciRetracementLevel> GetFibonacciRetracementLevels()
+        private IEnumerable<Patterns.FibonacciLevel> GetFibonacciRetracementLevels()
         {
-            var fibonacciRetracementLevels = new List<FibonacciRetracementLevel>();
+            var fibonacciRetracementLevels = new List<Patterns.FibonacciLevel>();
 
             if (ShowFirstFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = FirstFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(FirstFibonacciRetracementColor),
@@ -898,7 +1096,7 @@ namespace cAlgo
 
             if (ShowSecondFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = SecondFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(SecondFibonacciRetracementColor),
@@ -911,7 +1109,7 @@ namespace cAlgo
 
             if (ShowThirdFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = ThirdFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(ThirdFibonacciRetracementColor),
@@ -924,7 +1122,7 @@ namespace cAlgo
 
             if (ShowFourthFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = FourthFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(FourthFibonacciRetracementColor),
@@ -937,7 +1135,7 @@ namespace cAlgo
 
             if (ShowFifthFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = FifthFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(FifthFibonacciRetracementColor),
@@ -950,7 +1148,7 @@ namespace cAlgo
 
             if (ShowSixthFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = SixthFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(SixthFibonacciRetracementColor),
@@ -963,7 +1161,7 @@ namespace cAlgo
 
             if (ShowSeventhFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = SeventhFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(SeventhFibonacciRetracementColor),
@@ -976,7 +1174,7 @@ namespace cAlgo
 
             if (ShowEighthFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = EighthFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(EighthFibonacciRetracementColor),
@@ -989,7 +1187,7 @@ namespace cAlgo
 
             if (ShowNinthFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = NinthFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(NinthFibonacciRetracementColor),
@@ -1002,7 +1200,7 @@ namespace cAlgo
 
             if (ShowTenthFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = TenthFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(TenthFibonacciRetracementColor),
@@ -1015,7 +1213,7 @@ namespace cAlgo
 
             if (ShowEleventhFibonacciRetracement)
             {
-                fibonacciRetracementLevels.Add(new FibonacciRetracementLevel
+                fibonacciRetracementLevels.Add(new Patterns.FibonacciLevel
                 {
                     Percent = EleventhFibonacciRetracementPercent,
                     LineColor = ColorParser.Parse(EleventhFibonacciRetracementColor),
@@ -1027,6 +1225,134 @@ namespace cAlgo
             }
 
             return fibonacciRetracementLevels;
+        }
+
+        private IEnumerable<Patterns.FibonacciLevel> GetFibonacciTimeZoneLevels()
+        {
+            var result = new List<Patterns.FibonacciLevel>();
+
+            if (ShowFirstFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FirstFibonacciTimeZonePercent,
+                    Style = FirstFibonacciTimeZoneStyle,
+                    Thickness = FirstFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(FirstFibonacciTimeZoneColor, FirstFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowSecondFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SecondFibonacciTimeZonePercent,
+                    Style = SecondFibonacciTimeZoneStyle,
+                    Thickness = SecondFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(SecondFibonacciTimeZoneColor, SecondFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowThirdFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = ThirdFibonacciTimeZonePercent,
+                    Style = ThirdFibonacciTimeZoneStyle,
+                    Thickness = ThirdFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(ThirdFibonacciTimeZoneColor, ThirdFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowFourthFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FourthFibonacciTimeZonePercent,
+                    Style = FourthFibonacciTimeZoneStyle,
+                    Thickness = FourthFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(FourthFibonacciTimeZoneColor, FourthFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowFifthFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FifthFibonacciTimeZonePercent,
+                    Style = FifthFibonacciTimeZoneStyle,
+                    Thickness = FifthFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(FifthFibonacciTimeZoneColor, FifthFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowSixthFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SixthFibonacciTimeZonePercent,
+                    Style = SixthFibonacciTimeZoneStyle,
+                    Thickness = SixthFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(SixthFibonacciTimeZoneColor, SixthFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowSeventhFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SeventhFibonacciTimeZonePercent,
+                    Style = SeventhFibonacciTimeZoneStyle,
+                    Thickness = SeventhFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(SeventhFibonacciTimeZoneColor, SeventhFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowEighthFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = EighthFibonacciTimeZonePercent,
+                    Style = EighthFibonacciTimeZoneStyle,
+                    Thickness = EighthFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(EighthFibonacciTimeZoneColor, EighthFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowNinthFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = NinthFibonacciTimeZonePercent,
+                    Style = NinthFibonacciTimeZoneStyle,
+                    Thickness = NinthFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(NinthFibonacciTimeZoneColor, NinthFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowTenthFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = TenthFibonacciTimeZonePercent,
+                    Style = TenthFibonacciTimeZoneStyle,
+                    Thickness = TenthFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(TenthFibonacciTimeZoneColor, TenthFibonacciTimeZoneAlpha),
+                });
+            }
+
+            if (ShowEleventhFibonacciTimeZone)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = EleventhFibonacciTimeZonePercent,
+                    Style = EleventhFibonacciTimeZoneStyle,
+                    Thickness = EleventhFibonacciTimeZoneThickness,
+                    LineColor = ColorParser.Parse(EleventhFibonacciTimeZoneColor, EleventhFibonacciTimeZoneAlpha),
+                });
+            }
+
+            return result;
         }
 
         private void AddFibonacciPatterns(PatternConfig patternConfig)
@@ -1139,7 +1465,8 @@ namespace cAlgo
                             Thickness = FibonacciSpeedResistanceFanFifthFanThickness
                         }
                     }
-                })
+                }),
+                new FibonacciTimeZonePattern(patternConfig, GetFibonacciTimeZoneLevels())
             };
 
             InitializePatterns(gannPatternsGroupButton.Patterns);

@@ -2,7 +2,7 @@
 
 namespace cAlgo.Patterns
 {
-    public class FibonacciRetracementLevel
+    public class FibonacciLevel
     {
         public double Percent { get; set; }
 

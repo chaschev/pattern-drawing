@@ -11,11 +11,11 @@ namespace cAlgo.Patterns
     {
         private ChartTrendLine _mainLine;
 
-        private readonly IOrderedEnumerable<FibonacciRetracementLevel> _levels;
+        private readonly IOrderedEnumerable<FibonacciLevel> _levels;
 
         private readonly Dictionary<double, ChartTrendLine> _levelLines = new Dictionary<double, ChartTrendLine>();
 
-        public FibonacciRetracementPattern(PatternConfig config, IEnumerable<FibonacciRetracementLevel> levels) : base("Fibonacci Retracement", config)
+        public FibonacciRetracementPattern(PatternConfig config, IEnumerable<FibonacciLevel> levels) : base("Fibonacci Retracement", config)
         {
             if (levels == null)
             {
@@ -55,7 +55,7 @@ namespace cAlgo.Patterns
 
             var previousLevelPrice = double.NaN;
 
-            FibonacciRetracementLevel previousLevel = null;
+            FibonacciLevel previousLevel = null;
 
             var startTime = mainLine.GetStartTime();
             var endTime = mainLine.GetEndTime();
@@ -164,7 +164,7 @@ namespace cAlgo.Patterns
 
             var previousLevelPrice = double.NaN;
 
-            FibonacciRetracementLevel previousLevel = null;
+            FibonacciLevel previousLevel = null;
 
             var startTime = mainLine.GetStartTime();
             var endTime = mainLine.GetEndTime();

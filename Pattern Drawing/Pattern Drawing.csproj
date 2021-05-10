@@ -75,6 +75,7 @@
     <Compile Include="Helpers\ExceptionExtensions.cs" />
     <Compile Include="Helpers\SymbolTradingSessionExtensions.cs" />
     <Compile Include="Pattern Drawing.cs" />
+    <Compile Include="Patterns\FibonacciTimeZonePattern.cs" />
     <Compile Include="Patterns\ElliottDoubleComboWavePattern.cs" />
     <Compile Include="Patterns\ElliottCorrectionWavePattern.cs" />
     <Compile Include="Patterns\ElliottTripleComboWavePattern.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Patterns\ElliottImpulseWavePattern.cs" />
     <Compile Include="Patterns\SideFanSettings.cs" />
     <Compile Include="Patterns\FanSettings.cs" />
-    <Compile Include="Patterns\FibonacciRetracementLevel.cs" />
+    <Compile Include="Patterns\FibonacciLevel.cs" />
     <Compile Include="Patterns\FibonacciRetracementPattern.cs" />
     <Compile Include="Patterns\GannBoxSettings.cs" />
     <Compile Include="Patterns\FanPatternBase.cs" />
