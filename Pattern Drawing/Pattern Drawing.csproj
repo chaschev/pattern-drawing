@@ -65,6 +65,7 @@
     <Compile Include="Controls\PatternsLoadButton.cs" />
     <Compile Include="Controls\PatternsSaveButton.cs" />
     <Compile Include="Controls\ToggleButton.cs" />
+    <Compile Include="Helpers\ChartPatternsVisibilityExtensions.cs" />
     <Compile Include="Helpers\ChartRectangleExtensions.cs" />
     <Compile Include="Helpers\DataSeriesAverageDistanceExtension.cs" />
     <Compile Include="Helpers\BarsOpenTimeExtensions.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Helpers\ExceptionExtensions.cs" />
     <Compile Include="Helpers\SymbolTradingSessionExtensions.cs" />
     <Compile Include="Pattern Drawing.cs" />
+    <Compile Include="Patterns\TrendBasedFibonacciTimePattern.cs" />
     <Compile Include="Patterns\FibonacciTimeZonePattern.cs" />
     <Compile Include="Patterns\ElliottDoubleComboWavePattern.cs" />
     <Compile Include="Patterns\ElliottCorrectionWavePattern.cs" />

@@ -3,7 +3,6 @@ using cAlgo.Controls;
 using cAlgo.Helpers;
 using cAlgo.Patterns;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace cAlgo
 {
@@ -26,11 +25,17 @@ namespace cAlgo
 
         private Button _expandButton;
 
+        #region Patterns color parameters
+
         [Parameter("Color", DefaultValue = "Red", Group = "Patterns Color")]
         public string PatternsColor { get; set; }
 
         [Parameter("Alpha", DefaultValue = 100, MinValue = 0, MaxValue = 255, Group = "Patterns Color")]
         public int PatternsColorAlpha { get; set; }
+
+        #endregion Patterns color parameters
+
+        #region Patterns Label parameters
 
         [Parameter("Show", DefaultValue = true, Group = "Patterns Label")]
         public bool PatternsLabelShow { get; set; }
@@ -47,6 +52,10 @@ namespace cAlgo
         [Parameter("Link Style", DefaultValue = true, Group = "Patterns Label")]
         public bool PatternsLabelLinkStyle { get; set; }
 
+        #endregion Patterns Label parameters
+
+        #region Container Panel parameters
+
         [Parameter("Orientation", DefaultValue = Orientation.Vertical, Group = "Container Panel")]
         public Orientation PanelOrientation { get; set; }
 
@@ -58,6 +67,10 @@ namespace cAlgo
 
         [Parameter("Margin", DefaultValue = 3, Group = "Container Panel")]
         public double PanelMargin { get; set; }
+
+        #endregion Container Panel parameters
+
+        #region Buttons parameters
 
         [Parameter("Disable Color", DefaultValue = "#FFCCCCCC", Group = "Buttons")]
         public string ButtonsBackgroundDisableColor { get; set; }
@@ -74,8 +87,16 @@ namespace cAlgo
         [Parameter("Transparency", DefaultValue = 0.5, MinValue = 0, MaxValue = 1, Group = "Buttons")]
         public double ButtonsTransparency { get; set; }
 
+        #endregion Buttons parameters
+
+        #region Cycles parameters
+
         [Parameter("Number", DefaultValue = 100, MinValue = 1, Group = "Cycles")]
         public int CyclesNumber { get; set; }
+
+        #endregion Cycles parameters
+
+        #region TimeFrame Visibility parameters
 
         [Parameter("Enable", DefaultValue = false, Group = "TimeFrame Visibility")]
         public bool IsTimeFrameVisibilityEnabled { get; set; }
@@ -85,6 +106,10 @@ namespace cAlgo
 
         [Parameter("Only Buttons", Group = "TimeFrame Visibility")]
         public bool VisibilityOnlyButtons { get; set; }
+
+        #endregion TimeFrame Visibility parameters
+
+        #region Gann Box parameters
 
         [Parameter("Rectangle Thickness", DefaultValue = 1, MinValue = 1, Group = "Gann Box")]
         public int GannBoxRectangleThickness { get; set; }
@@ -112,6 +137,10 @@ namespace cAlgo
 
         [Parameter("Time Levels Color", DefaultValue = "Yellow", Group = "Gann Box")]
         public string GannBoxTimeLevelsColor { get; set; }
+
+        #endregion Gann Box parameters
+
+        #region Gann Square parameters
 
         [Parameter("Rectangle Thickness", DefaultValue = 1, MinValue = 1, Group = "Gann Square")]
         public int GannSquareRectangleThickness { get; set; }
@@ -148,6 +177,10 @@ namespace cAlgo
 
         [Parameter("Fans Color", DefaultValue = "Brown", Group = "Gann Square")]
         public string GannSquareFansColor { get; set; }
+
+        #endregion Gann Square parameters
+
+        #region Gann Fan parameters
 
         [Parameter("1/1 Thickness", DefaultValue = 1, MinValue = 1, Group = "Gann Fan")]
         public int GannFanOneThickness { get; set; }
@@ -193,6 +226,10 @@ namespace cAlgo
 
         [Parameter("1/8 and 8/1 Color", DefaultValue = "Blue", Group = "Gann Fan")]
         public string GannFanEightColor { get; set; }
+
+        #endregion Gann Fan parameters
+
+        #region Fibonacci Retracement parameters
 
         [Parameter("Show 1st Level", DefaultValue = true, Group = "Fibonacci Retracement")]
         public bool ShowFirstFibonacciRetracement { get; set; }
@@ -425,6 +462,10 @@ namespace cAlgo
         [Parameter("11th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Retracement")]
         public LineStyle EleventhFibonacciRetracementStyle { get; set; }
 
+        #endregion Fibonacci Retracement parameters
+
+        #region Fibonacci Speed Resistance Fan parameters
+
         [Parameter("Rectangle Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
         public int FibonacciSpeedResistanceFanRectangleThickness { get; set; }
 
@@ -529,6 +570,10 @@ namespace cAlgo
 
         [Parameter("5th Fan Color", DefaultValue = "Blue", Group = "Fibonacci Speed Resistance Fan")]
         public string FibonacciSpeedResistanceFanFifthFanColor { get; set; }
+
+        #endregion Fibonacci Speed Resistance Fan parameters
+
+        #region Fibonacci Time Zone parameters
 
         [Parameter("Show 1st Level", DefaultValue = true, Group = "Fibonacci Time Zone")]
         public bool ShowFirstFibonacciTimeZone { get; set; }
@@ -728,6 +773,212 @@ namespace cAlgo
         [Parameter("11th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Time Zone")]
         public LineStyle EleventhFibonacciTimeZoneStyle { get; set; }
 
+        #endregion Fibonacci Time Zone parameters
+
+        #region Trend Based Fibonacci Time Parameters
+
+        [Parameter("Show 1st Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowFirstTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("1st Level Percent", DefaultValue = 0, Group = "Trend Based Fibonacci Time")]
+        public double FirstTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("1st Level Color", DefaultValue = "Gray", Group = "Trend Based Fibonacci Time")]
+        public string FirstTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("1st Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int FirstTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("1st Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int FirstTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("1st Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle FirstTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 2nd Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowSecondTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("2nd Level Percent", DefaultValue = 0.382, Group = "Trend Based Fibonacci Time")]
+        public double SecondTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("2nd Level Color", DefaultValue = "Red", Group = "Trend Based Fibonacci Time")]
+        public string SecondTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("2nd Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int SecondTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("2nd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int SecondTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("2nd Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle SecondTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 3rd Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowThirdTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("3rd Level Percent", DefaultValue = 0.5, Group = "Trend Based Fibonacci Time")]
+        public double ThirdTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("3rd Level Color", DefaultValue = "GreenYellow", Group = "Trend Based Fibonacci Time")]
+        public string ThirdTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("3rd Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int ThirdTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("3rd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int ThirdTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("3rd Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle ThirdTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 4th Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowFourthTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("4th Level Percent", DefaultValue = 0.618, Group = "Trend Based Fibonacci Time")]
+        public double FourthTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("4th Level Color", DefaultValue = "DarkGreen", Group = "Trend Based Fibonacci Time")]
+        public string FourthTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("4th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int FourthTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("4th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int FourthTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("4th Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle FourthTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 5th Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowFifthTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("5th Level Percent", DefaultValue = 1, Group = "Trend Based Fibonacci Time")]
+        public double FifthTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("5th Level Color", DefaultValue = "BlueViolet", Group = "Trend Based Fibonacci Time")]
+        public string FifthTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("5th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int FifthTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("5th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int FifthTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("5th Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle FifthTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 6th Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowSixthTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("6th Level Percent", DefaultValue = 1.382, Group = "Trend Based Fibonacci Time")]
+        public double SixthTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("6th Level Color", DefaultValue = "AliceBlue", Group = "Trend Based Fibonacci Time")]
+        public string SixthTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("6th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int SixthTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("6th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int SixthTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("6th Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle SixthTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 7th Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowSeventhTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("7th Level Percent", DefaultValue = 1.618, Group = "Trend Based Fibonacci Time")]
+        public double SeventhTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("7th Level Color", DefaultValue = "Bisque", Group = "Trend Based Fibonacci Time")]
+        public string SeventhTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("7th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int SeventhTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("7th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int SeventhTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("7th Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle SeventhTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 8th Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowEighthTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("8th Level Percent", DefaultValue = 2, Group = "Trend Based Fibonacci Time")]
+        public double EighthTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("8th Level Color", DefaultValue = "Azure", Group = "Trend Based Fibonacci Time")]
+        public string EighthTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("8th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int EighthTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("8th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int EighthTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("8th Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle EighthTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 9th Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowNinthTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("9th Level Percent", DefaultValue = 2.382, Group = "Trend Based Fibonacci Time")]
+        public double NinthTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("9th Level Color", DefaultValue = "Aqua", Group = "Trend Based Fibonacci Time")]
+        public string NinthTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("9th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int NinthTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("9th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int NinthTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("9th Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle NinthTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 10th Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowTenthTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("10th Level Percent", DefaultValue = 2.618, Group = "Trend Based Fibonacci Time")]
+        public double TenthTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("10th Level Color", DefaultValue = "Aquamarine", Group = "Trend Based Fibonacci Time")]
+        public string TenthTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("10th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int TenthTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("10th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int TenthTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("10th Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle TenthTrendBasedFibonacciTimeStyle { get; set; }
+
+        [Parameter("Show 11th Level", DefaultValue = true, Group = "Trend Based Fibonacci Time")]
+        public bool ShowEleventhTrendBasedFibonacciTime { get; set; }
+
+        [Parameter("11th Level Percent", DefaultValue = 3, Group = "Trend Based Fibonacci Time")]
+        public double EleventhTrendBasedFibonacciTimePercent { get; set; }
+
+        [Parameter("11th Level Color", DefaultValue = "Chocolate", Group = "Trend Based Fibonacci Time")]
+        public string EleventhTrendBasedFibonacciTimeColor { get; set; }
+
+        [Parameter("11th Level Alpha", DefaultValue = 150, MinValue = 0, MaxValue = 255, Group = "Trend Based Fibonacci Time")]
+        public int EleventhTrendBasedFibonacciTimeAlpha { get; set; }
+
+        [Parameter("11th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Trend Based Fibonacci Time")]
+        public int EleventhTrendBasedFibonacciTimeThickness { get; set; }
+
+        [Parameter("11th Level Style", DefaultValue = LineStyle.Solid, Group = "Trend Based Fibonacci Time")]
+        public LineStyle EleventhTrendBasedFibonacciTimeStyle { get; set; }
+
+        #endregion Trend Based Fibonacci Time Parameters
+
+        #region Overridden methods
+
         protected override void Initialize()
         {
             _mainPanel = new StackPanel
@@ -861,6 +1112,12 @@ namespace cAlgo
             CheckTimeFrameVisibility();
         }
 
+        public override void Calculate(int index)
+        {
+        }
+
+        #endregion Overridden methods
+
         private void CollapseButton_Click(ButtonClickEventArgs obj)
         {
             _buttons.ForEach(iButton => iButton.IsVisible = false);
@@ -877,20 +1134,16 @@ namespace cAlgo
             obj.Button.IsVisible = false;
         }
 
-        public override void Calculate(int index)
-        {
-        }
-
         private void ShowHideButton_TurnedOff(Controls.ToggleButton obj)
         {
-            ChangePatternsVisibility(false);
+            Chart.ChangePatternsVisibility(false);
 
             obj.Text = "Hide";
         }
 
         private void ShowHideButton_TurnedOn(Controls.ToggleButton obj)
         {
-            ChangePatternsVisibility(true);
+            Chart.ChangePatternsVisibility(true);
 
             obj.Text = "Show";
         }
@@ -930,18 +1183,6 @@ namespace cAlgo
             return groupButton;
         }
 
-        private void ChangePatternsVisibility(bool isHidden)
-        {
-            var chartObjects = Chart.Objects.ToArray();
-
-            foreach (var chartObject in chartObjects)
-            {
-                if (!chartObject.IsPattern()) continue;
-
-                chartObject.IsHidden = isHidden;
-            }
-        }
-
         private void CheckTimeFrameVisibility()
         {
             if (IsTimeFrameVisibilityEnabled)
@@ -950,11 +1191,11 @@ namespace cAlgo
                 {
                     _mainButtonsPanel.IsVisible = false;
 
-                    if (!VisibilityOnlyButtons) ChangePatternsVisibility(true);
+                    if (!VisibilityOnlyButtons) Chart.ChangePatternsVisibility(true);
                 }
                 else if (!VisibilityOnlyButtons)
                 {
-                    ChangePatternsVisibility(false);
+                    Chart.ChangePatternsVisibility(false);
                 }
             }
         }
@@ -1355,11 +1596,139 @@ namespace cAlgo
             return result;
         }
 
+        private IEnumerable<Patterns.FibonacciLevel> GetTrendBasedFibonacciTimeLevels()
+        {
+            var result = new List<Patterns.FibonacciLevel>();
+
+            if (ShowFirstTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FirstTrendBasedFibonacciTimePercent,
+                    Style = FirstTrendBasedFibonacciTimeStyle,
+                    Thickness = FirstTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(FirstTrendBasedFibonacciTimeColor, FirstTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowSecondTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SecondTrendBasedFibonacciTimePercent,
+                    Style = SecondTrendBasedFibonacciTimeStyle,
+                    Thickness = SecondTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(SecondTrendBasedFibonacciTimeColor, SecondTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowThirdTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = ThirdTrendBasedFibonacciTimePercent,
+                    Style = ThirdTrendBasedFibonacciTimeStyle,
+                    Thickness = ThirdTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(ThirdTrendBasedFibonacciTimeColor, ThirdTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowFourthTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FourthTrendBasedFibonacciTimePercent,
+                    Style = FourthTrendBasedFibonacciTimeStyle,
+                    Thickness = FourthTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(FourthTrendBasedFibonacciTimeColor, FourthTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowFifthTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FifthTrendBasedFibonacciTimePercent,
+                    Style = FifthTrendBasedFibonacciTimeStyle,
+                    Thickness = FifthTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(FifthTrendBasedFibonacciTimeColor, FifthTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowSixthTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SixthTrendBasedFibonacciTimePercent,
+                    Style = SixthTrendBasedFibonacciTimeStyle,
+                    Thickness = SixthTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(SixthTrendBasedFibonacciTimeColor, SixthTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowSeventhTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SeventhTrendBasedFibonacciTimePercent,
+                    Style = SeventhTrendBasedFibonacciTimeStyle,
+                    Thickness = SeventhTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(SeventhTrendBasedFibonacciTimeColor, SeventhTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowEighthTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = EighthTrendBasedFibonacciTimePercent,
+                    Style = EighthTrendBasedFibonacciTimeStyle,
+                    Thickness = EighthTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(EighthTrendBasedFibonacciTimeColor, EighthTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowNinthTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = NinthTrendBasedFibonacciTimePercent,
+                    Style = NinthTrendBasedFibonacciTimeStyle,
+                    Thickness = NinthTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(NinthTrendBasedFibonacciTimeColor, NinthTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowTenthTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = TenthTrendBasedFibonacciTimePercent,
+                    Style = TenthTrendBasedFibonacciTimeStyle,
+                    Thickness = TenthTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(TenthTrendBasedFibonacciTimeColor, TenthTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            if (ShowEleventhTrendBasedFibonacciTime)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = EleventhTrendBasedFibonacciTimePercent,
+                    Style = EleventhTrendBasedFibonacciTimeStyle,
+                    Thickness = EleventhTrendBasedFibonacciTimeThickness,
+                    LineColor = ColorParser.Parse(EleventhTrendBasedFibonacciTimeColor, EleventhTrendBasedFibonacciTimeAlpha),
+                });
+            }
+
+            return result;
+        }
+
         private void AddFibonacciPatterns(PatternConfig patternConfig)
         {
-            var gannPatternsGroupButton = AddPatternGroupButton("Fibonacci");
+            var patternsGroupButton = AddPatternGroupButton("Fibonacci");
 
-            gannPatternsGroupButton.Patterns = new IPattern[]
+            patternsGroupButton.Patterns = new IPattern[]
             {
                 new FibonacciRetracementPattern(patternConfig, GetFibonacciRetracementLevels()),
                 new FibonacciSpeedResistanceFanPattern(patternConfig, new FibonacciSpeedResistanceFanSettings
@@ -1466,10 +1835,11 @@ namespace cAlgo
                         }
                     }
                 }),
-                new FibonacciTimeZonePattern(patternConfig, GetFibonacciTimeZoneLevels())
+                new FibonacciTimeZonePattern(patternConfig, GetFibonacciTimeZoneLevels()),
+                new TrendBasedFibonacciTimePattern(patternConfig, GetTrendBasedFibonacciTimeLevels()),
             };
 
-            InitializePatterns(gannPatternsGroupButton.Patterns);
+            InitializePatterns(patternsGroupButton.Patterns);
         }
 
         private void AddElliottImpulseWavgePattern(PatternConfig patternConfig)

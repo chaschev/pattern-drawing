@@ -34,7 +34,7 @@ namespace cAlgo.Patterns
             {
                 double lineLevelPercent;
 
-                if (!double.TryParse(verticalLine.Name.Split('_').Last(), NumberStyles.None, CultureInfo.InvariantCulture, out lineLevelPercent)) continue;
+                if (!double.TryParse(verticalLine.Name.Split('_').Last(), NumberStyles.Any, CultureInfo.InvariantCulture, out lineLevelPercent)) continue;
 
                 var level = _fibonacciLevels.FirstOrDefault(iLevel => iLevel.Percent == lineLevelPercent);
 
@@ -82,7 +82,7 @@ namespace cAlgo.Patterns
 
             foreach (var level in _fibonacciLevels)
             {
-                var levelLineName = GetObjectName(string.Format("Level_{0}", level.Percent));
+                var levelLineName = GetObjectName(string.Format("Level_{0}", level.Percent.ToString(CultureInfo.InvariantCulture)));
 
                 var barsAmount = barsNumber * level.Percent;
 
