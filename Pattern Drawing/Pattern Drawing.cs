@@ -977,6 +977,241 @@ namespace cAlgo
 
         #endregion Trend Based Fibonacci Time Parameters
 
+        #region Fibonacci Channel parameters
+
+        [Parameter("Show 1st Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowFirstFibonacciChannel { get; set; }
+
+        [Parameter("Fill 1st Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillFirstFibonacciChannel { get; set; }
+
+        [Parameter("1st Level Percent", DefaultValue = 0, Group = "Fibonacci Channel")]
+        public double FirstFibonacciChannelPercent { get; set; }
+
+        [Parameter("1st Level Color", DefaultValue = "Gray", Group = "Fibonacci Channel")]
+        public string FirstFibonacciChannelColor { get; set; }
+
+        [Parameter("1st Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int FirstFibonacciChannelAlpha { get; set; }
+
+        [Parameter("1st Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int FirstFibonacciChannelThickness { get; set; }
+
+        [Parameter("1st Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle FirstFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 2nd Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowSecondFibonacciChannel { get; set; }
+
+        [Parameter("Fill 2nd Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillSecondFibonacciChannel { get; set; }
+
+        [Parameter("2nd Level Percent", DefaultValue = 0.236, Group = "Fibonacci Channel")]
+        public double SecondFibonacciChannelPercent { get; set; }
+
+        [Parameter("2nd Level Color", DefaultValue = "Red", Group = "Fibonacci Channel")]
+        public string SecondFibonacciChannelColor { get; set; }
+
+        [Parameter("2nd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int SecondFibonacciChannelAlpha { get; set; }
+
+        [Parameter("2nd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int SecondFibonacciChannelThickness { get; set; }
+
+        [Parameter("2nd Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle SecondFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 3rd Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowThirdFibonacciChannel { get; set; }
+
+        [Parameter("Fill 3rd Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillThirdFibonacciChannel { get; set; }
+
+        [Parameter("3rd Level Percent", DefaultValue = 0.382, Group = "Fibonacci Channel")]
+        public double ThirdFibonacciChannelPercent { get; set; }
+
+        [Parameter("3rd Level Color", DefaultValue = "GreenYellow", Group = "Fibonacci Channel")]
+        public string ThirdFibonacciChannelColor { get; set; }
+
+        [Parameter("3rd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int ThirdFibonacciChannelAlpha { get; set; }
+
+        [Parameter("3rd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int ThirdFibonacciChannelThickness { get; set; }
+
+        [Parameter("3rd Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle ThirdFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 4th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowFourthFibonacciChannel { get; set; }
+
+        [Parameter("Fill 4th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillFourthFibonacciChannel { get; set; }
+
+        [Parameter("4th Level Percent", DefaultValue = 0.5, Group = "Fibonacci Channel")]
+        public double FourthFibonacciChannelPercent { get; set; }
+
+        [Parameter("4th Level Color", DefaultValue = "DarkGreen", Group = "Fibonacci Channel")]
+        public string FourthFibonacciChannelColor { get; set; }
+
+        [Parameter("4th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int FourthFibonacciChannelAlpha { get; set; }
+
+        [Parameter("4th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int FourthFibonacciChannelThickness { get; set; }
+
+        [Parameter("4th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle FourthFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 5th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowFifthFibonacciChannel { get; set; }
+
+        [Parameter("Fill 5th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillFifthFibonacciChannel { get; set; }
+
+        [Parameter("5th Level Percent", DefaultValue = 0.618, Group = "Fibonacci Channel")]
+        public double FifthFibonacciChannelPercent { get; set; }
+
+        [Parameter("5th Level Color", DefaultValue = "BlueViolet", Group = "Fibonacci Channel")]
+        public string FifthFibonacciChannelColor { get; set; }
+
+        [Parameter("5th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int FifthFibonacciChannelAlpha { get; set; }
+
+        [Parameter("5th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int FifthFibonacciChannelThickness { get; set; }
+
+        [Parameter("5th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle FifthFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 6th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowSixthFibonacciChannel { get; set; }
+
+        [Parameter("Fill 6th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillSixthFibonacciChannel { get; set; }
+
+        [Parameter("6th Level Percent", DefaultValue = 0.786, Group = "Fibonacci Channel")]
+        public double SixthFibonacciChannelPercent { get; set; }
+
+        [Parameter("6th Level Color", DefaultValue = "AliceBlue", Group = "Fibonacci Channel")]
+        public string SixthFibonacciChannelColor { get; set; }
+
+        [Parameter("6th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int SixthFibonacciChannelAlpha { get; set; }
+
+        [Parameter("6th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int SixthFibonacciChannelThickness { get; set; }
+
+        [Parameter("6th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle SixthFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 7th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowSeventhFibonacciChannel { get; set; }
+
+        [Parameter("Fill 7th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillSeventhFibonacciChannel { get; set; }
+
+        [Parameter("7th Level Percent", DefaultValue = 1, Group = "Fibonacci Channel")]
+        public double SeventhFibonacciChannelPercent { get; set; }
+
+        [Parameter("7th Level Color", DefaultValue = "Bisque", Group = "Fibonacci Channel")]
+        public string SeventhFibonacciChannelColor { get; set; }
+
+        [Parameter("7th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int SeventhFibonacciChannelAlpha { get; set; }
+
+        [Parameter("7th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int SeventhFibonacciChannelThickness { get; set; }
+
+        [Parameter("7th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle SeventhFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 8th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowEighthFibonacciChannel { get; set; }
+
+        [Parameter("Fill 8th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillEighthFibonacciChannel { get; set; }
+
+        [Parameter("8th Level Percent", DefaultValue = 1.618, Group = "Fibonacci Channel")]
+        public double EighthFibonacciChannelPercent { get; set; }
+
+        [Parameter("8th Level Color", DefaultValue = "Azure", Group = "Fibonacci Channel")]
+        public string EighthFibonacciChannelColor { get; set; }
+
+        [Parameter("8th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int EighthFibonacciChannelAlpha { get; set; }
+
+        [Parameter("8th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int EighthFibonacciChannelThickness { get; set; }
+
+        [Parameter("8th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle EighthFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 9th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowNinthFibonacciChannel { get; set; }
+
+        [Parameter("Fill 9th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillNinthFibonacciChannel { get; set; }
+
+        [Parameter("9th Level Percent", DefaultValue = 2.618, Group = "Fibonacci Channel")]
+        public double NinthFibonacciChannelPercent { get; set; }
+
+        [Parameter("9th Level Color", DefaultValue = "Aqua", Group = "Fibonacci Channel")]
+        public string NinthFibonacciChannelColor { get; set; }
+
+        [Parameter("9th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int NinthFibonacciChannelAlpha { get; set; }
+
+        [Parameter("9th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int NinthFibonacciChannelThickness { get; set; }
+
+        [Parameter("9th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle NinthFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 10th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowTenthFibonacciChannel { get; set; }
+
+        [Parameter("Fill 10th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillTenthFibonacciChannel { get; set; }
+
+        [Parameter("10th Level Percent", DefaultValue = 3.618, Group = "Fibonacci Channel")]
+        public double TenthFibonacciChannelPercent { get; set; }
+
+        [Parameter("10th Level Color", DefaultValue = "Aquamarine", Group = "Fibonacci Channel")]
+        public string TenthFibonacciChannelColor { get; set; }
+
+        [Parameter("10th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int TenthFibonacciChannelAlpha { get; set; }
+
+        [Parameter("10th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int TenthFibonacciChannelThickness { get; set; }
+
+        [Parameter("10th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle TenthFibonacciChannelStyle { get; set; }
+
+        [Parameter("Show 11th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool ShowEleventhFibonacciChannel { get; set; }
+
+        [Parameter("Fill 11th Level", DefaultValue = true, Group = "Fibonacci Channel")]
+        public bool FillEleventhFibonacciChannel { get; set; }
+
+        [Parameter("11th Level Percent", DefaultValue = 4.236, Group = "Fibonacci Channel")]
+        public double EleventhFibonacciChannelPercent { get; set; }
+
+        [Parameter("11th Level Color", DefaultValue = "Chocolate", Group = "Fibonacci Channel")]
+        public string EleventhFibonacciChannelColor { get; set; }
+
+        [Parameter("11th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Fibonacci Channel")]
+        public int EleventhFibonacciChannelAlpha { get; set; }
+
+        [Parameter("11th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Fibonacci Channel")]
+        public int EleventhFibonacciChannelThickness { get; set; }
+
+        [Parameter("11th Level Style", DefaultValue = LineStyle.Solid, Group = "Fibonacci Channel")]
+        public LineStyle EleventhFibonacciChannelStyle { get; set; }
+
+        #endregion Fibonacci Channel parameters
+
         #region Overridden methods
 
         protected override void Initialize()
@@ -1724,6 +1959,156 @@ namespace cAlgo
             return result;
         }
 
+        private IEnumerable<Patterns.FibonacciLevel> GetFibonacciChannelLevels()
+        {
+            var result = new List<Patterns.FibonacciLevel>();
+
+            if (ShowFirstFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FirstFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(FirstFibonacciChannelColor),
+                    Style = FirstFibonacciChannelStyle,
+                    Thickness = FirstFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(FirstFibonacciChannelColor, FirstFibonacciChannelAlpha),
+                    IsFilled = FillFirstFibonacciChannel,
+                });
+            }
+
+            if (ShowSecondFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SecondFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(SecondFibonacciChannelColor),
+                    Style = SecondFibonacciChannelStyle,
+                    Thickness = SecondFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(SecondFibonacciChannelColor, SecondFibonacciChannelAlpha),
+                    IsFilled = FillSecondFibonacciChannel,
+                });
+            }
+
+            if (ShowThirdFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = ThirdFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(ThirdFibonacciChannelColor),
+                    Style = ThirdFibonacciChannelStyle,
+                    Thickness = ThirdFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(ThirdFibonacciChannelColor, ThirdFibonacciChannelAlpha),
+                    IsFilled = FillThirdFibonacciChannel,
+                });
+            }
+
+            if (ShowFourthFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FourthFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(FourthFibonacciChannelColor),
+                    Style = FourthFibonacciChannelStyle,
+                    Thickness = FourthFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(FourthFibonacciChannelColor, FourthFibonacciChannelAlpha),
+                    IsFilled = FillFourthFibonacciChannel,
+                });
+            }
+
+            if (ShowFifthFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = FifthFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(FifthFibonacciChannelColor),
+                    Style = FifthFibonacciChannelStyle,
+                    Thickness = FifthFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(FifthFibonacciChannelColor, FifthFibonacciChannelAlpha),
+                    IsFilled = FillFifthFibonacciChannel,
+                });
+            }
+
+            if (ShowSixthFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SixthFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(SixthFibonacciChannelColor),
+                    Style = SixthFibonacciChannelStyle,
+                    Thickness = SixthFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(SixthFibonacciChannelColor, SixthFibonacciChannelAlpha),
+                    IsFilled = FillSixthFibonacciChannel,
+                });
+            }
+
+            if (ShowSeventhFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = SeventhFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(SeventhFibonacciChannelColor),
+                    Style = SeventhFibonacciChannelStyle,
+                    Thickness = SeventhFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(SeventhFibonacciChannelColor, SeventhFibonacciChannelAlpha),
+                    IsFilled = FillSeventhFibonacciChannel,
+                });
+            }
+
+            if (ShowEighthFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = EighthFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(EighthFibonacciChannelColor),
+                    Style = EighthFibonacciChannelStyle,
+                    Thickness = EighthFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(EighthFibonacciChannelColor, EighthFibonacciChannelAlpha),
+                    IsFilled = FillEighthFibonacciChannel,
+                });
+            }
+
+            if (ShowNinthFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = NinthFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(NinthFibonacciChannelColor),
+                    Style = NinthFibonacciChannelStyle,
+                    Thickness = NinthFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(NinthFibonacciChannelColor, NinthFibonacciChannelAlpha),
+                    IsFilled = FillNinthFibonacciChannel,
+                });
+            }
+
+            if (ShowTenthFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = TenthFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(TenthFibonacciChannelColor),
+                    Style = TenthFibonacciChannelStyle,
+                    Thickness = TenthFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(TenthFibonacciChannelColor, TenthFibonacciChannelAlpha),
+                    IsFilled = FillTenthFibonacciChannel,
+                });
+            }
+
+            if (ShowEleventhFibonacciChannel)
+            {
+                result.Add(new Patterns.FibonacciLevel
+                {
+                    Percent = EleventhFibonacciChannelPercent,
+                    LineColor = ColorParser.Parse(EleventhFibonacciChannelColor),
+                    Style = EleventhFibonacciChannelStyle,
+                    Thickness = EleventhFibonacciChannelThickness,
+                    FillColor = ColorParser.Parse(EleventhFibonacciChannelColor, EleventhFibonacciChannelAlpha),
+                    IsFilled = FillEleventhFibonacciChannel,
+                });
+            }
+
+            return result;
+        }
+
         private void AddFibonacciPatterns(PatternConfig patternConfig)
         {
             var patternsGroupButton = AddPatternGroupButton("Fibonacci");
@@ -1837,6 +2222,7 @@ namespace cAlgo
                 }),
                 new FibonacciTimeZonePattern(patternConfig, GetFibonacciTimeZoneLevels()),
                 new TrendBasedFibonacciTimePattern(patternConfig, GetTrendBasedFibonacciTimeLevels()),
+                new FibonacciChannelPattern(patternConfig, GetFibonacciChannelLevels())
             };
 
             InitializePatterns(patternsGroupButton.Patterns);
