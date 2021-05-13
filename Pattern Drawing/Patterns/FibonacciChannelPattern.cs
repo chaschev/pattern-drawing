@@ -78,28 +78,18 @@ namespace cAlgo.Patterns
                 var onePercentBarIndex = Chart.Bars.GetBarIndex(obj.TimeValue, Chart.Symbol);
 
                 var zeroLineBarsDelta = _zeroLine.GetBarsNumber(Chart.Bars, Chart.Symbol);
-
-                double secondBarIndex;
-
-                if (obj.TimeValue > _zeroLine.Time1)
-                {
-                    secondBarIndex = onePercentBarIndex + zeroLineBarsDelta;
-                }
-                else
-                {
-                    secondBarIndex = onePercentBarIndex - zeroLineBarsDelta;
-                }
-
                 var zeroLinePriceDelta = _zeroLine.GetPriceDelta();
 
-                double secondPrice;
+                double secondBarIndex, secondPrice;
 
-                if (_zeroLine.Y1 > obj.YValue)
+                if (_zeroLine.Time1 < _zeroLine.Time2)
                 {
+                    secondBarIndex = onePercentBarIndex + zeroLineBarsDelta;
                     secondPrice = obj.YValue - zeroLinePriceDelta;
                 }
                 else
                 {
+                    secondBarIndex = onePercentBarIndex - zeroLineBarsDelta;
                     secondPrice = obj.YValue + zeroLinePriceDelta;
                 }
 
@@ -113,16 +103,16 @@ namespace cAlgo.Patterns
 
         private void DrawFibonacciLevels(ChartTrendLine zeroLine, ChartTrendLine onePercentLine, long id)
         {
-            var zeroFirstBarIndex = Chart.Bars.GetBarIndex(_zeroLine.Time1, Chart.Symbol);
-            var zeroSecondBarIndex = Chart.Bars.GetBarIndex(_zeroLine.Time2, Chart.Symbol);
+            var zeroFirstBarIndex = Chart.Bars.GetBarIndex(zeroLine.Time1, Chart.Symbol);
+            var zeroSecondBarIndex = Chart.Bars.GetBarIndex(zeroLine.Time2, Chart.Symbol);
 
             var onePercentFirstBarIndex = Chart.Bars.GetBarIndex(onePercentLine.Time1, Chart.Symbol);
 
-            var barsDelta = Math.Abs(onePercentFirstBarIndex - zeroFirstBarIndex);
+            var barsDelta = Math.Abs(zeroFirstBarIndex - onePercentFirstBarIndex);
             var priceDelta = Math.Abs(zeroLine.Y1 - onePercentLine.Y1);
 
-            var zeroLineBarsDelta = _zeroLine.GetBarsNumber(Chart.Bars, Chart.Symbol);
-            var zeroLinePriceDelta = _zeroLine.GetPriceDelta();
+            var zeroLineBarsDelta = zeroLine.GetBarsNumber(Chart.Bars, Chart.Symbol);
+            var zeroLinePriceDelta = zeroLine.GetPriceDelta();
 
             foreach (var level in _fibonacciLevels)
             {
@@ -131,57 +121,103 @@ namespace cAlgo.Patterns
                     zeroLine.Color = level.LineColor;
                     zeroLine.Thickness = level.Thickness;
                     zeroLine.LineStyle = level.Style;
-
-                    continue;
                 }
                 else if (level.Percent == 1)
                 {
                     onePercentLine.Color = level.LineColor;
                     onePercentLine.Thickness = level.Thickness;
                     onePercentLine.LineStyle = level.Style;
-
-                    continue;
-                }
-
-                var levelName = GetObjectName(string.Format("Level_{0}", level.Percent.ToString(CultureInfo.InvariantCulture)), id);
-
-                var firstBarAmount = barsDelta * level.Percent;
-
-                double firstBarIndex, secondBarIndex;
-
-                if (onePercentLine.Time1 > _zeroLine.Time1)
-                {
-                    firstBarIndex = zeroFirstBarIndex + firstBarAmount;
-                    secondBarIndex = firstBarIndex + zeroLineBarsDelta;
                 }
                 else
                 {
-                    firstBarIndex = zeroFirstBarIndex - firstBarAmount;
-                    secondBarIndex = firstBarIndex - zeroLineBarsDelta;
+                    if (level.Percent != 0.5) continue;
+
+                    var levelName = GetObjectName(string.Format("Level_{0}", level.Percent.ToString(CultureInfo.InvariantCulture)), id);
+
+                    var barsAmount = barsDelta * level.Percent;
+                    var priceAmount = priceDelta * level.Percent;
+
+                    double firstBarIndex, secondBarIndex, firstPrice, secondPrice;
+
+                    if (onePercentLine.Time1 < zeroLine.Time1)
+                    {
+                        if (zeroLine.Time1 < zeroLine.Time2)
+                        {
+                            firstBarIndex = zeroFirstBarIndex - barsAmount;
+                            secondBarIndex = firstBarIndex + zeroLineBarsDelta;
+
+                            if (_onePercentLine.Y1 > _zeroLine.Y1)
+                            {
+                                firstPrice = zeroLine.Y1 + priceAmount;
+                                secondPrice = firstPrice - zeroLinePriceDelta;
+                            }
+                            else
+                            {
+                                firstPrice = zeroLine.Y1 - priceAmount;
+                                secondPrice = firstPrice - zeroLinePriceDelta;
+                            }
+                        }
+                        else
+                        {
+                            firstBarIndex = zeroFirstBarIndex - barsAmount;
+                            secondBarIndex = firstBarIndex - zeroLineBarsDelta;
+
+                            if (_onePercentLine.Y1 > _zeroLine.Y1)
+                            {
+                                firstPrice = zeroLine.Y1 + priceAmount;
+                                secondPrice = firstPrice + zeroLinePriceDelta;
+                            }
+                            else
+                            {
+                                firstPrice = zeroLine.Y1 - priceAmount;
+                                secondPrice = firstPrice + zeroLinePriceDelta;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (zeroLine.Time1 < zeroLine.Time2)
+                        {
+                            firstBarIndex = zeroFirstBarIndex + barsAmount;
+                            secondBarIndex = firstBarIndex + zeroLineBarsDelta;
+
+                            if (_onePercentLine.Y1 > _zeroLine.Y1)
+                            {
+                                firstPrice = zeroLine.Y1 + priceAmount;
+                                secondPrice = firstPrice - zeroLinePriceDelta;
+                            }
+                            else
+                            {
+                                firstPrice = zeroLine.Y1 - priceAmount;
+                                secondPrice = firstPrice - zeroLinePriceDelta;
+                            }
+                        }
+                        else
+                        {
+                            firstBarIndex = zeroFirstBarIndex + barsAmount;
+                            secondBarIndex = firstBarIndex - zeroLineBarsDelta;
+
+                            if (_onePercentLine.Y1 > _zeroLine.Y1)
+                            {
+                                firstPrice = zeroLine.Y1 + priceAmount;
+                                secondPrice = firstPrice + zeroLinePriceDelta;
+                            }
+                            else
+                            {
+                                firstPrice = zeroLine.Y1 - priceAmount;
+                                secondPrice = firstPrice + zeroLinePriceDelta;
+                            }
+                        }
+                    }
+
+                    var firstTime = Chart.Bars.GetOpenTime(firstBarIndex, Chart.Symbol);
+                    var secondTime = Chart.Bars.GetOpenTime(secondBarIndex, Chart.Symbol);
+
+                    var levelLine = Chart.DrawTrendLine(levelName, firstTime, firstPrice, secondTime, secondPrice, level.FillColor, level.Thickness, level.Style);
+
+                    levelLine.IsInteractive = true;
+                    levelLine.IsLocked = true;
                 }
-
-                var firstTime = Chart.Bars.GetOpenTime(firstBarIndex, Chart.Symbol);
-                var secondTime = Chart.Bars.GetOpenTime(secondBarIndex, Chart.Symbol);
-
-                var priceAmount = priceDelta * level.Percent;
-
-                double firstPrice, secondPrice;
-
-                if (zeroLine.Y1 > onePercentLine.Y1)
-                {
-                    firstPrice = _zeroLine.Y1 - (priceDelta * level.Percent);
-                    secondPrice = firstPrice - zeroLinePriceDelta;
-                }
-                else
-                {
-                    firstPrice = _zeroLine.Y1 + (priceDelta * level.Percent);
-                    secondPrice = firstPrice + zeroLinePriceDelta;
-                }
-
-                var levelLine = Chart.DrawTrendLine(levelName, firstTime, firstPrice, secondTime, secondPrice, level.FillColor, level.Thickness, level.Style);
-
-                levelLine.IsInteractive = true;
-                levelLine.IsLocked = true;
             }
         }
 
