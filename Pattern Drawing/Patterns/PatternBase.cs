@@ -91,6 +91,8 @@ namespace cAlgo.Patterns
         {
             if (IsDrawing) return;
 
+            Chart.ObjectsUpdated -= Chart_ObjectsUpdated;
+
             Id = DateTime.Now.Ticks;
 
             Chart.MouseDown += Chart_MouseDown;
@@ -139,6 +141,8 @@ namespace cAlgo.Patterns
             {
                 drawingStopped.Invoke(this);
             }
+
+            Chart.ObjectsUpdated += Chart_ObjectsUpdated;
         }
 
         protected void FinishDrawing()

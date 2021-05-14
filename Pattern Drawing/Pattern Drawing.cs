@@ -1968,10 +1968,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = FirstFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(FirstFibonacciChannelColor),
                     Style = FirstFibonacciChannelStyle,
                     Thickness = FirstFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(FirstFibonacciChannelColor, FirstFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(FirstFibonacciChannelColor, FirstFibonacciChannelAlpha),
                     IsFilled = FillFirstFibonacciChannel,
                 });
             }
@@ -1981,10 +1980,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = SecondFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(SecondFibonacciChannelColor),
                     Style = SecondFibonacciChannelStyle,
                     Thickness = SecondFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(SecondFibonacciChannelColor, SecondFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(SecondFibonacciChannelColor, SecondFibonacciChannelAlpha),
                     IsFilled = FillSecondFibonacciChannel,
                 });
             }
@@ -1994,10 +1992,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = ThirdFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(ThirdFibonacciChannelColor),
                     Style = ThirdFibonacciChannelStyle,
                     Thickness = ThirdFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(ThirdFibonacciChannelColor, ThirdFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(ThirdFibonacciChannelColor, ThirdFibonacciChannelAlpha),
                     IsFilled = FillThirdFibonacciChannel,
                 });
             }
@@ -2007,10 +2004,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = FourthFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(FourthFibonacciChannelColor),
                     Style = FourthFibonacciChannelStyle,
                     Thickness = FourthFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(FourthFibonacciChannelColor, FourthFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(FourthFibonacciChannelColor, FourthFibonacciChannelAlpha),
                     IsFilled = FillFourthFibonacciChannel,
                 });
             }
@@ -2020,10 +2016,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = FifthFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(FifthFibonacciChannelColor),
                     Style = FifthFibonacciChannelStyle,
                     Thickness = FifthFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(FifthFibonacciChannelColor, FifthFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(FifthFibonacciChannelColor, FifthFibonacciChannelAlpha),
                     IsFilled = FillFifthFibonacciChannel,
                 });
             }
@@ -2033,10 +2028,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = SixthFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(SixthFibonacciChannelColor),
                     Style = SixthFibonacciChannelStyle,
                     Thickness = SixthFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(SixthFibonacciChannelColor, SixthFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(SixthFibonacciChannelColor, SixthFibonacciChannelAlpha),
                     IsFilled = FillSixthFibonacciChannel,
                 });
             }
@@ -2046,10 +2040,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = SeventhFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(SeventhFibonacciChannelColor),
                     Style = SeventhFibonacciChannelStyle,
                     Thickness = SeventhFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(SeventhFibonacciChannelColor, SeventhFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(SeventhFibonacciChannelColor, SeventhFibonacciChannelAlpha),
                     IsFilled = FillSeventhFibonacciChannel,
                 });
             }
@@ -2059,10 +2052,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = EighthFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(EighthFibonacciChannelColor),
                     Style = EighthFibonacciChannelStyle,
                     Thickness = EighthFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(EighthFibonacciChannelColor, EighthFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(EighthFibonacciChannelColor, EighthFibonacciChannelAlpha),
                     IsFilled = FillEighthFibonacciChannel,
                 });
             }
@@ -2072,10 +2064,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = NinthFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(NinthFibonacciChannelColor),
                     Style = NinthFibonacciChannelStyle,
                     Thickness = NinthFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(NinthFibonacciChannelColor, NinthFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(NinthFibonacciChannelColor, NinthFibonacciChannelAlpha),
                     IsFilled = FillNinthFibonacciChannel,
                 });
             }
@@ -2085,10 +2076,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = TenthFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(TenthFibonacciChannelColor),
                     Style = TenthFibonacciChannelStyle,
                     Thickness = TenthFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(TenthFibonacciChannelColor, TenthFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(TenthFibonacciChannelColor, TenthFibonacciChannelAlpha),
                     IsFilled = FillTenthFibonacciChannel,
                 });
             }
@@ -2098,10 +2088,9 @@ namespace cAlgo
                 result.Add(new Patterns.FibonacciLevel
                 {
                     Percent = EleventhFibonacciChannelPercent,
-                    LineColor = ColorParser.Parse(EleventhFibonacciChannelColor),
                     Style = EleventhFibonacciChannelStyle,
                     Thickness = EleventhFibonacciChannelThickness,
-                    FillColor = ColorParser.Parse(EleventhFibonacciChannelColor, EleventhFibonacciChannelAlpha),
+                    LineColor = ColorParser.Parse(EleventhFibonacciChannelColor, EleventhFibonacciChannelAlpha),
                     IsFilled = FillEleventhFibonacciChannel,
                 });
             }

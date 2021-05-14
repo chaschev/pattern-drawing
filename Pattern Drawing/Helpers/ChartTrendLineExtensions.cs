@@ -66,5 +66,52 @@ namespace cAlgo.Helpers
         {
             return line.GetEndTime() - line.GetStartTime();
         }
+
+        public static double GetSlope(this ChartTrendLine line)
+        {
+            var startTime = line.GetStartTime();
+            var endTime = line.GetEndTime();
+
+            double startPrice, endPrice;
+
+            if (line.Time1 < line.Time2)
+            {
+                startPrice = line.Y1;
+                endPrice = line.Y2;
+            }
+            else
+            {
+                startPrice = line.Y2;
+                endPrice = line.Y1;
+            }
+
+            return (endPrice - startPrice) / (endTime.Ticks - startTime.Ticks);
+        }
+
+        public static void RefelectOnOtherLine(this ChartTrendLine line, ChartTrendLine otherLine, Bars bars, Symbol symbol)
+        {
+            var onePercentFirstBarIndex = bars.GetBarIndex(otherLine.Time1, symbol);
+
+            var zeroLineBarsDelta = line.GetBarsNumber(bars, symbol);
+            var zeroLinePriceDelta = line.GetPriceDelta();
+
+            var zeroLineSlope = line.GetSlope();
+
+            double secondBarIndex, secondPrice;
+
+            if (line.Time1 < line.Time2)
+            {
+                secondBarIndex = onePercentFirstBarIndex + zeroLineBarsDelta;
+                secondPrice = zeroLineSlope > 0 ? otherLine.Y1 + zeroLinePriceDelta : otherLine.Y1 - zeroLinePriceDelta;
+            }
+            else
+            {
+                secondBarIndex = onePercentFirstBarIndex - zeroLineBarsDelta;
+                secondPrice = zeroLineSlope > 0 ? otherLine.Y1 - zeroLinePriceDelta : otherLine.Y1 + zeroLinePriceDelta;
+            }
+
+            otherLine.Time2 = bars.GetOpenTime(secondBarIndex, symbol);
+            otherLine.Y2 = secondPrice;
+        }
     }
 }
