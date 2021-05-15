@@ -22,8 +22,6 @@ namespace cAlgo.Patterns
 
         protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
         {
-            Config.Print("OnPatternChartObjectsUpdated");
-
             if (updatedChartObject.ObjectType != ChartObjectType.TrendLine) return;
 
             var zeroLine = patternObjects.FirstOrDefault(iLine => iLine.Name.LastIndexOf("ZeroLine", StringComparison.OrdinalIgnoreCase) >= 0) as ChartTrendLine;
@@ -37,6 +35,8 @@ namespace cAlgo.Patterns
         protected override void OnDrawingStopped()
         {
             _zeroLine = null;
+
+            _onePercentLine = null;
 
             _otherLevelLines.Clear();
         }
@@ -150,7 +150,7 @@ namespace cAlgo.Patterns
 
             if (labels.Length == 0)
             {
-                DrawLabels(zeroLine, onePercentLine, otherLevelLines, id);
+                //DrawLabels(zeroLine, onePercentLine, otherLevelLines, id);
 
                 return;
             }

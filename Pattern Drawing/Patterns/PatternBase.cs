@@ -3,6 +3,8 @@ using cAlgo.Helpers;
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace cAlgo.Patterns
 {
@@ -11,6 +13,7 @@ namespace cAlgo.Patterns
         private int _mouseUpNumber;
         private bool _isMouseDown;
         private bool _isDrawing;
+        private bool _isSubscribedToChartObjectsUpdatedEvent;
 
         public PatternBase(string name, PatternConfig config, string objectName = null)
         {
@@ -74,7 +77,8 @@ namespace cAlgo.Patterns
             ExecuteInTryCatch(() => ReloadPatterns(Chart.Objects.ToArray()));
 
             Config.Chart.ObjectsRemoved += Chart_ObjectsRemoved;
-            Config.Chart.ObjectsUpdated += Chart_ObjectsUpdated;
+
+            SubscribeToChartObjectsUpdatedEvent();
 
             OnInitialized();
         }
@@ -91,7 +95,9 @@ namespace cAlgo.Patterns
         {
             if (IsDrawing) return;
 
-            Chart.ObjectsUpdated -= Chart_ObjectsUpdated;
+            _isDrawing = true;
+
+            UnsubscribeFromChartObjectsUpdatedEvent();
 
             Id = DateTime.Now.Ticks;
 
@@ -100,8 +106,6 @@ namespace cAlgo.Patterns
             Chart.MouseUp += Chart_MouseUp;
 
             Chart.IsScrollingEnabled = false;
-
-            _isDrawing = true;
 
             OnDrawingStarted();
 
@@ -117,6 +121,8 @@ namespace cAlgo.Patterns
         {
             if (!IsDrawing) return;
 
+            _isDrawing = false;
+
             if (ShowLabels) DrawLabels();
 
             Chart.MouseDown -= Chart_MouseDown;
@@ -131,8 +137,6 @@ namespace cAlgo.Patterns
 
             SetFrontObjectsZIndex();
 
-            _isDrawing = false;
-
             OnDrawingStopped();
 
             var drawingStopped = DrawingStopped;
@@ -142,7 +146,12 @@ namespace cAlgo.Patterns
                 drawingStopped.Invoke(this);
             }
 
-            Chart.ObjectsUpdated += Chart_ObjectsUpdated;
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(500);
+
+                SubscribeToChartObjectsUpdatedEvent();
+            });
         }
 
         protected void FinishDrawing()
@@ -237,7 +246,7 @@ namespace cAlgo.Patterns
         {
             if (IsDrawing) return;
 
-            Chart.ObjectsUpdated -= Chart_ObjectsUpdated;
+            UnsubscribeFromChartObjectsUpdatedEvent();
 
             try
             {
@@ -245,7 +254,7 @@ namespace cAlgo.Patterns
             }
             finally
             {
-                Chart.ObjectsUpdated += Chart_ObjectsUpdated;
+                SubscribeToChartObjectsUpdatedEvent();
             }
         }
 
@@ -334,9 +343,9 @@ namespace cAlgo.Patterns
             var updatedPatternObjects = updatedChartObjects.Where(iObject => iObject.Name.StartsWith(ObjectName,
                 StringComparison.OrdinalIgnoreCase)).ToArray();
 
-            var chartObjects = Chart.Objects.ToArray();
-
             if (updatedPatternObjects.Length == 0) return;
+
+            var chartObjects = Chart.Objects.ToArray();
 
             foreach (var chartObject in updatedPatternObjects)
             {
@@ -400,6 +409,24 @@ namespace cAlgo.Patterns
 
                 throw ex;
             }
+        }
+
+        private void SubscribeToChartObjectsUpdatedEvent()
+        {
+            if (_isSubscribedToChartObjectsUpdatedEvent) return;
+
+            _isSubscribedToChartObjectsUpdatedEvent = true;
+
+            Chart.ObjectsUpdated += Chart_ObjectsUpdated;
+        }
+
+        private void UnsubscribeFromChartObjectsUpdatedEvent()
+        {
+            if (!_isSubscribedToChartObjectsUpdatedEvent) return;
+
+            _isSubscribedToChartObjectsUpdatedEvent = false;
+
+            Chart.ObjectsUpdated -= Chart_ObjectsUpdated;
         }
     }
 }
