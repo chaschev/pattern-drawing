@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace cAlgo.Helpers
@@ -32,18 +31,6 @@ namespace cAlgo.Helpers
                 stringBuilder.AppendFormat("OS Version: {0}", Environment.OSVersion.VersionString);
                 stringBuilder.AppendLine();
                 stringBuilder.AppendFormat("System Type: {0}", systemType);
-
-                var entryAssembly = Assembly.GetEntryAssembly();
-
-                if (entryAssembly != null)
-                {
-                    var entryAssemblyName = entryAssembly.GetName();
-
-                    stringBuilder.AppendLine();
-                    stringBuilder.AppendFormat("Entry Assembly Name: {0}", entryAssemblyName.Name);
-                    stringBuilder.AppendLine();
-                    stringBuilder.AppendFormat("Entry Assembly Version: {0}", entryAssemblyName.Version);
-                }
             }
 
             stringBuilder.AppendLine();

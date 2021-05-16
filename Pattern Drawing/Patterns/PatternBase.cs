@@ -1,5 +1,4 @@
 ﻿using cAlgo.API;
-using cAlgo.Helpers;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -405,7 +404,7 @@ namespace cAlgo.Patterns
             }
             catch (Exception ex)
             {
-                Config.Print(ex.GetLog());
+                Config.Logger.Fatal(ex);
 
                 throw ex;
             }

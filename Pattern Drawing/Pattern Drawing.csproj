@@ -74,6 +74,7 @@
     <Compile Include="Helpers\ColorParser.cs" />
     <Compile Include="Helpers\DoubleToStringNonScientificExtension.cs" />
     <Compile Include="Helpers\ExceptionExtensions.cs" />
+    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\SymbolTradingSessionExtensions.cs" />
     <Compile Include="Pattern Drawing.cs" />
     <Compile Include="Patterns\FibonacciChannelPattern.cs" />

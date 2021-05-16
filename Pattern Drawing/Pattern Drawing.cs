@@ -1256,10 +1256,7 @@ namespace cAlgo
             var patternsColor = ColorParser.Parse(PatternsColor, PatternsColorAlpha);
             var patternsLabelsColor = ColorParser.Parse(PatternsLabelColor, PatternsLabelColorAlpha);
 
-            var patternConfig = new PatternConfig(Chart, patternsColor, PatternsLabelShow, patternsLabelsColor, PatternsLabelLocked, PatternsLabelLinkStyle)
-            {
-                Print = Print
-            };
+            var patternConfig = new PatternConfig(Chart, patternsColor, PatternsLabelShow, patternsLabelsColor, PatternsLabelLocked, PatternsLabelLinkStyle, new Logger(this.GetType().Name, Print));
 
             _expandButton = new Button
             {
