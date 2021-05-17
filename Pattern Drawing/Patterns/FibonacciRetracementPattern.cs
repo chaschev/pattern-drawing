@@ -22,7 +22,7 @@ namespace cAlgo.Patterns
                 throw new ArgumentNullException("levels");
             }
 
-            _levels = levels.OrderBy(iLevel => iLevel.Percent);
+            _levels = levels.OrderByDescending(iLevel => iLevel.Percent);
         }
 
         protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
@@ -197,11 +197,11 @@ namespace cAlgo.Patterns
 
                 if (level.IsFilled)
                 {
-                    var levelRectangleName = GetObjectName(string.Format("LevelRectangle_{0}", previousLevel.Percent));
+                    var levelRectangleName = GetObjectName(string.Format("LevelRectangle_{0}", level.Percent));
 
-                    var rectangle = Chart.DrawRectangle(levelRectangleName, startTime, previousLevelPrice, endTime, price, previousLevel.FillColor, 0);
+                    var rectangle = Chart.DrawRectangle(levelRectangleName, startTime, previousLevelPrice, endTime, price, level.FillColor, 0);
 
-                    rectangle.IsFilled = true;
+                    rectangle.IsFilled = level.IsFilled;
 
                     rectangle.IsInteractive = true;
                     rectangle.IsLocked = true;

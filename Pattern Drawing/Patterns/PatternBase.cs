@@ -71,15 +71,18 @@ namespace cAlgo.Patterns
 
         public void Initialize()
         {
-            OnInitialize();
+            ExecuteInTryCatch(() =>
+            {
+                OnInitialize();
 
-            ExecuteInTryCatch(() => ReloadPatterns(Chart.Objects.ToArray()));
+                ReloadPatterns(Chart.Objects.ToArray());
 
-            Config.Chart.ObjectsRemoved += Chart_ObjectsRemoved;
+                Config.Chart.ObjectsRemoved += Chart_ObjectsRemoved;
 
-            SubscribeToChartObjectsUpdatedEvent();
+                SubscribeToChartObjectsUpdatedEvent();
 
-            OnInitialized();
+                OnInitialized();
+            });
         }
 
         protected virtual void OnInitialize()
@@ -96,24 +99,27 @@ namespace cAlgo.Patterns
 
             _isDrawing = true;
 
-            UnsubscribeFromChartObjectsUpdatedEvent();
-
-            Id = DateTime.Now.Ticks;
-
-            Chart.MouseDown += Chart_MouseDown;
-            Chart.MouseMove += Chart_MouseMove;
-            Chart.MouseUp += Chart_MouseUp;
-
-            Chart.IsScrollingEnabled = false;
-
-            OnDrawingStarted();
-
-            var drawingStarted = DrawingStarted;
-
-            if (drawingStarted != null)
+            ExecuteInTryCatch(() =>
             {
-                drawingStarted.Invoke(this);
-            }
+                UnsubscribeFromChartObjectsUpdatedEvent();
+
+                Id = DateTime.Now.Ticks;
+
+                Chart.MouseDown += Chart_MouseDown;
+                Chart.MouseMove += Chart_MouseMove;
+                Chart.MouseUp += Chart_MouseUp;
+
+                Chart.IsScrollingEnabled = false;
+
+                OnDrawingStarted();
+
+                var drawingStarted = DrawingStarted;
+
+                if (drawingStarted != null)
+                {
+                    drawingStarted.Invoke(this);
+                }
+            });
         }
 
         public void StopDrawing()
@@ -122,34 +128,37 @@ namespace cAlgo.Patterns
 
             _isDrawing = false;
 
-            if (ShowLabels) DrawLabels();
-
-            Chart.MouseDown -= Chart_MouseDown;
-            Chart.MouseMove -= Chart_MouseMove;
-            Chart.MouseUp -= Chart_MouseUp;
-
-            Chart.IsScrollingEnabled = true;
-
-            _mouseUpNumber = 0;
-
-            Id = 0;
-
-            SetFrontObjectsZIndex();
-
-            OnDrawingStopped();
-
-            var drawingStopped = DrawingStopped;
-
-            if (drawingStopped != null)
+            ExecuteInTryCatch(() =>
             {
-                drawingStopped.Invoke(this);
-            }
+                if (ShowLabels) DrawLabels();
 
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(500);
+                Chart.MouseDown -= Chart_MouseDown;
+                Chart.MouseMove -= Chart_MouseMove;
+                Chart.MouseUp -= Chart_MouseUp;
 
-                SubscribeToChartObjectsUpdatedEvent();
+                Chart.IsScrollingEnabled = true;
+
+                _mouseUpNumber = 0;
+
+                Id = 0;
+
+                SetFrontObjectsZIndex();
+
+                OnDrawingStopped();
+
+                var drawingStopped = DrawingStopped;
+
+                if (drawingStopped != null)
+                {
+                    drawingStopped.Invoke(this);
+                }
+
+                Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(500);
+
+                    SubscribeToChartObjectsUpdatedEvent();
+                });
             });
         }
 

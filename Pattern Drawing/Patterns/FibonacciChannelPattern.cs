@@ -15,7 +15,7 @@ namespace cAlgo.Patterns
 
         private readonly Dictionary<double, ChartTrendLine> _otherLevelLines = new Dictionary<double, ChartTrendLine>();
 
-        public FibonacciChannelPattern(PatternConfig config, IEnumerable<FibonacciLevel> fibonacciLevels) : base("Fibonacci Channel Pattern", config)
+        public FibonacciChannelPattern(PatternConfig config, IEnumerable<FibonacciLevel> fibonacciLevels) : base("Fibonacci Channel", config)
         {
             _fibonacciLevels = fibonacciLevels;
         }
@@ -108,6 +108,8 @@ namespace cAlgo.Patterns
 
         protected override void DrawLabels()
         {
+            if (_zeroLine == null || _onePercentLine == null || _otherLevelLines == null) return;
+
             DrawLabels(_zeroLine, _onePercentLine, _otherLevelLines, Id);
         }
 
