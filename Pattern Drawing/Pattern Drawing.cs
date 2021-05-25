@@ -1212,6 +1212,181 @@ namespace cAlgo
 
         #endregion Fibonacci Channel parameters
 
+        #region Original Pitchfork parameters
+
+        [Parameter("Median Thickness", DefaultValue = 1, MinValue = 1, Group = "Original Pitchfork")]
+        public int OriginalPitchforkMedianThickness { get; set; }
+
+        [Parameter("Median Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle OriginalPitchforkMedianStyle { get; set; }
+
+        [Parameter("Median Color", DefaultValue = "Red", Group = "Original Pitchfork")]
+        public string OriginalPitchforkMedianColor { get; set; }
+
+        [Parameter("Show 1st Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowFirstOriginalPitchfork { get; set; }
+
+        [Parameter("1st Level Percent", DefaultValue = 0.25, Group = "Original Pitchfork")]
+        public double FirstOriginalPitchforkPercent { get; set; }
+
+        [Parameter("1st Level Color", DefaultValue = "Gray", Group = "Original Pitchfork")]
+        public string FirstOriginalPitchforkColor { get; set; }
+
+        [Parameter("1st Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int FirstOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("1st Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int FirstOriginalPitchforkThickness { get; set; }
+
+        [Parameter("1st Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle FirstOriginalPitchforkStyle { get; set; }
+
+        [Parameter("Show 2nd Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowSecondOriginalPitchfork { get; set; }
+
+        [Parameter("2nd Level Percent", DefaultValue = 0.382, Group = "Original Pitchfork")]
+        public double SecondOriginalPitchforkPercent { get; set; }
+
+        [Parameter("2nd Level Color", DefaultValue = "Red", Group = "Original Pitchfork")]
+        public string SecondOriginalPitchforkColor { get; set; }
+
+        [Parameter("2nd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int SecondOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("2nd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int SecondOriginalPitchforkThickness { get; set; }
+
+        [Parameter("2nd Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle SecondOriginalPitchforkStyle { get; set; }
+
+        [Parameter("Show 3rd Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowThirdOriginalPitchfork { get; set; }
+
+        [Parameter("3rd Level Percent", DefaultValue = 0.5, Group = "Original Pitchfork")]
+        public double ThirdOriginalPitchforkPercent { get; set; }
+
+        [Parameter("3rd Level Color", DefaultValue = "GreenYellow", Group = "Original Pitchfork")]
+        public string ThirdOriginalPitchforkColor { get; set; }
+
+        [Parameter("3rd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int ThirdOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("3rd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int ThirdOriginalPitchforkThickness { get; set; }
+
+        [Parameter("3rd Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle ThirdOriginalPitchforkStyle { get; set; }
+
+        [Parameter("Show 4th Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowFourthOriginalPitchfork { get; set; }
+
+        [Parameter("4th Level Percent", DefaultValue = 0.618, Group = "Original Pitchfork")]
+        public double FourthOriginalPitchforkPercent { get; set; }
+
+        [Parameter("4th Level Color", DefaultValue = "DarkGreen", Group = "Original Pitchfork")]
+        public string FourthOriginalPitchforkColor { get; set; }
+
+        [Parameter("4th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int FourthOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("4th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int FourthOriginalPitchforkThickness { get; set; }
+
+        [Parameter("4th Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle FourthOriginalPitchforkStyle { get; set; }
+
+        [Parameter("Show 5th Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowFifthOriginalPitchfork { get; set; }
+
+        [Parameter("5th Level Percent", DefaultValue = 0.75, Group = "Original Pitchfork")]
+        public double FifthOriginalPitchforkPercent { get; set; }
+
+        [Parameter("5th Level Color", DefaultValue = "BlueViolet", Group = "Original Pitchfork")]
+        public string FifthOriginalPitchforkColor { get; set; }
+
+        [Parameter("5th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int FifthOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("5th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int FifthOriginalPitchforkThickness { get; set; }
+
+        [Parameter("5th Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle FifthOriginalPitchforkStyle { get; set; }
+
+        [Parameter("Show 6th Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowSixthOriginalPitchfork { get; set; }
+
+        [Parameter("6th Level Percent", DefaultValue = 1, Group = "Original Pitchfork")]
+        public double SixthOriginalPitchforkPercent { get; set; }
+
+        [Parameter("6th Level Color", DefaultValue = "AliceBlue", Group = "Original Pitchfork")]
+        public string SixthOriginalPitchforkColor { get; set; }
+
+        [Parameter("6th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int SixthOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("6th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int SixthOriginalPitchforkThickness { get; set; }
+
+        [Parameter("6th Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle SixthOriginalPitchforkStyle { get; set; }
+
+        [Parameter("Show 7th Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowSeventhOriginalPitchfork { get; set; }
+
+        [Parameter("7th Level Percent", DefaultValue = 1.5, Group = "Original Pitchfork")]
+        public double SeventhOriginalPitchforkPercent { get; set; }
+
+        [Parameter("7th Level Color", DefaultValue = "Bisque", Group = "Original Pitchfork")]
+        public string SeventhOriginalPitchforkColor { get; set; }
+
+        [Parameter("7th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int SeventhOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("7th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int SeventhOriginalPitchforkThickness { get; set; }
+
+        [Parameter("7th Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle SeventhOriginalPitchforkStyle { get; set; }
+
+        [Parameter("Show 8th Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowEighthOriginalPitchfork { get; set; }
+
+        [Parameter("8th Level Percent", DefaultValue = 1.75, Group = "Original Pitchfork")]
+        public double EighthOriginalPitchforkPercent { get; set; }
+
+        [Parameter("8th Level Color", DefaultValue = "Azure", Group = "Original Pitchfork")]
+        public string EighthOriginalPitchforkColor { get; set; }
+
+        [Parameter("8th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int EighthOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("8th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int EighthOriginalPitchforkThickness { get; set; }
+
+        [Parameter("8th Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle EighthOriginalPitchforkStyle { get; set; }
+
+        [Parameter("Show 9th Level", DefaultValue = true, Group = "Original Pitchfork")]
+        public bool ShowNinthOriginalPitchfork { get; set; }
+
+        [Parameter("9th Level Percent", DefaultValue = 2, Group = "Original Pitchfork")]
+        public double NinthOriginalPitchforkPercent { get; set; }
+
+        [Parameter("9th Level Color", DefaultValue = "Aqua", Group = "Original Pitchfork")]
+        public string NinthOriginalPitchforkColor { get; set; }
+
+        [Parameter("9th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Original Pitchfork")]
+        public int NinthOriginalPitchforkAlpha { get; set; }
+
+        [Parameter("9th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Original Pitchfork")]
+        public int NinthOriginalPitchforkThickness { get; set; }
+
+        [Parameter("9th Level Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
+        public LineStyle NinthOriginalPitchforkStyle { get; set; }
+
+        #endregion Original Pitchfork parameters
+
         #region Overridden methods
 
         protected override void Initialize()
@@ -1278,6 +1453,8 @@ namespace cAlgo
             AddGannPatterns(patternConfig);
 
             AddFibonacciPatterns(patternConfig);
+
+            AddPitchforkPatterns(patternConfig);
 
             AddElliottCorrectionWavePattern(patternConfig);
             AddElliottImpulseWavgePattern(patternConfig);
@@ -2209,6 +2386,129 @@ namespace cAlgo
                 new FibonacciTimeZonePattern(patternConfig, GetFibonacciTimeZoneLevels()),
                 new TrendBasedFibonacciTimePattern(patternConfig, GetTrendBasedFibonacciTimeLevels()),
                 new FibonacciChannelPattern(patternConfig, GetFibonacciChannelLevels())
+            };
+
+            InitializePatterns(patternsGroupButton.Patterns);
+        }
+
+        private Dictionary<double, PercentLineSettings> GetOriginalPitchforkLevels()
+        {
+            var originalPitchforkLevels = new Dictionary<double, PercentLineSettings>();
+
+            if (ShowFirstOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(FirstOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = FirstOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(FirstOriginalPitchforkColor),
+                    Style = FirstOriginalPitchforkStyle,
+                    Thickness = FirstOriginalPitchforkThickness,
+                });
+            }
+
+            if (ShowSecondOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(SecondOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = SecondOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(SecondOriginalPitchforkColor),
+                    Style = SecondOriginalPitchforkStyle,
+                    Thickness = SecondOriginalPitchforkThickness,
+                });
+            }
+
+            if (ShowThirdOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(ThirdOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = ThirdOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(ThirdOriginalPitchforkColor),
+                    Style = ThirdOriginalPitchforkStyle,
+                    Thickness = ThirdOriginalPitchforkThickness,
+                });
+            }
+
+            if (ShowFourthOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(FourthOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = FourthOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(FourthOriginalPitchforkColor),
+                    Style = FourthOriginalPitchforkStyle,
+                    Thickness = FourthOriginalPitchforkThickness,
+                });
+            }
+
+            if (ShowFifthOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(FifthOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = FifthOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(FifthOriginalPitchforkColor),
+                    Style = FifthOriginalPitchforkStyle,
+                    Thickness = FifthOriginalPitchforkThickness,
+                });
+            }
+
+            if (ShowSixthOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(SixthOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = SixthOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(SixthOriginalPitchforkColor),
+                    Style = SixthOriginalPitchforkStyle,
+                    Thickness = SixthOriginalPitchforkThickness,
+                });
+            }
+
+            if (ShowSeventhOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(SeventhOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = SeventhOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(SeventhOriginalPitchforkColor),
+                    Style = SeventhOriginalPitchforkStyle,
+                    Thickness = SeventhOriginalPitchforkThickness,
+                });
+            }
+
+            if (ShowEighthOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(EighthOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = EighthOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(EighthOriginalPitchforkColor),
+                    Style = EighthOriginalPitchforkStyle,
+                    Thickness = EighthOriginalPitchforkThickness,
+                });
+            }
+
+            if (ShowNinthOriginalPitchfork)
+            {
+                originalPitchforkLevels.Add(NinthOriginalPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = NinthOriginalPitchforkPercent,
+                    LineColor = ColorParser.Parse(NinthOriginalPitchforkColor),
+                    Style = NinthOriginalPitchforkStyle,
+                    Thickness = NinthOriginalPitchforkThickness,
+                });
+            }
+
+            return originalPitchforkLevels;
+        }
+
+        private void AddPitchforkPatterns(PatternConfig patternConfig)
+        {
+            var patternsGroupButton = AddPatternGroupButton("Pitchfork");
+
+            patternsGroupButton.Patterns = new IPattern[]
+            {
+                new OriginalPitchforkPattern(patternConfig, new LineSettings
+                {
+                    LineColor = ColorParser.Parse(OriginalPitchforkMedianColor),
+                    Style = OriginalPitchforkMedianStyle,
+                    Thickness = OriginalPitchforkMedianThickness
+                }, GetOriginalPitchforkLevels()),
             };
 
             InitializePatterns(patternsGroupButton.Patterns);
