@@ -2,6 +2,7 @@
 using cAlgo.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace cAlgo.Patterns
@@ -23,11 +24,21 @@ namespace cAlgo.Patterns
 
         protected override void OnPatternChartObjectsUpdated(long id, ChartObject updatedChartObject, ChartObject[] patternObjects)
         {
-            var trendLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine).Cast<ChartTrendLine>();
+            if (updatedChartObject.ObjectType != ChartObjectType.TrendLine) return;
 
-            var mainFan = trendLines.FirstOrDefault(iLine => iLine.Name.IndexOf("MainFan", StringComparison.OrdinalIgnoreCase) > -1);
+            var trendLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine).Cast<ChartTrendLine>().ToArray();
 
-            if (mainFan == null) return;
+            var medianLine = trendLines.FirstOrDefault(iObject => iObject.Name.Split('_').Last().Equals("MedianLine", StringComparison.InvariantCultureIgnoreCase));
+
+            if (medianLine == null) return;
+
+            var controllerLine = trendLines.FirstOrDefault(iObject => iObject.Name.Split('_').Last().Equals("ControllerLine", StringComparison.InvariantCultureIgnoreCase));
+
+            if (controllerLine == null) return;
+
+            UpdateMedianLine(medianLine, controllerLine);
+
+            DrawPercentLevels(medianLine, controllerLine, id);
         }
 
         protected override void OnDrawingStopped()
@@ -81,10 +92,9 @@ namespace cAlgo.Patterns
                 _controllerLine.Time2 = obj.TimeValue;
                 _controllerLine.Y2 = obj.YValue;
 
-                _medianLine.Time2 = _controllerLine.GetStartTime().AddTicks(_controllerLine.GetTimeDelta().Ticks / 2);
-                _medianLine.Y2 = _controllerLine.GetBottomPrice() + _controllerLine.GetPriceDelta() / 2;
+                UpdateMedianLine(_medianLine, _controllerLine);
 
-                DrawPercentLevels(_medianLine, _controllerLine);
+                DrawPercentLevels(_medianLine, _controllerLine, Id);
             }
         }
 
@@ -93,14 +103,44 @@ namespace cAlgo.Patterns
             return new ChartObject[] { _medianLine, _controllerLine };
         }
 
-        private void DrawPercentLevels(ChartTrendLine medianLine, ChartTrendLine controllerLine)
+        private void DrawPercentLevels(ChartTrendLine medianLine, ChartTrendLine controllerLine, long id)
         {
+            var timeDeltaInMinutes = Math.Abs((medianLine.Time2 - controllerLine.Time1).TotalMinutes);
+            var priceDelta = controllerLine.GetPriceDelta() / 2;
+
+            var controllerLineSlope = controllerLine.GetSlope();
+
             foreach (var levelSettings in _levelsSettings)
             {
-                var topLevelName = GetObjectName(string.Format("Level_{0}_Top", levelSettings.Key));
-
-                //var topLevel = Chart.DrawTrendLine(topLevelName, )
+                DrawLevel(medianLine, timeDeltaInMinutes, priceDelta, controllerLineSlope, levelSettings.Value.Percent, levelSettings.Value.LineColor, id);
+                DrawLevel(medianLine, timeDeltaInMinutes, priceDelta, controllerLineSlope, -levelSettings.Value.Percent, levelSettings.Value.LineColor, id);
             }
+        }
+
+        private void DrawLevel(ChartTrendLine medianLine, double timeDeltaInMinutes, double priceDelta, double controllerLineSlope, double percent, Color lineColor, long id)
+        {
+            var firstTime = controllerLineSlope > 0 ? medianLine.Time2.AddMinutes(timeDeltaInMinutes * percent) : medianLine.Time2.AddMinutes(-timeDeltaInMinutes * percent);
+            var firstPrice = medianLine.Y2 + priceDelta * percent;
+
+            var secondTime = medianLine.Time1 > medianLine.Time2 ? firstTime.AddMinutes(-timeDeltaInMinutes) : firstTime.AddMinutes(timeDeltaInMinutes);
+
+            var priceDistanceWithMediumLine = Math.Abs(medianLine.CalculateY(firstTime) - medianLine.CalculateY(secondTime));
+
+            var secondPrice = medianLine.Y2 > medianLine.Y1 ? firstPrice + priceDistanceWithMediumLine : firstPrice - priceDistanceWithMediumLine;
+
+            var name = GetObjectName(string.Format("Level_{0}", percent.ToString(CultureInfo.InvariantCulture)), id: id);
+
+            var line = Chart.DrawTrendLine(name, firstTime, firstPrice, secondTime, secondPrice, lineColor);
+
+            line.ExtendToInfinity = true;
+            line.IsInteractive = true;
+            line.IsLocked = true;
+        }
+
+        private void UpdateMedianLine(ChartTrendLine medianLine, ChartTrendLine controllerLine)
+        {
+            medianLine.Time2 = controllerLine.GetStartTime().AddTicks(controllerLine.GetTimeDelta().Ticks / 2);
+            medianLine.Y2 = controllerLine.GetBottomPrice() + controllerLine.GetPriceDelta() / 2;
         }
     }
 }
