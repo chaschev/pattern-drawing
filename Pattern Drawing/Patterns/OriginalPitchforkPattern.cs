@@ -36,6 +36,8 @@ namespace cAlgo.Patterns
 
             if (controllerLine == null) return;
 
+            if (updatedChartObject != medianLine && updatedChartObject != controllerLine) return;
+
             UpdateMedianLine(medianLine, controllerLine);
 
             DrawPercentLevels(medianLine, controllerLine, id);
@@ -122,7 +124,7 @@ namespace cAlgo.Patterns
             var firstTime = controllerLineSlope > 0 ? medianLine.Time2.AddMinutes(timeDeltaInMinutes * percent) : medianLine.Time2.AddMinutes(-timeDeltaInMinutes * percent);
             var firstPrice = medianLine.Y2 + priceDelta * percent;
 
-            var secondTime = medianLine.Time1 > medianLine.Time2 ? firstTime.AddMinutes(-timeDeltaInMinutes) : firstTime.AddMinutes(timeDeltaInMinutes);
+            var secondTime = medianLine.Time1 > medianLine.Time2 ? firstTime.AddMinutes(-timeDeltaInMinutes * 2) : firstTime.AddMinutes(timeDeltaInMinutes * 2);
 
             var priceDistanceWithMediumLine = Math.Abs(medianLine.CalculateY(firstTime) - medianLine.CalculateY(secondTime));
 
