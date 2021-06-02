@@ -107,24 +107,31 @@ namespace cAlgo.Patterns
 
         private void DrawPercentLevels(ChartTrendLine medianLine, ChartTrendLine controllerLine, long id)
         {
-            var timeDeltaInMinutes = Math.Abs((medianLine.Time2 - controllerLine.Time1).TotalMinutes);
+            var medianLineSecondBarIndex = Chart.Bars.GetBarIndex(medianLine.Time2, Chart.Symbol);
+            var controllerLineFirstBarIndex = Chart.Bars.GetBarIndex(controllerLine.Time1, Chart.Symbol);
+
+            var barsDelta = Math.Abs(medianLineSecondBarIndex - controllerLineFirstBarIndex);
+            var lengthInMinutes = Math.Abs((medianLine.Time2 - controllerLine.Time1).TotalMinutes) * 2;
             var priceDelta = controllerLine.GetPriceDelta() / 2;
 
             var controllerLineSlope = controllerLine.GetSlope();
 
             foreach (var levelSettings in _levelsSettings)
             {
-                DrawLevel(medianLine, timeDeltaInMinutes, priceDelta, controllerLineSlope, levelSettings.Value.Percent, levelSettings.Value.LineColor, id);
-                DrawLevel(medianLine, timeDeltaInMinutes, priceDelta, controllerLineSlope, -levelSettings.Value.Percent, levelSettings.Value.LineColor, id);
+                DrawLevel(medianLine, medianLineSecondBarIndex, barsDelta, lengthInMinutes, priceDelta, controllerLineSlope, levelSettings.Value.Percent, levelSettings.Value.LineColor, id);
+                DrawLevel(medianLine, medianLineSecondBarIndex, barsDelta, lengthInMinutes, priceDelta, controllerLineSlope, -levelSettings.Value.Percent, levelSettings.Value.LineColor, id);
             }
         }
 
-        private void DrawLevel(ChartTrendLine medianLine, double timeDeltaInMinutes, double priceDelta, double controllerLineSlope, double percent, Color lineColor, long id)
+        private void DrawLevel(ChartTrendLine medianLine, double medianLineSecondBarIndex, double barsDelta, double lengthInMinutes, double priceDelta, double controllerLineSlope, double percent, Color lineColor, long id)
         {
-            var firstTime = controllerLineSlope > 0 ? medianLine.Time2.AddMinutes(timeDeltaInMinutes * percent) : medianLine.Time2.AddMinutes(-timeDeltaInMinutes * percent);
+            var barsPercent = barsDelta * percent;
+
+            var firstBarIndex = controllerLineSlope > 0 ? medianLineSecondBarIndex + barsPercent : medianLineSecondBarIndex - barsPercent;
+            var firstTime = Chart.Bars.GetOpenTime(firstBarIndex, Chart.Symbol);
             var firstPrice = medianLine.Y2 + priceDelta * percent;
 
-            var secondTime = medianLine.Time1 > medianLine.Time2 ? firstTime.AddMinutes(-timeDeltaInMinutes * 2) : firstTime.AddMinutes(timeDeltaInMinutes * 2);
+            var secondTime = medianLine.Time1 > medianLine.Time2 ? firstTime.AddMinutes(-lengthInMinutes) : firstTime.AddMinutes(lengthInMinutes);
 
             var priceDistanceWithMediumLine = Math.Abs(medianLine.CalculateY(firstTime) - medianLine.CalculateY(secondTime));
 
@@ -141,7 +148,10 @@ namespace cAlgo.Patterns
 
         private void UpdateMedianLine(ChartTrendLine medianLine, ChartTrendLine controllerLine)
         {
-            medianLine.Time2 = controllerLine.GetStartTime().AddTicks(controllerLine.GetTimeDelta().Ticks / 2);
+            var controllerLineStartBarIndex = controllerLine.GetStartBarIndex(Chart.Bars, Chart.Symbol);
+            var controllerLineBarsNumber = controllerLine.GetBarsNumber(Chart.Bars, Chart.Symbol);
+
+            medianLine.Time2 = Chart.Bars.GetOpenTime(controllerLineStartBarIndex + controllerLineBarsNumber / 2, Chart.Symbol);
             medianLine.Y2 = controllerLine.GetBottomPrice() + controllerLine.GetPriceDelta() / 2;
         }
     }

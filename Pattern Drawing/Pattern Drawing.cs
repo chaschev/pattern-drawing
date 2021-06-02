@@ -1253,7 +1253,7 @@ namespace cAlgo
         [Parameter("Median Style", DefaultValue = LineStyle.Solid, Group = "Original Pitchfork")]
         public LineStyle OriginalPitchforkMedianStyle { get; set; }
 
-        [Parameter("Median Color", DefaultValue = "Red", Group = "Original Pitchfork")]
+        [Parameter("Median Color", DefaultValue = "Blue", Group = "Original Pitchfork")]
         public string OriginalPitchforkMedianColor { get; set; }
 
         [Parameter("Show 1st Level", DefaultValue = true, Group = "Original Pitchfork")]
