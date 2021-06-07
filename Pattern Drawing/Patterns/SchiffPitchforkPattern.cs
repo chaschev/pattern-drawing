@@ -170,7 +170,7 @@ namespace cAlgo.Patterns
 
         private void UpdateMedianLine(ChartTrendLine medianLine, ChartTrendLine schiffLine, ChartTrendLine handleLine)
         {
-            medianLine.Time1 = schiffLine.Time1.Add(schiffLine.GetTimeDelta());
+            medianLine.Time1 = schiffLine.Time1.AddMinutes(schiffLine.GetTimeDelta().TotalMinutes / 2);
             medianLine.Y1 = schiffLine.GetBottomPrice() + schiffLine.GetPriceDelta() / 2;
 
             var handleLineStartBarIndex = handleLine.GetStartBarIndex(Chart.Bars, Chart.Symbol);
