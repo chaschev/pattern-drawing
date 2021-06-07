@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace cAlgo.Patterns
 {
-    public class OriginalPitchforkPattern : PatternBase
+    public class SchiffPitchforkPattern : PatternBase
     {
         private readonly Dictionary<double, ChartTrendLine> _horizontalTrendLines = new Dictionary<double, ChartTrendLine>();
         private readonly Dictionary<double, ChartTrendLine> _verticalTrendLines = new Dictionary<double, ChartTrendLine>();
@@ -15,8 +15,9 @@ namespace cAlgo.Patterns
         private readonly Dictionary<double, PercentLineSettings> _levelsSettings;
         private ChartTrendLine _medianLine;
         private ChartTrendLine _handleLine;
+        private ChartTrendLine _schiffLine;
 
-        public OriginalPitchforkPattern(PatternConfig config, LineSettings medianLineSettings, Dictionary<double, PercentLineSettings> levelsSettings) : base("Original Pitchfork", config)
+        public SchiffPitchforkPattern(PatternConfig config, LineSettings medianLineSettings, Dictionary<double, PercentLineSettings> levelsSettings) : base("Schiff Pitchfork", config)
         {
             _medianLineSettings = medianLineSettings;
             _levelsSettings = levelsSettings;
@@ -28,17 +29,30 @@ namespace cAlgo.Patterns
 
             var trendLines = patternObjects.Where(iObject => iObject.ObjectType == ChartObjectType.TrendLine).Cast<ChartTrendLine>().ToArray();
 
-            var medianLine = trendLines.FirstOrDefault(iObject => iObject.Name.Split('_').Last().Equals("MedianLine", StringComparison.InvariantCultureIgnoreCase));
+            var schiffLine = trendLines.FirstOrDefault(iObject => iObject.Name.Split('_').Last().Equals("SchiffLine", StringComparison.InvariantCultureIgnoreCase));
 
-            if (medianLine == null) return;
+            if (schiffLine == null) return;
 
             var handleLine = trendLines.FirstOrDefault(iObject => iObject.Name.Split('_').Last().Equals("HandleLine", StringComparison.InvariantCultureIgnoreCase));
 
             if (handleLine == null) return;
 
-            if (updatedChartObject != medianLine && updatedChartObject != handleLine) return;
+            var medianLine = trendLines.FirstOrDefault(iObject => iObject.Name.Split('_').Last().Equals("MedianLine", StringComparison.InvariantCultureIgnoreCase));
 
-            UpdateMedianLine(medianLine, handleLine);
+            if (medianLine == null) return;
+
+            if (updatedChartObject != schiffLine && updatedChartObject != handleLine) return;
+
+            if (updatedChartObject == schiffLine)
+            {
+                UpdateHandleLine(handleLine, schiffLine);
+            }
+            else if (updatedChartObject == handleLine)
+            {
+                UpdateSchiffLine(handleLine, schiffLine);
+            }
+
+            UpdateMedianLine(medianLine, schiffLine, handleLine);
 
             DrawPercentLevels(medianLine, handleLine, id);
         }
@@ -47,6 +61,7 @@ namespace cAlgo.Patterns
         {
             _medianLine = null;
             _handleLine = null;
+            _schiffLine = null;
 
             _horizontalTrendLines.Clear();
             _verticalTrendLines.Clear();
@@ -61,14 +76,13 @@ namespace cAlgo.Patterns
                 return;
             }
 
-            if (_medianLine == null)
+            if (_schiffLine == null)
             {
-                var name = GetObjectName("MedianLine");
+                var name = GetObjectName("SchiffLine");
 
-                _medianLine = Chart.DrawTrendLine(name, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, _medianLineSettings.LineColor, _medianLineSettings.Thickness, _medianLineSettings.Style);
+                _schiffLine = Chart.DrawTrendLine(name, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, _medianLineSettings.LineColor, _medianLineSettings.Thickness, _medianLineSettings.Style);
 
-                _medianLine.IsInteractive = true;
-                _medianLine.ExtendToInfinity = true;
+                _schiffLine.IsInteractive = true;
             }
             else if (_handleLine == null)
             {
@@ -77,24 +91,32 @@ namespace cAlgo.Patterns
                 _handleLine = Chart.DrawTrendLine(name, obj.TimeValue, obj.YValue, obj.TimeValue, obj.YValue, _medianLineSettings.LineColor, _medianLineSettings.Thickness, _medianLineSettings.Style);
 
                 _handleLine.IsInteractive = true;
+
+                var medianLineName = GetObjectName("MedianLine");
+
+                _medianLine = Chart.DrawTrendLine(medianLineName, _schiffLine.Time1, _schiffLine.Y1, _schiffLine.Time2, _handleLine.Y2, _medianLineSettings.LineColor, _medianLineSettings.Thickness, _medianLineSettings.Style);
+
+                _medianLine.IsInteractive = true;
+                _medianLine.IsLocked = true;
+                _medianLine.ExtendToInfinity = true;
             }
         }
 
         protected override void OnMouseMove(ChartMouseEventArgs obj)
         {
-            if (_medianLine == null) return;
+            if (_schiffLine == null) return;
 
             if (_handleLine == null)
             {
-                _medianLine.Time2 = obj.TimeValue;
-                _medianLine.Y2 = obj.YValue;
+                _schiffLine.Time2 = obj.TimeValue;
+                _schiffLine.Y2 = obj.YValue;
             }
             else
             {
                 _handleLine.Time2 = obj.TimeValue;
                 _handleLine.Y2 = obj.YValue;
 
-                UpdateMedianLine(_medianLine, _handleLine);
+                UpdateMedianLine(_medianLine, _schiffLine, _handleLine);
 
                 DrawPercentLevels(_medianLine, _handleLine, Id);
             }
@@ -102,7 +124,7 @@ namespace cAlgo.Patterns
 
         protected override ChartObject[] GetFrontObjects()
         {
-            return new ChartObject[] { _medianLine, _handleLine };
+            return new ChartObject[] { _schiffLine, _handleLine };
         }
 
         private void DrawPercentLevels(ChartTrendLine medianLine, ChartTrendLine handleLine, long id)
@@ -146,13 +168,28 @@ namespace cAlgo.Patterns
             line.IsLocked = true;
         }
 
-        private void UpdateMedianLine(ChartTrendLine medianLine, ChartTrendLine handleLine)
+        private void UpdateMedianLine(ChartTrendLine medianLine, ChartTrendLine schiffLine, ChartTrendLine handleLine)
         {
+            medianLine.Time1 = schiffLine.Time1.Add(schiffLine.GetTimeDelta());
+            medianLine.Y1 = schiffLine.GetBottomPrice() + schiffLine.GetPriceDelta() / 2;
+
             var handleLineStartBarIndex = handleLine.GetStartBarIndex(Chart.Bars, Chart.Symbol);
             var handleLineBarsNumber = handleLine.GetBarsNumber(Chart.Bars, Chart.Symbol);
 
             medianLine.Time2 = Chart.Bars.GetOpenTime(handleLineStartBarIndex + handleLineBarsNumber / 2, Chart.Symbol);
             medianLine.Y2 = handleLine.GetBottomPrice() + handleLine.GetPriceDelta() / 2;
+        }
+
+        private void UpdateHandleLine(ChartTrendLine handleLine, ChartTrendLine schiffLine)
+        {
+            handleLine.Time1 = schiffLine.Time2;
+            handleLine.Y1 = schiffLine.Y2;
+        }
+
+        private void UpdateSchiffLine(ChartTrendLine handleLine, ChartTrendLine schiffLine)
+        {
+            schiffLine.Time2 = handleLine.Time1;
+            schiffLine.Y2 = handleLine.Y1;
         }
     }
 }

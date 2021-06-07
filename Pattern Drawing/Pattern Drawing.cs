@@ -1420,6 +1420,181 @@ namespace cAlgo
 
         #endregion Original Pitchfork parameters
 
+        #region Schiff Pitchfork parameters
+
+        [Parameter("Median Thickness", DefaultValue = 1, MinValue = 1, Group = "Schiff Pitchfork")]
+        public int SchiffPitchforkMedianThickness { get; set; }
+
+        [Parameter("Median Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle SchiffPitchforkMedianStyle { get; set; }
+
+        [Parameter("Median Color", DefaultValue = "Blue", Group = "Schiff Pitchfork")]
+        public string SchiffPitchforkMedianColor { get; set; }
+
+        [Parameter("Show 1st Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowFirstSchiffPitchfork { get; set; }
+
+        [Parameter("1st Level Percent", DefaultValue = 0.25, Group = "Schiff Pitchfork")]
+        public double FirstSchiffPitchforkPercent { get; set; }
+
+        [Parameter("1st Level Color", DefaultValue = "Gray", Group = "Schiff Pitchfork")]
+        public string FirstSchiffPitchforkColor { get; set; }
+
+        [Parameter("1st Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int FirstSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("1st Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int FirstSchiffPitchforkThickness { get; set; }
+
+        [Parameter("1st Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle FirstSchiffPitchforkStyle { get; set; }
+
+        [Parameter("Show 2nd Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowSecondSchiffPitchfork { get; set; }
+
+        [Parameter("2nd Level Percent", DefaultValue = 0.382, Group = "Schiff Pitchfork")]
+        public double SecondSchiffPitchforkPercent { get; set; }
+
+        [Parameter("2nd Level Color", DefaultValue = "Red", Group = "Schiff Pitchfork")]
+        public string SecondSchiffPitchforkColor { get; set; }
+
+        [Parameter("2nd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int SecondSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("2nd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int SecondSchiffPitchforkThickness { get; set; }
+
+        [Parameter("2nd Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle SecondSchiffPitchforkStyle { get; set; }
+
+        [Parameter("Show 3rd Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowThirdSchiffPitchfork { get; set; }
+
+        [Parameter("3rd Level Percent", DefaultValue = 0.5, Group = "Schiff Pitchfork")]
+        public double ThirdSchiffPitchforkPercent { get; set; }
+
+        [Parameter("3rd Level Color", DefaultValue = "GreenYellow", Group = "Schiff Pitchfork")]
+        public string ThirdSchiffPitchforkColor { get; set; }
+
+        [Parameter("3rd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int ThirdSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("3rd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int ThirdSchiffPitchforkThickness { get; set; }
+
+        [Parameter("3rd Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle ThirdSchiffPitchforkStyle { get; set; }
+
+        [Parameter("Show 4th Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowFourthSchiffPitchfork { get; set; }
+
+        [Parameter("4th Level Percent", DefaultValue = 0.618, Group = "Schiff Pitchfork")]
+        public double FourthSchiffPitchforkPercent { get; set; }
+
+        [Parameter("4th Level Color", DefaultValue = "DarkGreen", Group = "Schiff Pitchfork")]
+        public string FourthSchiffPitchforkColor { get; set; }
+
+        [Parameter("4th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int FourthSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("4th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int FourthSchiffPitchforkThickness { get; set; }
+
+        [Parameter("4th Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle FourthSchiffPitchforkStyle { get; set; }
+
+        [Parameter("Show 5th Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowFifthSchiffPitchfork { get; set; }
+
+        [Parameter("5th Level Percent", DefaultValue = 0.75, Group = "Schiff Pitchfork")]
+        public double FifthSchiffPitchforkPercent { get; set; }
+
+        [Parameter("5th Level Color", DefaultValue = "BlueViolet", Group = "Schiff Pitchfork")]
+        public string FifthSchiffPitchforkColor { get; set; }
+
+        [Parameter("5th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int FifthSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("5th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int FifthSchiffPitchforkThickness { get; set; }
+
+        [Parameter("5th Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle FifthSchiffPitchforkStyle { get; set; }
+
+        [Parameter("Show 6th Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowSixthSchiffPitchfork { get; set; }
+
+        [Parameter("6th Level Percent", DefaultValue = 1, Group = "Schiff Pitchfork")]
+        public double SixthSchiffPitchforkPercent { get; set; }
+
+        [Parameter("6th Level Color", DefaultValue = "AliceBlue", Group = "Schiff Pitchfork")]
+        public string SixthSchiffPitchforkColor { get; set; }
+
+        [Parameter("6th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int SixthSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("6th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int SixthSchiffPitchforkThickness { get; set; }
+
+        [Parameter("6th Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle SixthSchiffPitchforkStyle { get; set; }
+
+        [Parameter("Show 7th Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowSeventhSchiffPitchfork { get; set; }
+
+        [Parameter("7th Level Percent", DefaultValue = 1.5, Group = "Schiff Pitchfork")]
+        public double SeventhSchiffPitchforkPercent { get; set; }
+
+        [Parameter("7th Level Color", DefaultValue = "Bisque", Group = "Schiff Pitchfork")]
+        public string SeventhSchiffPitchforkColor { get; set; }
+
+        [Parameter("7th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int SeventhSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("7th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int SeventhSchiffPitchforkThickness { get; set; }
+
+        [Parameter("7th Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle SeventhSchiffPitchforkStyle { get; set; }
+
+        [Parameter("Show 8th Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowEighthSchiffPitchfork { get; set; }
+
+        [Parameter("8th Level Percent", DefaultValue = 1.75, Group = "Schiff Pitchfork")]
+        public double EighthSchiffPitchforkPercent { get; set; }
+
+        [Parameter("8th Level Color", DefaultValue = "Azure", Group = "Schiff Pitchfork")]
+        public string EighthSchiffPitchforkColor { get; set; }
+
+        [Parameter("8th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int EighthSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("8th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int EighthSchiffPitchforkThickness { get; set; }
+
+        [Parameter("8th Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle EighthSchiffPitchforkStyle { get; set; }
+
+        [Parameter("Show 9th Level", DefaultValue = true, Group = "Schiff Pitchfork")]
+        public bool ShowNinthSchiffPitchfork { get; set; }
+
+        [Parameter("9th Level Percent", DefaultValue = 2, Group = "Schiff Pitchfork")]
+        public double NinthSchiffPitchforkPercent { get; set; }
+
+        [Parameter("9th Level Color", DefaultValue = "Aqua", Group = "Schiff Pitchfork")]
+        public string NinthSchiffPitchforkColor { get; set; }
+
+        [Parameter("9th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Schiff Pitchfork")]
+        public int NinthSchiffPitchforkAlpha { get; set; }
+
+        [Parameter("9th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Schiff Pitchfork")]
+        public int NinthSchiffPitchforkThickness { get; set; }
+
+        [Parameter("9th Level Style", DefaultValue = LineStyle.Solid, Group = "Schiff Pitchfork")]
+        public LineStyle NinthSchiffPitchforkStyle { get; set; }
+
+        #endregion Schiff Pitchfork parameters
+
         #region Overridden methods
 
         protected override void Initialize()
@@ -2541,6 +2716,112 @@ namespace cAlgo
             return originalPitchforkLevels;
         }
 
+        private Dictionary<double, PercentLineSettings> GetSchiffPitchforkLevels()
+        {
+            var schiffPitchforkLevels = new Dictionary<double, PercentLineSettings>();
+
+            if (ShowFirstSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(FirstSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = FirstSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(FirstSchiffPitchforkColor),
+                    Style = FirstSchiffPitchforkStyle,
+                    Thickness = FirstSchiffPitchforkThickness,
+                });
+            }
+
+            if (ShowSecondSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(SecondSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = SecondSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(SecondSchiffPitchforkColor),
+                    Style = SecondSchiffPitchforkStyle,
+                    Thickness = SecondSchiffPitchforkThickness,
+                });
+            }
+
+            if (ShowThirdSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(ThirdSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = ThirdSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(ThirdSchiffPitchforkColor),
+                    Style = ThirdSchiffPitchforkStyle,
+                    Thickness = ThirdSchiffPitchforkThickness,
+                });
+            }
+
+            if (ShowFourthSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(FourthSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = FourthSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(FourthSchiffPitchforkColor),
+                    Style = FourthSchiffPitchforkStyle,
+                    Thickness = FourthSchiffPitchforkThickness,
+                });
+            }
+
+            if (ShowFifthSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(FifthSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = FifthSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(FifthSchiffPitchforkColor),
+                    Style = FifthSchiffPitchforkStyle,
+                    Thickness = FifthSchiffPitchforkThickness,
+                });
+            }
+
+            if (ShowSixthSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(SixthSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = SixthSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(SixthSchiffPitchforkColor),
+                    Style = SixthSchiffPitchforkStyle,
+                    Thickness = SixthSchiffPitchforkThickness,
+                });
+            }
+
+            if (ShowSeventhSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(SeventhSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = SeventhSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(SeventhSchiffPitchforkColor),
+                    Style = SeventhSchiffPitchforkStyle,
+                    Thickness = SeventhSchiffPitchforkThickness,
+                });
+            }
+
+            if (ShowEighthSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(EighthSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = EighthSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(EighthSchiffPitchforkColor),
+                    Style = EighthSchiffPitchforkStyle,
+                    Thickness = EighthSchiffPitchforkThickness,
+                });
+            }
+
+            if (ShowNinthSchiffPitchfork)
+            {
+                schiffPitchforkLevels.Add(NinthSchiffPitchforkPercent, new PercentLineSettings
+                {
+                    Percent = NinthSchiffPitchforkPercent,
+                    LineColor = ColorParser.Parse(NinthSchiffPitchforkColor),
+                    Style = NinthSchiffPitchforkStyle,
+                    Thickness = NinthSchiffPitchforkThickness,
+                });
+            }
+
+            return schiffPitchforkLevels;
+        }
+
         private void AddPitchforkPatterns(PatternConfig patternConfig)
         {
             var patternsGroupButton = AddPatternGroupButton("Pitchfork");
@@ -2553,6 +2834,12 @@ namespace cAlgo
                     Style = OriginalPitchforkMedianStyle,
                     Thickness = OriginalPitchforkMedianThickness
                 }, GetOriginalPitchforkLevels()),
+                new SchiffPitchforkPattern(patternConfig, new LineSettings
+                {
+                    LineColor = ColorParser.Parse(SchiffPitchforkMedianColor),
+                    Style = SchiffPitchforkMedianStyle,
+                    Thickness = SchiffPitchforkMedianThickness
+                }, GetSchiffPitchforkLevels()),
             };
 
             InitializePatterns(patternsGroupButton.Patterns);
