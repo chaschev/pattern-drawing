@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace cAlgo.Patterns
 {
-    public class SchiffPitchforkPattern : PatternBase
+    public class ModifiedSchiffPitchforkPattern : PatternBase
     {
         private readonly Dictionary<double, ChartTrendLine> _horizontalTrendLines = new Dictionary<double, ChartTrendLine>();
         private readonly Dictionary<double, ChartTrendLine> _verticalTrendLines = new Dictionary<double, ChartTrendLine>();
@@ -17,7 +17,7 @@ namespace cAlgo.Patterns
         private ChartTrendLine _handleLine;
         private ChartTrendLine _schiffLine;
 
-        public SchiffPitchforkPattern(PatternConfig config, LineSettings medianLineSettings, Dictionary<double, PercentLineSettings> levelsSettings) : base("Schiff Pitchfork", config)
+        public ModifiedSchiffPitchforkPattern(PatternConfig config, LineSettings medianLineSettings, Dictionary<double, PercentLineSettings> levelsSettings) : base("Modified Schiff Pitchfork", config)
         {
             _medianLineSettings = medianLineSettings;
             _levelsSettings = levelsSettings;
@@ -170,7 +170,11 @@ namespace cAlgo.Patterns
 
         private void UpdateMedianLine(ChartTrendLine medianLine, ChartTrendLine schiffLine, ChartTrendLine handleLine)
         {
-            medianLine.Time1 = schiffLine.Time1;
+            var schiffLineBarsDelta = schiffLine.GetBarsNumber(Chart.Bars, Chart.Symbol);
+
+            var schiffLineStartBarIndex = schiffLine.GetStartBarIndex(Chart.Bars, Chart.Symbol);
+
+            medianLine.Time1 = Chart.Bars.GetOpenTime(schiffLineStartBarIndex + schiffLineBarsDelta / 2, Chart.Symbol);
             medianLine.Y1 = schiffLine.GetBottomPrice() + schiffLine.GetPriceDelta() / 2;
 
             var handleLineStartBarIndex = handleLine.GetStartBarIndex(Chart.Bars, Chart.Symbol);

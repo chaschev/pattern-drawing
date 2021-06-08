@@ -79,6 +79,7 @@
     <Compile Include="Pattern Drawing.cs" />
     <Compile Include="Patterns\FibonacciChannelPattern.cs" />
     <Compile Include="Patterns\LineSettings.cs" />
+    <Compile Include="Patterns\ModifiedSchiffPitchforkPattern.cs" />
     <Compile Include="Patterns\SchiffPitchforkPattern.cs" />
     <Compile Include="Patterns\OriginalPitchforkPattern.cs" />
     <Compile Include="Patterns\PercentLineSettings.cs" />
