@@ -3,6 +3,7 @@ using cAlgo.Controls;
 using cAlgo.Helpers;
 using cAlgo.Patterns;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace cAlgo
 {
@@ -2038,6 +2039,181 @@ namespace cAlgo
 
         #endregion Modified Schiff Pitchfork parameters
 
+        #region Pitchfan parameters
+
+        [Parameter("Median Thickness", DefaultValue = 1, MinValue = 1, Group = "Pitchfan")]
+        public int PitchfanMedianThickness { get; set; }
+
+        [Parameter("Median Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle PitchfanMedianStyle { get; set; }
+
+        [Parameter("Median Color", DefaultValue = "Blue", Group = "Pitchfan")]
+        public string PitchfanMedianColor { get; set; }
+
+        [Parameter("Show 1st Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowFirstPitchfan { get; set; }
+
+        [Parameter("1st Level Percent", DefaultValue = 0.25, Group = "Pitchfan")]
+        public double FirstPitchfanPercent { get; set; }
+
+        [Parameter("1st Level Color", DefaultValue = "Gray", Group = "Pitchfan")]
+        public string FirstPitchfanColor { get; set; }
+
+        [Parameter("1st Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int FirstPitchfanAlpha { get; set; }
+
+        [Parameter("1st Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int FirstPitchfanThickness { get; set; }
+
+        [Parameter("1st Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle FirstPitchfanStyle { get; set; }
+
+        [Parameter("Show 2nd Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowSecondPitchfan { get; set; }
+
+        [Parameter("2nd Level Percent", DefaultValue = 0.382, Group = "Pitchfan")]
+        public double SecondPitchfanPercent { get; set; }
+
+        [Parameter("2nd Level Color", DefaultValue = "Red", Group = "Pitchfan")]
+        public string SecondPitchfanColor { get; set; }
+
+        [Parameter("2nd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int SecondPitchfanAlpha { get; set; }
+
+        [Parameter("2nd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int SecondPitchfanThickness { get; set; }
+
+        [Parameter("2nd Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle SecondPitchfanStyle { get; set; }
+
+        [Parameter("Show 3rd Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowThirdPitchfan { get; set; }
+
+        [Parameter("3rd Level Percent", DefaultValue = 0.5, Group = "Pitchfan")]
+        public double ThirdPitchfanPercent { get; set; }
+
+        [Parameter("3rd Level Color", DefaultValue = "GreenYellow", Group = "Pitchfan")]
+        public string ThirdPitchfanColor { get; set; }
+
+        [Parameter("3rd Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int ThirdPitchfanAlpha { get; set; }
+
+        [Parameter("3rd Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int ThirdPitchfanThickness { get; set; }
+
+        [Parameter("3rd Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle ThirdPitchfanStyle { get; set; }
+
+        [Parameter("Show 4th Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowFourthPitchfan { get; set; }
+
+        [Parameter("4th Level Percent", DefaultValue = 0.618, Group = "Pitchfan")]
+        public double FourthPitchfanPercent { get; set; }
+
+        [Parameter("4th Level Color", DefaultValue = "DarkGreen", Group = "Pitchfan")]
+        public string FourthPitchfanColor { get; set; }
+
+        [Parameter("4th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int FourthPitchfanAlpha { get; set; }
+
+        [Parameter("4th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int FourthPitchfanThickness { get; set; }
+
+        [Parameter("4th Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle FourthPitchfanStyle { get; set; }
+
+        [Parameter("Show 5th Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowFifthPitchfan { get; set; }
+
+        [Parameter("5th Level Percent", DefaultValue = 0.75, Group = "Pitchfan")]
+        public double FifthPitchfanPercent { get; set; }
+
+        [Parameter("5th Level Color", DefaultValue = "BlueViolet", Group = "Pitchfan")]
+        public string FifthPitchfanColor { get; set; }
+
+        [Parameter("5th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int FifthPitchfanAlpha { get; set; }
+
+        [Parameter("5th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int FifthPitchfanThickness { get; set; }
+
+        [Parameter("5th Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle FifthPitchfanStyle { get; set; }
+
+        [Parameter("Show 6th Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowSixthPitchfan { get; set; }
+
+        [Parameter("6th Level Percent", DefaultValue = 1, Group = "Pitchfan")]
+        public double SixthPitchfanPercent { get; set; }
+
+        [Parameter("6th Level Color", DefaultValue = "AliceBlue", Group = "Pitchfan")]
+        public string SixthPitchfanColor { get; set; }
+
+        [Parameter("6th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int SixthPitchfanAlpha { get; set; }
+
+        [Parameter("6th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int SixthPitchfanThickness { get; set; }
+
+        [Parameter("6th Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle SixthPitchfanStyle { get; set; }
+
+        [Parameter("Show 7th Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowSeventhPitchfan { get; set; }
+
+        [Parameter("7th Level Percent", DefaultValue = 1.5, Group = "Pitchfan")]
+        public double SeventhPitchfanPercent { get; set; }
+
+        [Parameter("7th Level Color", DefaultValue = "Bisque", Group = "Pitchfan")]
+        public string SeventhPitchfanColor { get; set; }
+
+        [Parameter("7th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int SeventhPitchfanAlpha { get; set; }
+
+        [Parameter("7th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int SeventhPitchfanThickness { get; set; }
+
+        [Parameter("7th Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle SeventhPitchfanStyle { get; set; }
+
+        [Parameter("Show 8th Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowEighthPitchfan { get; set; }
+
+        [Parameter("8th Level Percent", DefaultValue = 1.75, Group = "Pitchfan")]
+        public double EighthPitchfanPercent { get; set; }
+
+        [Parameter("8th Level Color", DefaultValue = "Azure", Group = "Pitchfan")]
+        public string EighthPitchfanColor { get; set; }
+
+        [Parameter("8th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int EighthPitchfanAlpha { get; set; }
+
+        [Parameter("8th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int EighthPitchfanThickness { get; set; }
+
+        [Parameter("8th Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle EighthPitchfanStyle { get; set; }
+
+        [Parameter("Show 9th Level", DefaultValue = true, Group = "Pitchfan")]
+        public bool ShowNinthPitchfan { get; set; }
+
+        [Parameter("9th Level Percent", DefaultValue = 2, Group = "Pitchfan")]
+        public double NinthPitchfanPercent { get; set; }
+
+        [Parameter("9th Level Color", DefaultValue = "Aqua", Group = "Pitchfan")]
+        public string NinthPitchfanColor { get; set; }
+
+        [Parameter("9th Level Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Pitchfan")]
+        public int NinthPitchfanAlpha { get; set; }
+
+        [Parameter("9th Level Thickness", DefaultValue = 1, MinValue = 0, Group = "Pitchfan")]
+        public int NinthPitchfanThickness { get; set; }
+
+        [Parameter("9th Level Style", DefaultValue = LineStyle.Solid, Group = "Pitchfan")]
+        public LineStyle NinthPitchfanStyle { get; set; }
+
+        #endregion Pitchfan parameters
+
         #region Overridden methods
 
         protected override void Initialize()
@@ -3533,6 +3709,120 @@ namespace cAlgo
             return modifiedSchiffPitchforkLevels;
         }
 
+        private SideFanSettings[] GetPitchfanSideFanSettings()
+        {
+            var result = new List<SideFanSettings>();
+
+            if (ShowFirstPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = FirstPitchfanPercent,
+                    Color = ColorParser.Parse(FirstPitchfanColor),
+                    Style = FirstPitchfanStyle,
+                    Thickness = FirstPitchfanThickness,
+                });
+            }
+
+            if (ShowSecondPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = SecondPitchfanPercent,
+                    Color = ColorParser.Parse(SecondPitchfanColor),
+                    Style = SecondPitchfanStyle,
+                    Thickness = SecondPitchfanThickness,
+                });
+            }
+
+            if (ShowThirdPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = ThirdPitchfanPercent,
+                    Color = ColorParser.Parse(ThirdPitchfanColor),
+                    Style = ThirdPitchfanStyle,
+                    Thickness = ThirdPitchfanThickness,
+                });
+            }
+
+            if (ShowFourthPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = FourthPitchfanPercent,
+                    Color = ColorParser.Parse(FourthPitchfanColor),
+                    Style = FourthPitchfanStyle,
+                    Thickness = FourthPitchfanThickness,
+                });
+            }
+
+            if (ShowFifthPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = FifthPitchfanPercent,
+                    Color = ColorParser.Parse(FifthPitchfanColor),
+                    Style = FifthPitchfanStyle,
+                    Thickness = FifthPitchfanThickness,
+                });
+            }
+
+            if (ShowSixthPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = SixthPitchfanPercent,
+                    Color = ColorParser.Parse(SixthPitchfanColor),
+                    Style = SixthPitchfanStyle,
+                    Thickness = SixthPitchfanThickness,
+                });
+            }
+
+            if (ShowSeventhPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = SeventhPitchfanPercent,
+                    Color = ColorParser.Parse(SeventhPitchfanColor),
+                    Style = SeventhPitchfanStyle,
+                    Thickness = SeventhPitchfanThickness,
+                });
+            }
+
+            if (ShowEighthPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = EighthPitchfanPercent,
+                    Color = ColorParser.Parse(EighthPitchfanColor),
+                    Style = EighthPitchfanStyle,
+                    Thickness = EighthPitchfanThickness,
+                });
+            }
+
+            if (ShowNinthPitchfan)
+            {
+                result.Add(new SideFanSettings
+                {
+                    Percent = NinthPitchfanPercent,
+                    Color = ColorParser.Parse(NinthPitchfanColor),
+                    Style = NinthPitchfanStyle,
+                    Thickness = NinthPitchfanThickness,
+                });
+            }
+
+            result.ToList().ForEach(iSettings => result.Add(new SideFanSettings
+            {
+                Percent = -iSettings.Percent,
+                Color = iSettings.Color,
+                Style = iSettings.Style,
+                Thickness = iSettings.Thickness,
+            }));
+
+            return result.ToArray();
+        }
+
         private void AddPitchforkPatterns(PatternConfig patternConfig)
         {
             var patternsGroupButton = AddPatternGroupButton("Pitchfork");
@@ -3551,12 +3841,18 @@ namespace cAlgo
                     Style = SchiffPitchforkMedianStyle,
                     Thickness = SchiffPitchforkMedianThickness
                 }, GetSchiffPitchforkLevels()),
-                                new ModifiedSchiffPitchforkPattern(patternConfig, new LineSettings
+                new ModifiedSchiffPitchforkPattern(patternConfig, new LineSettings
                 {
                     LineColor = ColorParser.Parse(ModifiedSchiffPitchforkMedianColor),
                     Style = ModifiedSchiffPitchforkMedianStyle,
                     Thickness = ModifiedSchiffPitchforkMedianThickness
                 }, GetModifiedSchiffPitchforkLevels()),
+                new PitchfanPattern(patternConfig, GetPitchfanSideFanSettings(), new FanSettings
+                {
+                    Color = ColorParser.Parse(PitchfanMedianColor),
+                    Style = PitchfanMedianStyle,
+                    Thickness = PitchfanMedianThickness
+                })
             };
 
             InitializePatterns(patternsGroupButton.Patterns);
