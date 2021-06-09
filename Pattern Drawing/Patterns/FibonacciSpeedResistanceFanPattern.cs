@@ -96,9 +96,15 @@ namespace cAlgo.Patterns
                 _rectangle.Time2 = obj.TimeValue;
                 _rectangle.Y2 = obj.YValue;
 
-                DrawOrUpdateHorizontalLines(MainFanLine, _horizontalTrendLines);
+                if (_settings.ShowPriceLevels)
+                {
+                    DrawOrUpdateHorizontalLines(MainFanLine, _horizontalTrendLines);
+                }
 
-                DrawOrUpdateVerticalLines(MainFanLine, _verticalTrendLines);
+                if (_settings.ShowTimeLevels)
+                {
+                    DrawOrUpdateVerticalLines(MainFanLine, _verticalTrendLines);
+                }
 
                 DrawOrUpdateExtendedSideLines(MainFanLine, ref _extendedHorizontalLine, ref _extendedVerticalLine);
             }
@@ -135,7 +141,7 @@ namespace cAlgo.Patterns
                     line.Y1 = level;
                     line.Y2 = level;
                 }
-                else
+                else if (_settings.ShowPriceLevels)
                 {
                     var objectName = GetObjectName(string.Format("HorizontalLine_{0}", absolutePercent.ToString(CultureInfo.InvariantCulture)));
 
@@ -185,7 +191,7 @@ namespace cAlgo.Patterns
                     line.Y1 = mainFan.Y1;
                     line.Y2 = mainFan.Y2;
                 }
-                else
+                else if (_settings.ShowTimeLevels)
                 {
                     var objectName = GetObjectName(string.Format("VerticalLine_{0}", fanSettings.Percent.ToString(CultureInfo.InvariantCulture)));
 

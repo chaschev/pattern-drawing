@@ -786,6 +786,9 @@ namespace cAlgo
         [Parameter("Extended Lines Color", DefaultValue = "Blue", Group = "Fibonacci Speed Resistance Fan")]
         public string FibonacciSpeedResistanceFanExtendedLinesColor { get; set; }
 
+        [Parameter("Show Price Levels", DefaultValue = true, Group = "Fibonacci Speed Resistance Fan")]
+        public bool FibonacciSpeedResistanceFanShowPriceLevels { get; set; }
+
         [Parameter("Price Levels Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
         public int FibonacciSpeedResistanceFanPriceLevelsThickness { get; set; }
 
@@ -794,6 +797,9 @@ namespace cAlgo
 
         [Parameter("Price Levels Color", DefaultValue = "Magenta", Group = "Fibonacci Speed Resistance Fan")]
         public string FibonacciSpeedResistanceFanPriceLevelsColor { get; set; }
+
+        [Parameter("Show Time Levels", DefaultValue = true, Group = "Fibonacci Speed Resistance Fan")]
+        public bool FibonacciSpeedResistanceFanShowTimeLevels { get; set; }
 
         [Parameter("Time Levels Thickness", DefaultValue = 1, MinValue = 1, Group = "Fibonacci Speed Resistance Fan")]
         public int FibonacciSpeedResistanceFanTimeLevelsThickness { get; set; }
@@ -3293,6 +3299,8 @@ namespace cAlgo
                     ExtendedLinesThickness = FibonacciSpeedResistanceFanExtendedLinesThickness,
                     ExtendedLinesStyle = FibonacciSpeedResistanceFanExtendedLinesStyle,
                     ExtendedLinesColor = ColorParser.Parse(FibonacciSpeedResistanceFanExtendedLinesColor),
+                    ShowPriceLevels = FibonacciSpeedResistanceFanShowPriceLevels,
+                    ShowTimeLevels = FibonacciSpeedResistanceFanShowTimeLevels,
                     MainFanSettings = new FanSettings
                     {
                         Color = ColorParser.Parse(FibonacciSpeedResistanceFanMainFanColor),
