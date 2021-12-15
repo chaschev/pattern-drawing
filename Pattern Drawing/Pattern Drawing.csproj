@@ -79,6 +79,8 @@
     <Compile Include="Pattern Drawing.cs" />
     <Compile Include="Patterns\FibonacciChannelPattern.cs" />
     <Compile Include="Patterns\FibonacciExpansionPattern.cs" />
+    <Compile Include="Patterns\MeasureSettings.cs" />
+    <Compile Include="Patterns\MeasurePattern.cs" />
     <Compile Include="Patterns\PitchfanPattern.cs" />
     <Compile Include="Patterns\LineSettings.cs" />
     <Compile Include="Patterns\ModifiedSchiffPitchforkPattern.cs" />

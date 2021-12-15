@@ -65,5 +65,22 @@ namespace cAlgo.Helpers
 
             return Math.Round(verticalDelta / barsNumnber, 10);
         }
+
+        public static double GetVolume(this ChartRectangle rectangle, Bars bars, Symbol symbol)
+        {
+            double volume = 0;
+
+            var topPrice = rectangle.GetTopPrice();
+            var bottomPrice = rectangle.GetBottomPrice();
+
+            for (int i = (int)rectangle.GetStartBarIndex(bars, symbol); i <= (int)rectangle.GetEndBarIndex(bars, symbol); i++)
+            {
+                if (i > bars.Count - 1 || bars.ClosePrices[i] > topPrice || bars.ClosePrices[i] < bottomPrice) continue;
+
+                volume += bars.TickVolumes[i];
+            }
+
+            return volume;
+        }
     }
 }

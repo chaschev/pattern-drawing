@@ -2220,6 +2220,37 @@ namespace cAlgo
 
         #endregion Pitchfan parameters
 
+        #region Measure parameters
+
+        [Parameter("Up Color", DefaultValue = "Blue", Group = "Measure")]
+        public string MeasureUpColor { get; set; }
+
+        [Parameter("Down Color", DefaultValue = "Red", Group = "Measure")]
+        public string MeasureDownColor { get; set; }
+
+        [Parameter("Color Alpha", DefaultValue = 50, MinValue = 0, MaxValue = 255, Group = "Measure")]
+        public int MeasureColorAlpha { get; set; }
+
+        [Parameter("Thickness", DefaultValue = 1, Group = "Measure")]
+        public int MeasureThickness { get; set; }
+
+        [Parameter("Style", DefaultValue = LineStyle.Solid, Group = "Measure")]
+        public LineStyle MeasureStyle { get; set; }
+
+        [Parameter("Filled", DefaultValue = true, Group = "Measure")]
+        public bool MeasureIsFilled { get; set; }
+
+        [Parameter("Text Color", DefaultValue = "Yellow", Group = "Measure")]
+        public string MeasureTextColor { get; set; }
+
+        [Parameter("Font Size", DefaultValue = 10, Group = "Measure")]
+        public int MeasureFontSize { get; set; }
+
+        [Parameter("Text Bold", DefaultValue = true, Group = "Measure")]
+        public bool MeasureIsTextBold { get; set; }
+
+        #endregion Measure parameters
+
         #region Overridden methods
 
         protected override void Initialize()
@@ -2294,6 +2325,18 @@ namespace cAlgo
             AddElliottTriangleWavePattern(patternConfig);
             AddElliottTripleComboWavePattern(patternConfig);
             AddElliottDoubleComboWavePattern(patternConfig);
+
+            AddPatternButton(new MeasurePattern(patternConfig, new MeasureSettings
+            {
+                Thickness = MeasureThickness,
+                Style = MeasureStyle,
+                UpColor = ColorParser.Parse(MeasureUpColor, MeasureColorAlpha),
+                DownColor = ColorParser.Parse(MeasureDownColor, MeasureColorAlpha),
+                TextColor = ColorParser.Parse(MeasureTextColor),
+                IsFilled = MeasureIsFilled,
+                FontSize = MeasureFontSize,
+                IsTextBold = MeasureIsTextBold
+            }));
 
             var showHideButton = new Controls.ToggleButton()
             {
