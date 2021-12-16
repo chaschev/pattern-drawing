@@ -111,11 +111,11 @@ namespace cAlgo.Patterns
 
             var barsDelta = rectangle.GetBarsNumber(Chart.Bars, Chart.Symbol);
 
-            var barIndex = rectangle.GetStartBarIndex(Chart.Bars, Chart.Symbol) + barsDelta / 4;
+            var barIndex = rectangle.GetStartBarIndex(Chart.Bars, Chart.Symbol) + barsDelta / 3;
 
             var time = Chart.Bars.GetOpenTime(barIndex, Chart.Symbol);
 
-            label.Text = string.Format("Bars: {0} | Time: {1} | Price Delta: {2} ({3}%) | Volume: {4}", (int)barsDelta, rectangle.GetTimeDelta(), Math.Round(priceDelta, Chart.Symbol.Digits), Math.Round(pricePercent, 2), volume);
+            label.Text = string.Format("Bars: {0} | Time: {1}\nPrice Delta: {2} ({3}%)\nVolume: {4}", (int)barsDelta, rectangle.GetTimeDelta(), Math.Round(priceDelta, Chart.Symbol.Digits), Math.Round(pricePercent, 2), volume);
             label.Time = time;
         }
 
